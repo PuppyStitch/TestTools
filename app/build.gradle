@@ -1,0 +1,92 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.simcom.testtools"
+        minSdk 26
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            Set<File> fileSet = options.bootstrapClasspath.getFiles()
+            List<File> newFileList =  new ArrayList<>();
+            //相对位置，根据存放的位置修改路径
+            newFileList.add(new File("./libs/framework.jar"))
+            newFileList.addAll(fileSet)
+            options.bootstrapClasspath = files(
+                    newFileList.toArray()
+            )
+        }
+    }
+
+//    sourceSets {
+//        doLast {
+//            orderJdk(android, project)
+//        }
+//    }
+//
+
+
+//    allprojects {
+//        gradle.projectsEvaluated {
+//            tasks.withType(JavaCompile) {
+//                //相对位置，根据存放的位置修改路径
+//                options.compilerArgs.add('-Xbootclasspath/p:libs/framework.jar')
+//            }
+//        }
+//    }
+
+
+
+
+    signingConfigs {
+        release {
+            storeFile file("./key/platform.jks") //签名文件路径
+            storePassword "simcom123"
+            keyAlias "simcom"
+            keyPassword "simcom123"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding true
+    }
+
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    compileOnly files('libs/framework.jar')
+    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment:2.5.1'
+    implementation 'androidx.navigation:navigation-ui:2.5.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}

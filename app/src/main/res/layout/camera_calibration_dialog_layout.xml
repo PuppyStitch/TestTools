@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/camera_calibration_dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_margin="16dip"
+        android:textColor="@android:color/holo_red_light"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/camera_calibration_dialog_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_margin="16dip" />
+
+</LinearLayout>

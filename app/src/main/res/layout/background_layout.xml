@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/background_relativelayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <Button
+        android:id="@+id/pass_btn"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:text="@string/text_pass"
+        android:textColor="@color/white"
+        android:background="@drawable/pass_button_style"
+        android:textSize="30sp" />
+    <Button
+        android:id="@+id/fail_btn"
+        android:layout_width="120dip"
+        android:layout_height="120dip"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:text="@string/text_fail"
+        android:textColor="@color/white"
+        android:background="@drawable/fail_button_style"
+        android:textSize="30sp" />
+</RelativeLayout>

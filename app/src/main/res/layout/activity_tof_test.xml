@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <!-- title -->
+    <LinearLayout
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="@string/tof_calibration_test" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="7"
+        android:orientation="horizontal">
+        <!-- Offset -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="8dp"
+            android:background="#333"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tof_text_size"
+                android:text="@string/offset_calibration_head" />
+             <TextView
+                android:id="@+id/offset_calibration_judge_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:textSize="@dimen/tof_text_size"
+                android:text="@string/ref_calibration_title" />
+            <TextView
+                android:id="@+id/spads_calibration_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:textSize="@dimen/tof_text_size"
+                android:text="@string/spads_calibration_title" />
+            <TextView
+                android:id="@+id/ref_calibration_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:textSize="@dimen/tof_text_size"
+                android:text="@string/ref_calibration_title" />
+            <TextView
+                android:id="@+id/offset_calibration_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:textSize="@dimen/tof_text_size"
+                android:text="@string/offset_calibration_title" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="80dp"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/offset_start_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:text="START" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Crosstalk -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="8dp"
+            android:background="#555"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tof_text_size"
+                android:text="@string/cross_talk_calibration_head" />
+             <TextView
+                android:id="@+id/cross_talk_calibration_judge_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:textSize="@dimen/tof_text_size"
+                android:text="@string/ref_calibration_title" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tof_text_size"
+                android:layout_marginTop="80dp"
+                android:visibility="invisible"
+                android:text="" />
+            <TextView
+                android:id="@+id/cross_talk_calibration_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:textSize="@dimen/tof_text_size"
+                android:text="@string/cross_talk_calibration_title" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:textSize="@dimen/tof_text_size"
+                android:visibility="invisible"
+                android:text="" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="80dp"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/cross_talk_start_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:text="START" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:text="" />
+    </LinearLayout>
+</LinearLayout>

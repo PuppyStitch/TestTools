@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_b.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_b_round_solid.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_back.xml" value="0.287" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_baseline_adb_24.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_baseline_adb_24_blue.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_baseline_adb_24_yellow.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_baseline_lens_24.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_blue.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_g.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_green.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_home.xml" value="0.287" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_launcher_background.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_r.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_recent.xml" value="0.287" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_red.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_round_blue.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_y.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/ic_yellow.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/pass_button_style.xml" value="0.196" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/shape.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/test.xml" value="0.325" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/activity_ai_test.xml" value="0.26268115942028986" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/activity_main.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/activity_new_test.xml" value="0.34782608695652173" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/content_main.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/fragment_first.xml" value="0.34782608695652173" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/fragment_second.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/key_test.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/test_result.xml" value="0.20104166666666667" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/version.xml" value="0.27853260869565216" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/menu/fm_record_list_menu.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/menu/menu_main.xml" value="0.38645833333333335" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

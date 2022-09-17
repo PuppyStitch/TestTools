@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/test_for_poweron"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test_for_poweron" />
+
+    <Button
+        android:id="@+id/test_for_poweroff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test_for_poweroff" />
+
+    <Button
+        android:id="@+id/test_for_seek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test_for_seek" />
+
+    <TextView
+        android:id="@+id/test_for_rds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0.87"
+        android:fontFamily="sans-serif-light"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:textColor="#CFD8DC"
+        android:textSize="30dp" />
+
+    <EditText
+        android:id="@+id/test_for_tuneFreq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/test_for_tune"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test_for_tune" />
+
+    <Button
+        android:id="@+id/test_for_autoscan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test_for_autoscan" />
+
+    <Button
+        android:id="@+id/test_for_mute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test_for_mute" />
+
+    <TextView
+        android:id="@+id/test_for_showFreq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0.87"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:textColor="#CFD8DC"
+        android:textSize="80dp" />
+
+</LinearLayout>

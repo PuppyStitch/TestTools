@@ -1,0 +1,16 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="pass_fail_button_size">120dip</dimen>
+    <dimen name="pass_fail_button_text_size">30sp</dimen>
+    <dimen name="list_item_height">80dip</dimen>
+    <dimen name="list_item_text_size">23sp</dimen>
+    <dimen name="wifi_scroll_height">300dip</dimen>
+    <dimen name="rf_cali_scroll_height">330dip</dimen>
+    <dimen name="lookback_bottom_size">200dip</dimen>
+    <dimen name="camera_ctlbar_heoght">120dip</dimen>
+    <dimen name="headset_text_size">24sp</dimen>
+    <dimen name="tof_text_size">16sp</dimen>
+    <dimen name="qrcode_bitmap_width">200dip</dimen>
+    <dimen name="qrcode_bitmap_height">200dip</dimen>
+</resources>

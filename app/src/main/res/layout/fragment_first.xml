@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FirstFragment">
+
+
+    <Button
+        android:id="@+id/button_show_blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show blue"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_hide_blue" />
+
+    <Button
+        android:id="@+id/button_hide_blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="hide blue"
+        app:layout_constraintBottom_toTopOf="@id/button_show_yellow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_show_blue" />
+
+    <Button
+        android:id="@+id/button_show_yellow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show yellow"
+        app:layout_constraintBottom_toTopOf="@id/button_hide_yellow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_hide_blue" />
+
+    <Button
+        android:id="@+id/button_hide_yellow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="hide yellow"
+        app:layout_constraintBottom_toTopOf="@id/button_show_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_show_yellow" />
+
+    <Button
+        android:id="@+id/button_show_green"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show green"
+        app:layout_constraintBottom_toTopOf="@id/button_hide_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_hide_yellow" />
+
+    <Button
+        android:id="@+id/button_hide_green"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="hide green"
+        app:layout_constraintBottom_toTopOf="@id/button_show_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_show_green" />
+
+    <Button
+        android:id="@+id/button_show_red"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show red"
+        app:layout_constraintBottom_toTopOf="@id/button_hide_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_hide_green" />
+
+    <Button
+        android:id="@+id/button_hide_red"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="hide red"
+        app:layout_constraintBottom_toTopOf="@id/button_is_all_show"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_show_red" />
+
+    <Button
+        android:id="@+id/button_is_all_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="check is all show"
+        app:layout_constraintBottom_toTopOf="@id/button_is_all_hide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_hide_red" />
+
+    <Button
+        android:id="@+id/button_is_all_hide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="check is all hide"
+        app:layout_constraintTop_toBottomOf="@id/button_is_all_show"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
