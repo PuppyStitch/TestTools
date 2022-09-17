@@ -58,46 +58,48 @@ public class UnitTestItemList extends TestItemList {
      * This array define the order of test items.
      */
     private static final String[] FILTER_CLASS_NAMES = {
-            TofCalibrationTest.class.getName(),
-            ColorTemperatureTestActivty.class.getName(),
-            SystemVersionTest.class.getName(), RFCALITest.class.getName(),
-            RTCTest.class.getName(), BackLightTest.class.getName(),
-            SmartPATest.class.getName(),
-            AITest.class.getName(),
-            ScreenColorTest.class.getName(),
-            SingleTouchPointTest.class.getName(),
-            MutiTouchTest.class.getName(), MutiTouchDoubleScreenTest.class.getName(),
-            MelodyTest.class.getName(),
-            PhoneLoopBackTest.class.getName(),
-            PhoneCallTestActivity.class.getName(),
-            GsensorTestActivity.class.getName(),
-            CompassTestActivity.class.getName(),
-            PsensorTestActivity.class.getName(),
-            LsensorNoiseTestActivity.class.getName(),
-            MagneticTestActivity.class.getName(),
-            GyroscopeTestActivity.class.getName(),
-            PressureTestActivity.class.getName(),
-            ASensorCalibrationActivity.class.getName(),
-            GSensorCalibrationActivity.class.getName(),
-            MSensorCalibrationActivity.class.getName(),
-            ProxSensorCalibrationActivity.class.getName(),
-            NFCTestActivity.class.getName(),
-            FrontSecondaryCameraTestActivity.class.getName(),
-            SecondaryCameraTestActivity.class.getName(),
-            FrontCameraTestActivity.class.getName(),
-            CameraTestActivity.class.getName(),
-            SpwCameraTestActivity.class.getName(),
-            MacroLensCameraTestActivity.class.getName(),
+            SystemVersionTest.class.getName(), RFCALITest.class.getName(),              // AP版本测试
+            ScreenColorTest.class.getName(),                                            // LCD测试
+//            TofCalibrationTest.class.getName(),
+//            ColorTemperatureTestActivty.class.getName(),
+            RTCTest.class.getName(), BackLightTest.class.getName(),                     // RTC时钟测试
+//            SmartPATest.class.getName(),
+//            AITest.class.getName(),
+
+//            SingleTouchPointTest.class.getName(),                                       // 单点触摸测试
+//            MutiTouchTest.class.getName(), MutiTouchDoubleScreenTest.class.getName(),   // 多点触摸测试
+            MelodyTest.class.getName(),                                                 // 喇叭和马达测试
+            PhoneLoopBackTest.class.getName(),                                          // 语音回环测试
+            PhoneCallTestActivity.class.getName(),                                      // 电话测试
+            GsensorTestActivity.class.getName(),                                        // 重力传感器测试
+            CompassTestActivity.class.getName(),                                        // 罗盘测试
+            PsensorTestActivity.class.getName(),                                        // 距离和光传感器测试
+            LsensorNoiseTestActivity.class.getName(),                                   // 光感底噪测试
+            MagneticTestActivity.class.getName(),                                       // 磁力传感器测试
+            GyroscopeTestActivity.class.getName(),                                      // 陀螺仪测试
+            PressureTestActivity.class.getName(),                                       // 压力传感器测试
+            ASensorCalibrationActivity.class.getName(),                                 // 加速度传感器校验
+            GSensorCalibrationActivity.class.getName(),                                 // 陀螺仪传感器校验
+            MSensorCalibrationActivity.class.getName(),                                 // 磁力传感器校准
+            ProxSensorCalibrationActivity.class.getName(),                              // 距离传感器校验
+            NFCTestActivity.class.getName(),                                            // NFC测试
+            FrontSecondaryCameraTestActivity.class.getName(),                           // 前置辅相机测试
+            SecondaryCameraTestActivity.class.getName(),                                // 后置辅相机测试
+            FrontCameraTestActivity.class.getName(),                                    // 前置相机测试
+            CameraTestActivity.class.getName(),                                         // 后相机测试
+            SpwCameraTestActivity.class.getName(),                                      // 后置三摄相机测试
+            MacroLensCameraTestActivity.class.getName(),                                // 微距相机测试
 //            FingerprintTestActivity.class.getName(),
-            KeyTestActivity.class.getName(), ChargerTest.class.getName(),
-            HeadSetTest.class.getName(), FMTest.class.getName(),
-            SoundTriggerTestActivity.class.getName(),
-            RedLightTest.class.getName(), GreenLightTest.class.getName(),
-            BlueLightTest.class.getName(),
-            BluetoothTestActivity.class.getName(),
-            WifiTestActivity.class.getName(), GpsTestActivity.class.getName(),
-            SDCardTest.class.getName(), SIMCardTestActivity.class.getName(),
-            OTGTest.class.getName() };
+            KeyTestActivity.class.getName(), ChargerTest.class.getName(),               // 按键测试
+            HeadSetTest.class.getName(), FMTest.class.getName(),                        // 耳机测试
+            SoundTriggerTestActivity.class.getName(),                                   // 语音唤醒
+            RedLightTest.class.getName(), GreenLightTest.class.getName(),               // 红灯
+            BlueLightTest.class.getName(),                                              // 蓝灯
+            BluetoothTestActivity.class.getName(),                                      // 蓝牙测试
+            WifiTestActivity.class.getName(), GpsTestActivity.class.getName(),          // WiFi测试
+            SDCardTest.class.getName(), SIMCardTestActivity.class.getName(),            // SD卡测试
+            OTGTest.class.getName(),                                                    // OTG测试
+    };
 
     private static UnitTestItemList mTestItemListInstance = null;
 

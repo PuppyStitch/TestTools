@@ -20,8 +20,9 @@ public class EngSqlite {
     private Context mContext;
     private SQLiteDatabase mSqLiteDatabase = null;
 
-    public static final String ENG_ENGTEST_DB = Const.PRODUCTINFO_DIR
-            + "/mmitest.db";
+//    public static final String ENG_ENGTEST_DB = Const.PRODUCTINFO_DIR
+//            + "/mmitest.db";
+    public static final String ENG_ENGTEST_DB = "test.db";
     public static final String ENG_STRING2INT_TABLE = "str2int";
     public static final String ENG_STRING2INT_NAME = "name";
     public static final String ENG_STRING2INT_DISPLAYNAME = "displayname";

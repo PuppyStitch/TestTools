@@ -33,7 +33,7 @@ public class SystemVersionTest extends BaseActivity
         linuxVersion = (TextView) findViewById(R.id.linux_version);
         platformVersion = (TextView) findViewById(R.id.platform_version);
 //        platformSn = (TextView) findViewById(R.id.platform_sn);
-        androidVersion.setText(getString(R.string.android_version) + "\n" + Build.VERSION.RELEASE
+        androidVersion.setText("\n" + getString(R.string.android_version) + "\n" + Build.VERSION.RELEASE
                 + "\n");
         linuxVersion.setText(getString(R.string.prop_version) + "\n" + getPropVersion() + "\n");
         platformVersion.setText(getString(R.string.build_number) + "\n" +
