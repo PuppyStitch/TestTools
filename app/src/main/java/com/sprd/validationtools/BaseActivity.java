@@ -25,6 +25,8 @@ import android.widget.Toast;
 import com.simcom.testtools.R;
 import com.sprd.validationtools.sqlite.EngSqlite;
 
+import java.lang.ref.WeakReference;
+
 public class BaseActivity extends Activity implements OnClickListener {
     private static final String TAG = "BaseActivity";
     private String mTestname = null;

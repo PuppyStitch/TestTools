@@ -15,8 +15,7 @@ import com.sprd.validationtools.PhaseCheckParse;
 import com.simcom.testtools.R;
 import com.sprd.validationtools.utils.FileUtils;
 
-public class SystemVersionTest extends BaseActivity
-{
+public class SystemVersionTest extends BaseActivity {
     private static final String TAG = "SystemVersionTest";
     private static final String PROD_VERSION_FILE = "/proc/version";
     private TextView androidVersion;

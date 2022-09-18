@@ -4,11 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import android.content.Context;
 import android.os.Environment;
 //import android.os.EnvironmentEx;
+import android.os.EnvironmentEx;
 import android.os.storage.StorageManager;
+
 import com.sprd.validationtools.nonpublic.EnvironmentExProxy;
+
 import android.util.Log;
 
 public class StorageUtil {
@@ -65,17 +69,17 @@ public class StorageUtil {
             return extCommonPath;
         } else if (type == OTG_UDISK_PATH) {
             return extOtgUdiskPath;
-        }else{
+        } else {
             Log.w(TAG, "type is incorrect!");
             return null;
         }
     }
 
-    public static String getExternalStoragePathState(){
+    public static String getExternalStoragePathState() {
         return EnvironmentExProxy.getExternalStoragePathState();
     }
 
-    public static String getInternalStoragePath(){
+    public static String getInternalStoragePath() {
         return EnvironmentExProxy.getInternalStoragePath().getAbsolutePath();
     }
 }

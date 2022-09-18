@@ -17,6 +17,7 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.Gravity;
@@ -117,13 +118,13 @@ public class MelodyTest extends BaseActivity {
         @Override
         public void onPrepared(MediaPlayer mp) {
             // TODO Auto-generated method stub
-            if(mp != null){
+            if (mp != null) {
                 mp.setLooping(PLAY_LOOP);
                 mp.start();
                 int volumeMusic = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
                 Log.d(TAG, "mOnPreparedListener volumeMusic = " + volumeMusic);
                 mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volumeMusic, 0);
-            }else{
+            } else {
                 Log.w(TAG, "mOnPreparedListener prepare issue!");
             }
         }
@@ -153,7 +154,7 @@ public class MelodyTest extends BaseActivity {
                 mPlayer.setDataSource(mFilePaths.get(audioNumber));
                 mPlayer.prepare();
                 mPlayer.setOnPreparedListener(mOnPreparedListener);
-            }else{
+            } else {
                 mPlayer.reset();
                 mPlayer.setDataSource(mFilePath);
                 mPlayer.prepare();
@@ -171,16 +172,17 @@ public class MelodyTest extends BaseActivity {
         /*BEGIN BUG559287 2016/05/04 zhijie.yang mmi/ringtones test error */
         if (AudioSystem.DEVICE_STATE_AVAILABLE == AudioSystem.getDeviceConnectionState(
                 AudioManager.DEVICE_OUT_EARPIECE, "")) {
-            if(!Const.isBoardISharkL210c10()){
+            if (!Const.isBoardISharkL210c10()) {
                 mAudioManager.setMode(AudioManager.MODE_IN_CALL);
             }
         }
         /*SPRD bug 755106:Repeat vibrate support*/
-        Log.d(TAG, "onCreate mVibratePattern="+mVibratePattern);
-        if(mVibratePattern){
+        Log.d(TAG, "onCreate mVibratePattern = " + mVibratePattern);
+        if (mVibratePattern) {
             mVibrator.vibrate(PATTERN, 0);
-        }else{
-            mVibrator.vibrate(V_TIME);
+        } else {
+            VibrationEffect vibrationEffect = VibrationEffect.createOneShot(10000, 200);
+            mVibrator.vibrate(vibrationEffect);
         }
         /*@}*/
 
@@ -232,7 +234,7 @@ public class MelodyTest extends BaseActivity {
             if (tf.isDirectory()) {
                 toSearchFiles(tf);
             } else {
-                try {                   
+                try {
                     if (tf.getName().indexOf(".ogg") > -1) {
                         mFilePaths.add(tf.getPath());
                     }
@@ -263,12 +265,13 @@ public class MelodyTest extends BaseActivity {
         super.onDestroy();
     }
 
-    private String saveMediaFileToSdcard(){
-        String filePath = StorageUtil.getInternalStoragePath() + "/mmi/" + SPECIFIC_RINGTONE_NAME ;
+    private String saveMediaFileToSdcard() {
+        String filePath = StorageUtil.getInternalStoragePath() + "/mmi/" + SPECIFIC_RINGTONE_NAME;
         saveToRawResourceSDCard(this, R.raw.mixtone, filePath);
         return filePath;
     }
-    public void saveToRawResourceSDCard(Context context, int sourceResId, String filePath){
+
+    public void saveToRawResourceSDCard(Context context, int sourceResId, String filePath) {
         InputStream inStream = null;
         FileOutputStream fileOutputStream = null;
         ByteArrayOutputStream outStream = null;
@@ -285,14 +288,15 @@ public class MelodyTest extends BaseActivity {
             byte[] buffer = new byte[10];
             outStream = new ByteArrayOutputStream();
             int len = 0;
-            while((len = inStream.read(buffer)) != -1) {
+            while ((len = inStream.read(buffer)) != -1) {
                 outStream.write(buffer, 0, len);
             }
             byte[] bs = outStream.toByteArray();
             fileOutputStream.write(bs);
         } catch (IOException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
+
             try {
                 outStream.close();
                 inStream.close();

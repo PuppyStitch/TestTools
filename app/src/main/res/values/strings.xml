@@ -427,7 +427,6 @@
     <string name="sensor_cali_out_of_maxrange">Calibration result out of max range</string>
     <string name="sensor_cali_out_of_minrange">Calibration result out of min range</string>
 
-
     <string name="barcode_test">Barcode Test</string>
     <string name="qrcode_test">QRCode Test</string>
     <string name="print_test">Print Test</string>
@@ -438,4 +437,12 @@
     <string name="my_nfc_test">My NFC Test</string>
     <string name="icc_test">ICC Test</string>
     <string name="mcr_test">MCR Test</string>
+
+    <string name="flash_light_test">Flash Light Test</string>
+    <string name="timer_test">Timer Test</string>
+    <string name="virtual_led_test">Virtual Led Test</string>
+    <string name="pos_id">POS ID</string>
+    <string name="ringtone_test">Ringtone Test</string>
+    <string name="my_vibrator_test">Vibrator Test</string>
+
 </resources>

@@ -30,26 +30,6 @@ android {
         }
     }
 
-//    sourceSets {
-//        doLast {
-//            orderJdk(android, project)
-//        }
-//    }
-//
-
-
-//    allprojects {
-//        gradle.projectsEvaluated {
-//            tasks.withType(JavaCompile) {
-//                //相对位置，根据存放的位置修改路径
-//                options.compilerArgs.add('-Xbootclasspath/p:libs/framework.jar')
-//            }
-//        }
-//    }
-
-
-
-
     signingConfigs {
         release {
             storeFile file("./key/platform.jks") //签名文件路径
@@ -65,6 +45,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -74,12 +59,16 @@ android {
         viewBinding true
     }
 
+    sourceSets.main {
+        jniLibs.srcDir 'src/main/jniLib'
+        jni.srcDirs = []
+    }
 }
 
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar', '*.so'])
     compileOnly files('libs/framework.jar')
     implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'

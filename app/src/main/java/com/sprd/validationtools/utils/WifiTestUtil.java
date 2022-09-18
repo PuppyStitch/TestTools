@@ -1,6 +1,8 @@
 
 package com.sprd.validationtools.utils;
 
+import java.net.NetworkInterface;
+import java.util.Collections;
 import java.util.List;
 
 import android.content.BroadcastReceiver;
@@ -154,14 +156,42 @@ public class WifiTestUtil {
         }
     }
 
+//    public String getMacAddress(Context context) {
+//        String wifiMac = "";
+//        WifiManager mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+//        final String[] macAddresses = mWifiManager.getFactoryMacAddresses();
+//        if (macAddresses != null && macAddresses.length > 0) {
+//            wifiMac = macAddresses[0];
+//        }
+//        Log.d(TAG, "getMacAddress getFactoryMacAddresses wifiMac=" + wifiMac);
+//        return wifiMac;
+//    }
+
     public String getMacAddress(Context context) {
-        String wifiMac = "";
-        WifiManager mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        final String[] macAddresses = mWifiManager.getFactoryMacAddresses();
-        if (macAddresses != null && macAddresses.length > 0) {
-            wifiMac = macAddresses[0];
+        //LogUtils.logD(TAG, "获取WifiMac地址===》getMacFromHardware方法 当前系统版本==》" + Build.VERSION.SDK_INT);
+        try {
+            List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface nif : all) {
+                if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
+
+                byte[] macBytes = nif.getHardwareAddress();
+                if (macBytes == null) {
+                    return null;
+                }
+
+                StringBuilder res1 = new StringBuilder();
+                for (byte b : macBytes) {
+                    res1.append(String.format("%02X:", b));
+                }
+
+                if (res1.length() > 0) {
+                    res1.deleteCharAt(res1.length() - 1);
+                }
+                return res1.toString();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        Log.d(TAG, "getMacAddress getFactoryMacAddresses wifiMac=" + wifiMac);
-        return wifiMac;
+        return null;
     }
 }

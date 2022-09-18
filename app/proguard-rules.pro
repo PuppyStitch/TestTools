@@ -19,3 +19,14 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class org.json.** {*;}
+-keep class com.android.volley.** {*;}
+-keep class com.dspread.xpos.** {*;}
+-dontwarn com.dspread.xpos.**
+-keep class android_serialport_api.** {*;}
+-keep class android_serialport_sdk.** {*;}
+-dontwarn android_serialport_api.**
+-keep class com.qfpay.qpossdk.** { *; }
+-keep class net.qfpay.king.android.** { *; }
+-dontwarn com.qfpay.qpossdk.**,net.qfpay.king.android.util.**

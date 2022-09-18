@@ -48,8 +48,8 @@ public class ValidationToolsBroadcastReceiver extends BroadcastReceiver {
         Intent i = new Intent(Intent.ACTION_MAIN);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        Log.d(TAG, "onReceive host=" + host);
-        Log.d(TAG, "onReceive getAction=" + intent.getAction());
+        Log.d(TAG, "onReceive host = " + host);
+        Log.d(TAG, "onReceive getAction = " + intent.getAction());
         if ("83789".equals(host)) {
             i.setClass(context, ValidationToolsMainActivity.class);
             context.startActivity(i);
