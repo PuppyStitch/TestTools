@@ -5,82 +5,72 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 
+import com.dspread.xpos.CQPOSService;
+import com.dspread.xpos.QPOSService;
 import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
 import com.sprd.validationtools.Const;
 
 import java.lang.ref.WeakReference;
+import java.util.Hashtable;
 
 public class MCRTestActivity extends BaseActivity {
 
-    private Button mStartButton;
-    private MyHandler myHandler;
+    QPOSService qposService;
 
-    private static final String TAG = "MSRTestActivity";
+    private static final String TAG = "MCRTestActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LinearLayout barcodeLayout = new LinearLayout(this);
-        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT);
-        barcodeLayout.setLayoutParams(params);
-        barcodeLayout.setOrientation(LinearLayout.VERTICAL);
-        barcodeLayout.setGravity(Gravity.CENTER);
-        mStartButton = new Button(this);
-        mStartButton.setTextSize(35);
-        barcodeLayout.addView(mStartButton);
-//        barcodeLayout.addView(mStopButton);
-        setContentView(barcodeLayout);
-        setTitle("MCR");
-        mStartButton.setText(getResources().getText(R.string.start_play));
-        mStartButton.setOnClickListener(view -> start());
-        myHandler = new MyHandler(this);
+        open(QPOSService.CommunicationMode.UART);
+        qposService.testPosFunctionCommand(3000, QPOSService.TestCommand.MCR_TEST);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        myHandler.removeCallbacksAndMessages(null);
+    private void open(QPOSService.CommunicationMode mode) {
+        MyPosListener listener = new MyPosListener();
+        //实现类的单例模式
+        qposService = QPOSService.getInstance(mode);
+        if (qposService == null) {
+            return;
+        }
+        if (mode == QPOSService.CommunicationMode.USB_OTG_CDC_ACM) {
+            qposService.setUsbSerialDriver(QPOSService.UsbOTGDriver.CH34XU);
+        }
+        qposService.setD20Trade(true); //跟祥承同步，SDK默认打开D20开关
+        qposService.setConext(this);
+        //通过handler处理，监听MyPosListener，实现QposService的接口，（回调接口）
+        Handler handler = new Handler(Looper.myLooper());
+        qposService.initListener(handler, listener);
     }
 
-    private void start() {
-        Intent intent = new Intent();
-        intent.setClassName("com.example.myprinterdemo", "com.example.myprinterdemo.CITTest.MyMCRActivity");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivityForResult(intent, 100);
-    }
-
-    private void storeResult(boolean isSuccess) {
-        storeRusult(isSuccess);
-    }
-
-    public class MyHandler extends Handler {
-        WeakReference<Activity> activityWeakReference;
-
-        MyHandler(Activity activity) {
-            this.activityWeakReference = new WeakReference<>(activity);
+    class MyPosListener extends CQPOSService {
+        @Override
+        public void onQposTestCommandResult(boolean isSuccess, String data) {
+            super.onQposTestCommandResult(isSuccess, data);
+            Log.i(TAG,"isSuccess "+ isSuccess);
+            storeRusult(isSuccess);
         }
 
         @Override
-        public void handleMessage(@NonNull Message msg) {
-            super.handleMessage(msg);
-            storeResult(msg.what == Const.SUCCESS);
+        public void onQposTestResult(Hashtable<String, String> testResultData) {
+            super.onQposTestResult(testResultData);
         }
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
-            myHandler.sendEmptyMessageDelayed(resultCode, 1000);
+        @Override
+        public void onError(QPOSService.Error errorState) {
+            super.onError(errorState);
+            Log.i(TAG,"Error "+ errorState.name());
+            storeRusult(false);
         }
     }
 }

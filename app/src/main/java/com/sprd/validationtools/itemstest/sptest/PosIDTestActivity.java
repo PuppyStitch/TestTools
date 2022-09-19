@@ -22,7 +22,7 @@ public class PosIDTestActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         open(QPOSService.CommunicationMode.UART);
-        qposService.getQposId(1000);
+        qposService.getQposId(3000);
     }
 
     private void open(QPOSService.CommunicationMode mode) {
@@ -49,8 +49,7 @@ public class PosIDTestActivity extends BaseActivity {
         public void onQposTestCommandResult(boolean isSuccess, String data) {
             super.onQposTestCommandResult(isSuccess, data);
             Log.i(TAG,"isSuccess "+ isSuccess);
-            setResult(isSuccess ? Const.SUCCESS : Const.FAIL);
-            finish();
+            storeRusult(isSuccess);
         }
 
         @Override
@@ -62,7 +61,7 @@ public class PosIDTestActivity extends BaseActivity {
         @Override
         public void onError(QPOSService.Error errorState) {
             super.onError(errorState);
-            Log.i(TAG,"Error "+errorState.name());
+            Log.i(TAG,"Error " + errorState.name());
         }
 
         @Override
@@ -70,7 +69,7 @@ public class PosIDTestActivity extends BaseActivity {
             super.onQposIdResult(posId);
             int a = 0;
             Log.i(TAG, "onQposIdResult");
-            Log.i(TAG, posId.get(0));
+            Log.i(TAG, posId.get("posId"));
         }
     }
 }

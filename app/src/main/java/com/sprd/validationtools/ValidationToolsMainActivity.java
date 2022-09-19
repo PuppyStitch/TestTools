@@ -59,7 +59,7 @@ public class ValidationToolsMainActivity extends Activity implements
 
     private ArrayList<BackgroundTest> mBgTest = null;
 
-    private  boolean mIsTested = false;
+    private boolean mIsTested = false;
     public final static String IS_SYSTEM_TESTED = "is_system_tested";
     private SharedPreferences mPrefs;
     private long time = 0;
@@ -78,16 +78,16 @@ public class ValidationToolsMainActivity extends Activity implements
         Log.d(TAG, "oncreate start!");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_validation_tools_main);
-        if(SUPPORT_CAMERA_FEATURE && Const.isSupportCameraCaliVeri()){
-            mListItemString = new String[] {
+        if (SUPPORT_CAMERA_FEATURE && Const.isSupportCameraCaliVeri()) {
+            mListItemString = new String[]{
                     this.getString(R.string.full_test),
                     this.getString(R.string.item_test),
                     this.getString(R.string.test_info),
                     this.getString(R.string.camera_cali_verify),
                     this.getString(R.string.reset)
             };
-        }else{
-            mListItemString = new String[] {
+        } else {
+            mListItemString = new String[]{
                     this.getString(R.string.full_test),
                     this.getString(R.string.item_test),
                     this.getString(R.string.test_info),
@@ -112,7 +112,7 @@ public class ValidationToolsMainActivity extends Activity implements
 
     @Override
     public void onPause() {
-        if(mUserId==0){
+        if (mUserId == 0) {
             saveTestInfo();
         }
         super.onPause();
@@ -127,17 +127,18 @@ public class ValidationToolsMainActivity extends Activity implements
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (resultCode == Const.TEST_ITEM_DONE) {
+            Log.d(TAG, "auto test because requesting");
             autoTest();
         }
     }
 
-    private void startValidationToolsService(Context context,boolean startService){
-        if(context == null) return;
+    private void startValidationToolsService(Context context, boolean startService) {
+        if (context == null) return;
         Intent intent = new Intent(context, ValidationToolsService.class);
-        if(startService){
+        if (startService) {
             intent.setFlags(ValidationToolsService.FLAG_START_FOREGROUND);
             context.startService(intent);
-        }else{
+        } else {
             intent.setFlags(ValidationToolsService.FLAG_STOP_FOREGROUND);
             context.stopService(intent);
         }
@@ -146,18 +147,18 @@ public class ValidationToolsMainActivity extends Activity implements
     private void storePhaseCheck() {
         try {
             String station = BaseActivity.STATION_MMIT_VALUE;
-            if(mPhaseCheckParse == null){
+            if (mPhaseCheckParse == null) {
                 return;
             }
             EngSqlite engSqlite = EngSqlite.getInstance(this);
-            if (engSqlite == null){
+            if (engSqlite == null) {
                 return;
             }
-            Log.d(TAG, "storePhaseCheck: fail = "+engSqlite.queryFailCount() + ", NotTest = " + engSqlite.queryNotTestCount());
+            Log.d(TAG, "storePhaseCheck: fail = " + engSqlite.queryFailCount() + ", NotTest = " + engSqlite.queryNotTestCount());
             mPhaseCheckParse.writeStationTested(station);
-            if (engSqlite.queryFailCount() == 0 && engSqlite.queryNotTestCount()== 0) {
+            if (engSqlite.queryFailCount() == 0 && engSqlite.queryNotTestCount() == 0) {
                 mPhaseCheckParse.writeStationPass(station);
-            }else {
+            } else {
                 mPhaseCheckParse.writeStationFail(station);
             }
         } catch (SQLException e) {
@@ -240,7 +241,7 @@ public class ValidationToolsMainActivity extends Activity implements
         editor.apply();
     }
 
-    public void onResume(){
+    public void onResume() {
         super.onResume();
     }
 
@@ -252,42 +253,42 @@ public class ValidationToolsMainActivity extends Activity implements
             return;
         }
         /* @} */
-        Log.d(TAG, "position:"+position+",id="+id);
-        if(mArrayAdapter != null){
+        Log.d(TAG, "position:" + position + ",id=" + id);
+        if (mArrayAdapter != null) {
             String clickItem = mArrayAdapter.getItem(position);
-            Log.d(TAG, "clickItem:"+clickItem);
-            if(getString(R.string.full_test).equals(clickItem)){
+            Log.d(TAG, "clickItem:" + clickItem);
+            if (getString(R.string.full_test).equals(clickItem)) {
                 time = System.currentTimeMillis();
                 mAutoTestArray = AutoTestItemList.getInstance(this).getTestItemList();
                 mAutoTestCur = 0;
                 mIsTested = true;
                 startBackgroundTest();
                 autoTest();
-            }else if(getString(R.string.item_test).equals(clickItem)){
+            } else if (getString(R.string.item_test).equals(clickItem)) {
                 Intent intent = new Intent(this, ListItemTestActivity.class);
                 startActivity(intent);
-            }else if(getString(R.string.test_info).equals(clickItem)){
+            } else if (getString(R.string.test_info).equals(clickItem)) {
                 Intent intent = new Intent(this, TestInfoMainActivity.class);
                 intent.putExtra(IS_SYSTEM_TESTED, mIsTested);
                 startActivity(intent);
-            }else if(getString(R.string.camera_cali_verify).equals(clickItem)){
+            } else if (getString(R.string.camera_cali_verify).equals(clickItem)) {
                 launcherCameraCaliVerify();
-            }else if(getString(R.string.reset).equals(clickItem)){
+            } else if (getString(R.string.reset).equals(clickItem)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setTitle(R.string.reset)
-                .setMessage(R.string.factory_reset_message)
-                .setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(Intent.ACTION_FACTORY_RESET);
-                        intent.setPackage("android");
-                        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-                        intent.putExtra(Intent.EXTRA_REASON, "MasterClearConfirm");
-                        intent.putExtra(Intent.EXTRA_WIPE_EXTERNAL_STORAGE, false);
-                        ValidationToolsMainActivity.this.sendBroadcast(intent);
-                    }
-                })
-                .setPositiveButton(android.R.string.cancel, null);
+                        .setTitle(R.string.reset)
+                        .setMessage(R.string.factory_reset_message)
+                        .setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(Intent.ACTION_FACTORY_RESET);
+                                intent.setPackage("android");
+                                intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+                                intent.putExtra(Intent.EXTRA_REASON, "MasterClearConfirm");
+                                intent.putExtra(Intent.EXTRA_WIPE_EXTERNAL_STORAGE, false);
+                                ValidationToolsMainActivity.this.sendBroadcast(intent);
+                            }
+                        })
+                        .setPositiveButton(android.R.string.cancel, null);
                 builder.show();
             }
         }
@@ -304,7 +305,7 @@ public class ValidationToolsMainActivity extends Activity implements
         }
     }
 
-    private void launcherCameraCaliVerify(){
+    private void launcherCameraCaliVerify() {
         try {
             String phasecheck = PhaseCheckParse.getInstance().getPhaseCheck();
             Intent intent = new Intent(ACTION_CAMERA_CALI_VERUFY);
