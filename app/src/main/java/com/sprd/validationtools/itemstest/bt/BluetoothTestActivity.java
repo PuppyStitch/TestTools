@@ -1,17 +1,21 @@
-
 package com.sprd.validationtools.itemstest.bt;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
 
 import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
@@ -29,6 +33,8 @@ public class BluetoothTestActivity extends BaseActivity {
 
     private BtTestUtil btTestUtil = null;
 
+    private Context mContext;
+
     @Override
     protected void onDestroy() {
         WcndUtils.dumpCPLog();
@@ -45,6 +51,7 @@ public class BluetoothTestActivity extends BaseActivity {
 
         setContentView(R.layout.bluetooth_result);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+        mContext = this;
 
         btTestUtil = new BtTestUtil() {
 
@@ -53,6 +60,19 @@ public class BluetoothTestActivity extends BaseActivity {
                     case BluetoothAdapter.STATE_ON:
                         tvBtState.setText("Bluetooth ON,Discovering...");
                         // SPRD: update bluetooth address when bt power on
+                        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            //    ActivityCompat#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for ActivityCompat#requestPermissions for more details.
+
+                            Log.e(TAG, "permission error");
+
+                            return;
+                        }
                         tvBtAddr.setText(btTestUtil.getBluetoothAdapter().getAddress() + "\n");
                         break;
                     case BluetoothAdapter.STATE_TURNING_OFF:
@@ -78,6 +98,17 @@ public class BluetoothTestActivity extends BaseActivity {
 
                 if (device != null) {
                     mBluetoothDeviceList.add(device);
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        Log.e(TAG, "getBondState permission error");
+                        return;
+                    }
                     if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
                         String name = device.getName();
                         if (name == null || name.isEmpty()) {
