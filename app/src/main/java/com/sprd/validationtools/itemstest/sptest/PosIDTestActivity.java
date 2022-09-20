@@ -11,6 +11,7 @@ import com.sprd.validationtools.BaseActivity;
 import com.sprd.validationtools.Const;
 
 import java.util.Hashtable;
+import java.util.Map;
 
 public class PosIDTestActivity extends BaseActivity {
 
@@ -23,6 +24,7 @@ public class PosIDTestActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         open(QPOSService.CommunicationMode.UART);
         qposService.getQposId(3000);
+
     }
 
     private void open(QPOSService.CommunicationMode mode) {
@@ -30,7 +32,6 @@ public class PosIDTestActivity extends BaseActivity {
         //实现类的单例模式
         qposService = QPOSService.getInstance(mode);
         if (qposService == null) {
-//            Toast.makeText(this,"pos == null",0).show();
             return;
         }
         if (mode == QPOSService.CommunicationMode.USB_OTG_CDC_ACM) {
@@ -46,22 +47,10 @@ public class PosIDTestActivity extends BaseActivity {
     class MyPosListener extends CQPOSService {
 
         @Override
-        public void onQposTestCommandResult(boolean isSuccess, String data) {
-            super.onQposTestCommandResult(isSuccess, data);
-            Log.i(TAG,"isSuccess "+ isSuccess);
-            storeRusult(isSuccess);
-        }
-
-        @Override
-        public void onQposTestResult(Hashtable<String, String> testResultData) {
-            super.onQposTestResult(testResultData);
-
-        }
-
-        @Override
         public void onError(QPOSService.Error errorState) {
             super.onError(errorState);
             Log.i(TAG,"Error " + errorState.name());
+            storeRusult(false);
         }
 
         @Override
@@ -70,6 +59,10 @@ public class PosIDTestActivity extends BaseActivity {
             int a = 0;
             Log.i(TAG, "onQposIdResult");
             Log.i(TAG, posId.get("posId"));
+
+            for (Map.Entry<String, String> entry : posId.entrySet()) {
+                Log.i(TAG, entry.getKey() + " = " + entry.getValue());
+            }
         }
     }
 }
