@@ -7,7 +7,7 @@ import android.view.View;
 import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
 
-public class TouchTestActivity extends BaseActivity {
+public class ScreenTestActivity extends BaseActivity {
 
     private static final String TAG = "TouchTestActivity";
 

@@ -444,6 +444,6 @@
     <string name="pos_id">POS ID</string>
     <string name="ringtone_test">Ringtone Test</string>
     <string name="my_vibrator_test">Vibrator Test</string>
-    <string name="my_finger_print_test">My Finger Test</string>
+    <string name="screen_print_test">Screen Print Test</string>
 
 </resources>

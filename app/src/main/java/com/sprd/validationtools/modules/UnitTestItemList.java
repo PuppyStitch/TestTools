@@ -10,7 +10,7 @@ import com.sprd.validationtools.itemstest.bt.BluetoothTestActivity;
 import com.sprd.validationtools.itemstest.camera.CameraTestActivity;
 import com.sprd.validationtools.itemstest.charger.ChargerTest;
 //import com.sprd.validationtools.itemstest.fingerprint.FingerprintTestActivity;
-import com.sprd.validationtools.itemstest.tp.TouchTestActivity;
+import com.sprd.validationtools.itemstest.tp.ScreenTestActivity;
 import com.sprd.validationtools.itemstest.gps.GpsTestActivity;
 import com.sprd.validationtools.itemstest.keypad.KeyTestActivity;
 import com.sprd.validationtools.itemstest.lcd.ScreenColorTest;
@@ -42,7 +42,7 @@ public class UnitTestItemList extends TestItemList {
             PosIDTestActivity.class.getName(),                                          // todo:SP版本测试
             ScreenColorTest.class.getName(),                                            // LCD测试
             BackLightTest.class.getName(),                                              // 背景光测试
-            TouchTestActivity.class.getName(),                                  // todo:触摸屏
+            ScreenTestActivity.class.getName(),                                  // todo:触摸屏
             KeyTestActivity.class.getName(),                                            // 按键测试 todo need to modify
             RingtoneTestActivity.class.getName(),                                       // 铃声测试
             VibratorTestActivity.class.getName(),                                       // 震动测试

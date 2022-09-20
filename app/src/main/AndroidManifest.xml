@@ -643,9 +643,9 @@
 
         </activity>
 
-        <activity android:name="com.sprd.validationtools.itemstest.tp.TouchTestActivity"
+        <activity android:name="com.sprd.validationtools.itemstest.tp.ScreenTestActivity"
             android:configChanges="keyboardHidden"
-            android:label="@string/my_finger_print_test"
+            android:label="@string/screen_print_test"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 
