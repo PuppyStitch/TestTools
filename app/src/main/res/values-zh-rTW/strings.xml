@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources tools:ignore="ExtraTranslation" xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
     <string name="mobile_tv_test">手机电视测试</string>
     <string name="charger_ac_plugged">AC 插入</string>
     <string name="charger_usb_plugged">USB 插入</string>
@@ -33,20 +33,20 @@
     <string name="item_test_title">單項測試</string>
     <string name="test_info_title">測試信息</string>
     <string name="recovery_stage_title">恢復出廠設定</string>
- <string name="display_test_title">螢幕測試</string>
-  <string name="ring_test_title">鈴聲測試</string>
-  <string name="phone_test_title">電話測試</string>
-  <string name="accessories_test_title">附件測試</string>
-  <string name="wireless_test_title">無線測試</string>
-  <string name="sensor_test_title">感測器測試</string>
-  <string name="camera_test_title">相機測試</string>
-  <string name="key_test_title">按鍵測試</string>
-  <string name="full_test_title">自動測試</string>
-  <string name="test_result_title">測試結果</string>
-  <string name="version_test">系統版本測試</string>
-  <string name="rf_cali_test">RF CALI測試</string>
-  <string name="rtc_test">RTC測試</string>
-  <string name="lcd_test">LCD測試</string>
+    <string name="display_test_title">螢幕測試</string>
+    <string name="ring_test_title">鈴聲測試</string>
+    <string name="phone_test_title">電話測試</string>
+    <string name="accessories_test_title">附件測試</string>
+    <string name="wireless_test_title">無線測試</string>
+    <string name="sensor_test_title">感測器測試</string>
+    <string name="camera_test_title">相機測試</string>
+    <string name="key_test_title">按鍵測試</string>
+    <string name="full_test_title">自動測試</string>
+    <string name="test_result_title">測試結果</string>
+    <string name="version_test">系統版本測試</string>
+    <string name="rf_cali_test">RF CALI測試</string>
+    <string name="rtc_test">RTC測試</string>
+    <string name="lcd_test">LCD測試</string>
     <string name="rtc_test_info">RTC测试是否通过？</string>
     <string name="backlight_test">背景光測試</string>
     <string name="backlight_des">是否看見背光和按鍵燈連續閃爍兩次？</string>
@@ -213,7 +213,7 @@
     <string name="reset">恢復出廠設定</string>
     <string name="has_camera_title">"你的手機是否有拍照鍵？"</string>
     <string name="has_camera_key">"有"</string>
-	<string name="no_camera_key">"無"</string>
+    <string name="no_camera_key">"無"</string>
     <string name="bt_addr">藍牙地址：</string>
     <string name="bt_state">藍牙狀態：</string>
     <string name="bt_device">藍牙設備列表：</string>
@@ -261,8 +261,8 @@
     <string name="face_msg_text">為保證拍攝效果，請勿遮擋鏡頭.</string>
     <string name="ai_test_title">AI 測試</string>
     <string name="smartpa_calibration_test_title">SmartPA校準測試</string>
-  <string name="camera_calibration_v1">3塊板</string>
-  <string name="camera_calibration_v2">4塊板</string>
+    <string name="camera_calibration_v1">3塊板</string>
+    <string name="camera_calibration_v2">4塊板</string>
 
 
     <string name="barcode_test">一維碼測試</string>
@@ -273,7 +273,15 @@
     <string name="stop_play">停止播放</string>
     <string name="battery_test">電流測試</string>
 
-    <string name="my_nfc_test">My NFC Test</string>
-    <string name="icc_test">ICC Test</string>
-    <string name="mcr_test">MCR Test</string>
+    <string name="my_nfc_test">NFC測試</string>
+    <string name="icc_test">IC卡測試</string>
+    <string name="mcr_test">磁卡測試</string>
+
+    <string name="flash_light_test">閃光燈測試</string>
+    <string name="timer_test">時鐘模塊測試</string>
+    <string name="virtual_led_test">虛擬LED燈測試</string>
+    <string name="pos_id">POS ID測試</string>
+    <string name="ringtone_test">鈴聲測試</string>
+    <string name="my_vibrator_test">震動測試</string>
+    <string name="screen_print_test">屏幕觸摸測試</string>
 </resources>

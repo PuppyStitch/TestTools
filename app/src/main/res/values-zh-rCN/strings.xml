@@ -375,7 +375,17 @@
     <string name="stop_play">停止播放</string>
     <string name="battery_test">电流测试</string>
 
-    <string name="my_nfc_test">My NFC Test</string>
-    <string name="icc_test">ICC Test</string>
-    <string name="mcr_test">MCR Test</string>
+    <string name="my_nfc_test">NFC测试</string>
+    <string name="icc_test">IC卡测试</string>
+    <string name="mcr_test">磁卡测试</string>
+
+    <string name="flash_light_test">闪光灯测试</string>
+    <string name="timer_test">时钟模块测试</string>
+    <string name="virtual_led_test">虚拟LED灯测试</string>
+    <string name="pos_id">POS ID测试</string>
+    <string name="ringtone_test">铃声测试</string>
+    <string name="my_vibrator_test">震动测试</string>
+    <string name="screen_print_test">屏幕触摸测试</string>
+
+
 </resources>
