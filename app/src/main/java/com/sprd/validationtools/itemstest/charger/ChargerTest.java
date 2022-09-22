@@ -161,20 +161,15 @@ public class ChargerTest extends BaseActivity {
                     } else {
 
                         if (mIsPlugUSB) {
-                            mRetryNum++;
-                            if (mRetryNum <= 5) {
-                                mWaitTime = 500 * mRetryNum;
-
-                                mHandler.post(mElectronicUpdate);
-                                Log.d(TAG, "retry test num:" + mRetryNum + ",wait time is " + mWaitTime);
-                            } else {
-                                mTestResultTextView.setText(getString(R.string.charger_test_fail));
-                                mTestResultTextView.setTextColor(Color.RED);
-                                storeRusult(false);
-                                mHandler.postDelayed(mCompleteTest, 2000);
-                            }
+                            mTestResultTextView.setText(getString(R.string.charger_test_success));
+                            mTestResultTextView.setTextColor(Color.GREEN);
+                            mHandler.post(mElectronicUpdate);
                         } else {
-                            mHandler.postDelayed(mElectronicUpdate, 2000);
+                            mTestResultTextView.setText(getString(R.string.charger_test_fail));
+                            mTestResultTextView.setTextColor(Color.RED);
+                            storeRusult(false);
+                            mHandler.postDelayed(mCompleteTest, 2000);
+//                            mHandler.postDelayed(mElectronicUpdate, 2000);
                         }
                     }
                 }
@@ -316,12 +311,12 @@ public class ChargerTest extends BaseActivity {
             } else {
                 c2 = Integer.parseInt(readFile(CHARGER_ELECTRONIC).trim());
             }
-            Log.d(TAG, "getInputElectronicNewStep inputCurrent c2=[" + c2 + "]");
+            Log.d(TAG, "getInputElectronicNewStep inputCurrent c2 = [" + c2 + "]");
             int i1 = c2 - c1;
-            Log.d(TAG, "getInputElectronicNewStep inputCurrent i1=[" + i1 + "]");
-            Log.d(TAG, "getInputElectronicNewStep inputCurrent mChargerVoltage=[" + mChargerVoltage + "]");
+            Log.d(TAG, "getInputElectronicNewStep inputCurrent i1 = [" + i1 + "]");
+            Log.d(TAG, "getInputElectronicNewStep inputCurrent mChargerVoltage = [" + mChargerVoltage + "]");
             //i1 >= 200mA PASS
-            if (i1 >= 200 || mIsPlugUSB) {
+            if (i1 >= 200) {
                 result = TEST_RESULT_SUCCESS;
             }
             //i1 > 100mA && i1 < 200mA && mChargerVoltage >= 4100 PASS

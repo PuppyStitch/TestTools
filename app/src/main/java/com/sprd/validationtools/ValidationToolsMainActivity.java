@@ -41,6 +41,9 @@ import com.sprd.validationtools.background.BackgroundWifiTest;
 import com.sprd.validationtools.itemstest.ListItemTestActivity;
 import com.sprd.validationtools.itemstest.TestResultActivity;
 import com.sprd.validationtools.modules.AutoTestItemList;
+import com.sprd.validationtools.modules.MMI1TestItems;
+import com.sprd.validationtools.modules.MMI2TestItems;
+import com.sprd.validationtools.modules.SMTTestItems;
 import com.sprd.validationtools.modules.TestItem;
 import com.sprd.validationtools.sqlite.EngSqlite;
 import com.sprd.validationtools.testinfo.TestInfoMainActivity;
@@ -72,6 +75,11 @@ public class ValidationToolsMainActivity extends Activity implements
     private long mFullTestUsedtime = 0;
     private PhaseCheckParse mPhaseCheckParse = null;
 
+    Intent mIntent;
+    String mode;
+
+    String[] testList;
+
     public final static String ACTION_CAMERA_CALI_VERUFY = "com.sprd.cameracalibration.START_CAMERACALIBRATION";
     public final static String EXTRA_GET_PHASECHECK = "phasecheck_result";
 
@@ -81,6 +89,17 @@ public class ValidationToolsMainActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "oncreate start!");
         super.onCreate(savedInstanceState);
+        mIntent = getIntent();
+
+        mode = mIntent.getStringExtra(Const.KEY);
+        if (Const.MMI1_VALUE.equals(mode)) {
+            testList = MMI1TestItems.FILTER_CLASS_NAMES;
+        } else if (Const.MMI2_VALUE.equals(mode)) {
+            testList = MMI2TestItems.FILTER_CLASS_NAMES;
+        } else {
+            testList = SMTTestItems.FILTER_CLASS_NAMES;
+        }
+
         setContentView(R.layout.activity_validation_tools_main);
         if (SUPPORT_CAMERA_FEATURE && Const.isSupportCameraCaliVeri()) {
             mListItemString = new String[]{

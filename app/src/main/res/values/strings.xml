@@ -69,7 +69,7 @@
     <string name="btut_test">BTEUT test</string>
     <string name="gravity_sensor_test">gravity sensor test</string>
     <string name="oritention_sensor_test">Orientation sensor test</string>
-    <string name="proximity_sensor_test">Proximity and Light sensor test</string>
+    <string name="p_sensor_test">Light sensor test</string>
     <string name="light_sensor_test">Ligth sensor test</string>
     <string name="camera_test">Camera test</string>
     <string name="key_test">Key test</string>

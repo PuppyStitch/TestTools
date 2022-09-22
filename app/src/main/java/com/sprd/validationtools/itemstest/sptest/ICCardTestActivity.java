@@ -1,5 +1,6 @@
 package com.sprd.validationtools.itemstest.sptest;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,6 +21,7 @@ public class ICCardTestActivity extends BaseActivity {
     private static final String TAG = "ICCardTestActivity";
 
     QPOSService qposService;
+    Context mContext;
 
     public Handler mHandler = new Handler();
     private static final int TIMEOUT = 8000;
@@ -45,6 +47,13 @@ public class ICCardTestActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         open(QPOSService.CommunicationMode.UART);
         qposService.testPosFunctionCommand(3000, QPOSService.TestCommand.ICC_TEST);
+        mContext = this;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(runnable);
     }
 
     private void open(QPOSService.CommunicationMode mode) {
@@ -70,9 +79,10 @@ public class ICCardTestActivity extends BaseActivity {
             super.onQposTestCommandResult(isSuccess, data);
             Log.i(TAG,"isSuccess "+ isSuccess);
             isOk = true;
-            Toast.makeText(ICCardTestActivity.this, R.string.text_pass,
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(ICCardTestActivity.this, mContext.getText(R.string.text_pass) +
+                    " " + data, Toast.LENGTH_SHORT).show();
             storeRusult(isSuccess);
+            finish();
         }
 
         @Override

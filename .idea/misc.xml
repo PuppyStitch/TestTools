@@ -25,6 +25,7 @@
         <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/shape.xml" value="0.325" />
         <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/drawable/test.xml" value="0.325" />
         <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/activity_ai_test.xml" value="0.26268115942028986" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/activity_chose_test_mode.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/activity_main.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/activity_new_test.xml" value="0.34782608695652173" />
         <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/activity_validation_tools_main.xml" value="0.3822463768115942" />
@@ -40,6 +41,8 @@
         <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/otg_test_layout.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/pos_id_test_layout.xml" value="0.3854166666666667" />
         <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/sensor_noise_proximity.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/sensor_prox_calibration.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/sensor_proximity.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/sim_card_test.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/single_touch_test1.xml" value="0.3822463768115942" />
         <entry key="..\:/Users/33023/AndroidStudioProjects/TestTools/app/src/main/res/layout/test_result.xml" value="0.20104166666666667" />

@@ -1,5 +1,6 @@
 package com.sprd.validationtools.itemstest.sptest;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,9 +16,10 @@ import java.util.Hashtable;
 
 public class MCRTestActivity extends BaseActivity {
 
-    QPOSService qposService;
-
     private static final String TAG = "MCRTestActivity";
+
+    QPOSService qposService;
+    Context mContext;
 
     public Handler mHandler = new Handler();
     private static final int TIMEOUT = 16000;
@@ -43,6 +45,7 @@ public class MCRTestActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         open(QPOSService.CommunicationMode.UART);
         qposService.testPosFunctionCommand(3000, QPOSService.TestCommand.MCR_TEST);
+        mContext = this;
     }
 
     @Override
@@ -79,10 +82,10 @@ public class MCRTestActivity extends BaseActivity {
         public void onQposTestCommandResult(boolean isSuccess, String data) {
             super.onQposTestCommandResult(isSuccess, data);
             Log.i(TAG, "isSuccess " + isSuccess);
-            Toast.makeText(MCRTestActivity.this, R.string.text_pass,
-                    Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(MCRTestActivity.this, mContext.getText(R.string.text_pass) +
+                    " " + data, Toast.LENGTH_SHORT).show();
             storeRusult(isSuccess);
+            finish();
         }
 
         @Override

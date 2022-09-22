@@ -77,7 +77,7 @@
             style="@style/itemTextKeyStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/status"
+            android:text="已使用容量"
             android:textColor="#ffffff" >
         </TextView>
 
@@ -107,7 +107,7 @@
             style="@style/itemTextKeyStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/status"
+            android:text="剩余容量"
             android:textColor="#ffffff" >
         </TextView>
 

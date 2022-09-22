@@ -79,7 +79,7 @@
     <string name="btut_test">BTEUT測試</string>
     <string name="gravity_sensor_test">重力傳感器測試</string>
     <string name="oritention_sensor_test">羅盤測試</string>
-    <string name="proximity_sensor_test">距離和光傳感器測試</string>
+    <string name="p_sensor_test">光傳感器測試</string>
     <string name="camera_test">相機測試</string>
     <string name="key_test">按鍵測試</string>
     <string name="key_test_info">是否與所按的鍵符合？</string>

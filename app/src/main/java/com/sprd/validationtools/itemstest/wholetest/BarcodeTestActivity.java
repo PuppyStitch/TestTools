@@ -41,7 +41,9 @@ public class BarcodeTestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new IntentIntegrator(this).initiateScan();
+        IntentIntegrator intentIntegrator = new IntentIntegrator(this);
+        intentIntegrator.setTimeout(TIMEOUT - 1000);
+        intentIntegrator.initiateScan();
     }
 
     @Override
@@ -63,7 +65,7 @@ public class BarcodeTestActivity extends BaseActivity {
         Log.d(TAG, "the result is " + result);
         if (result != null) {
             isOk = true;
-//            Toast.makeText(this, "扫描内容:" + result.getContents(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "扫描内容:" + result.getContents(), Toast.LENGTH_LONG).show();
         }
     }
 

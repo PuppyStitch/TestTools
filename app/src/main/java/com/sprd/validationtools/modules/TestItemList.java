@@ -16,12 +16,12 @@ public abstract class TestItemList {
 
     private static final String TAG = "TestItemList";
 
-    abstract public String[] getfilterClassName();
+    abstract public String[] getFilterClassName();
 
     private ArrayList<TestItem> mTestItemList = new ArrayList<TestItem>();
 
     public TestItemList(Context context) {
-        addAndFilterTestItemList(context, getfilterClassName());
+        addAndFilterTestItemList(context, getFilterClassName());
     }
 
     public ArrayList<TestItem> getTestItemList() {

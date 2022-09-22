@@ -77,7 +77,6 @@ public class SPVersionTestActivity extends BaseActivity {
     }
 
     class MyPosListener extends CQPOSService {
-
         @Override
         public void onError(QPOSService.Error errorState) {
             super.onError(errorState);

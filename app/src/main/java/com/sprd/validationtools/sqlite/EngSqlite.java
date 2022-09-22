@@ -120,11 +120,9 @@ public class EngSqlite {
             mSqLiteDatabase.update(ENG_STRING2INT_TABLE, cv,
                     ENG_STRING2INT_NAME + "= \'" + name + "\'", null);
             mSqLiteDatabase.setTransactionSuccessful();
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | IllegalStateException e) {
             e.printStackTrace();
-        }catch (IllegalStateException e) {
-            e.printStackTrace();
-        }finally{
+        } finally{
             mSqLiteDatabase.endTransaction();
         }
     }

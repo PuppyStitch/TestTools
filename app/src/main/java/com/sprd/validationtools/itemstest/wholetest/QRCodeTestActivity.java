@@ -36,7 +36,21 @@ public class QRCodeTestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new IntentIntegrator(this).initiateScan();
+        IntentIntegrator intentIntegrator = new IntentIntegrator(this);
+        intentIntegrator.setTimeout(TIMEOUT - 1000);
+        intentIntegrator.initiateScan();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mHandler.postDelayed(runnable, TIMEOUT);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(runnable);
     }
 
     @Override
@@ -45,7 +59,8 @@ public class QRCodeTestActivity extends BaseActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             isOk = true;
-//            Toast.makeText(this, "扫描内容:" + result.getContents(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "扫描内容:" + result.getContents(), Toast.LENGTH_LONG).show();
+            storeRusult(isOk);
         }
     }
 

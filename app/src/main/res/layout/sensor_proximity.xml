@@ -4,6 +4,10 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
     <TextView
         android:id="@+id/test_tile"
         android:layout_width="wrap_content"

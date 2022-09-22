@@ -123,6 +123,12 @@ public class Const {
     public static final int SUCCESS = 1;
     public static final int DEFAULT = 2;
 
+    public static final String KEY = "KEY";
+    public static final String MMI1_VALUE = "MMI1_VALUE";
+    public static final String MMI2_VALUE = "MMI2_VALUE";
+    public static final String SMT_VALUE = "SMT_VALUE";
+    public static String TEST_VALUE = MMI1_VALUE;
+
     private static boolean mSupportLightSensor = true;
     public static final String CAMERA_CALI_VERI = "persist.vendor.cam.multicam.cali.veri";
 

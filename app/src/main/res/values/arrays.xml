@@ -37,7 +37,7 @@
         <item>@string/phone_loopback_test</item>
         <item>@string/gravity_sensor_test</item>
         <item>@string/oritention_sensor_test</item>
-        <item>@string/proximity_sensor_test</item>
+        <item>@string/p_sensor_test</item>
         <item>@string/front_camera_title_text</item>
         <item>@string/back_camera_title_text</item>
         <item>@string/key_test</item>
@@ -113,7 +113,7 @@
     <string-array name="sensor_list_test">
         <item>@string/gravity_sensor_test</item>
         <item>@string/oritention_sensor_test</item>
-        <item>@string/proximity_sensor_test</item>
+        <item>@string/p_sensor_test</item>
     </string-array>
 
    <string-array name="camera_list_test">

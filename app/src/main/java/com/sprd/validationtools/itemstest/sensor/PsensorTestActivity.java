@@ -6,7 +6,6 @@ import com.sprd.validationtools.Const;
 import com.simcom.testtools.R;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -96,7 +95,7 @@ public class PsensorTestActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mContext = this;
         setContentView(R.layout.sensor_proximity);
-        setTitle(R.string.proximity_sensor_test);
+        setTitle(R.string.p_sensor_test);
         psensorTextView = (TextView) findViewById(R.id.txt_psensor);
         initSensor();
         setPsensorDisplay(VALUE_FAR, PSENSOR_DEFAULT_VALUE, Color.WHITE);

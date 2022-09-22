@@ -93,7 +93,7 @@
     <string name="btut_test">BTEUT测试</string>
     <string name="gravity_sensor_test">重力传感器测试</string>
     <string name="oritention_sensor_test">罗盘测试</string>
-    <string name="proximity_sensor_test">距离和光传感器测试</string>
+    <string name="p_sensor_test">光传感器测试</string>
     <string name="camera_test">照相机测试</string>
     <string name="key_test">按键测试</string>
     <string name="key_test_info">是否与所按的键符合？</string>
