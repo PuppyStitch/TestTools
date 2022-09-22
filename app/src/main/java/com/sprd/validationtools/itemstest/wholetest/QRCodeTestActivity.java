@@ -1,12 +1,12 @@
 package com.sprd.validationtools.itemstest.wholetest;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.os.Handler;
+import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
 
@@ -14,42 +14,39 @@ public class QRCodeTestActivity extends BaseActivity {
 
     private static final String TAG = "QRCodeTestActivity";
 
-    private Button mButton;
-    private final int REQUEST_CODE = 102;
+    public Handler mHandler = new Handler();
+    private static final int TIMEOUT = 20000;
+    private boolean isOk = false;
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            if (isOk) {
+                Toast.makeText(QRCodeTestActivity.this, R.string.text_pass,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(true);
+            } else {
+                Toast.makeText(QRCodeTestActivity.this, R.string.text_fail,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(false);
+            }
+            mHandler.removeCallbacks(runnable);
+            finish();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        LinearLayout barcodeLayout = new LinearLayout(this);
-        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT);
-        barcodeLayout.setLayoutParams(params);
-        barcodeLayout.setOrientation(1);
-        barcodeLayout.setGravity(Gravity.CENTER);
-        mButton = new Button(this);
-        mButton.setTextSize(35);
-        barcodeLayout.addView(mButton);
-        setContentView(barcodeLayout);
-        setTitle(R.string.barcode_test);
-        mButton.setText(getResources().getText(R.string.qrcode_test));
-        mButton.setOnClickListener(view -> start());
+        new IntentIntegrator(this).initiateScan();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE) {
-            storeRusult(requestCode == RESULT_OK);
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            isOk = true;
+//            Toast.makeText(this, "扫描内容:" + result.getContents(), Toast.LENGTH_LONG).show();
         }
-        finish();
-    }
-
-    public void start() {
-        Intent intent = new Intent();
-        intent.setClassName("com.example.myprinterdemo", "com.example.myprinterdemo.validation.ScannerActivity");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivityForResult(intent, REQUEST_CODE);
     }
 
 }

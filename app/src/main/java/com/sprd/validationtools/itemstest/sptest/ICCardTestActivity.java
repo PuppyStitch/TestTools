@@ -1,34 +1,44 @@
 package com.sprd.validationtools.itemstest.sptest;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
-import android.view.Gravity;
-import android.widget.Button;
-import android.widget.LinearLayout;
-
-import androidx.annotation.NonNull;
+import android.widget.Toast;
 
 import com.dspread.xpos.CQPOSService;
 import com.dspread.xpos.QPOSService;
 import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
-import com.sprd.validationtools.Const;
+import com.sprd.validationtools.itemstest.wholetest.PrintTestActivity;
 
-import java.lang.ref.WeakReference;
 import java.util.Hashtable;
 
 
 public class ICCardTestActivity extends BaseActivity {
 
+    private static final String TAG = "ICCardTestActivity";
+
     QPOSService qposService;
 
-    private static final String TAG = "ICCardTestActivity";
+    public Handler mHandler = new Handler();
+    private static final int TIMEOUT = 8000;
+    private boolean isOk = false;
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            if (isOk) {
+                Toast.makeText(ICCardTestActivity.this, R.string.text_pass,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(true);
+            } else {
+                Toast.makeText(ICCardTestActivity.this, R.string.text_fail,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(false);
+            }
+            mHandler.removeCallbacks(runnable);
+            finish();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +69,9 @@ public class ICCardTestActivity extends BaseActivity {
         public void onQposTestCommandResult(boolean isSuccess, String data) {
             super.onQposTestCommandResult(isSuccess, data);
             Log.i(TAG,"isSuccess "+ isSuccess);
+            isOk = true;
+            Toast.makeText(ICCardTestActivity.this, R.string.text_pass,
+                    Toast.LENGTH_SHORT).show();
             storeRusult(isSuccess);
         }
 
@@ -71,6 +84,7 @@ public class ICCardTestActivity extends BaseActivity {
         public void onError(QPOSService.Error errorState) {
             super.onError(errorState);
             Log.i(TAG,"Error "+ errorState.name());
+            isOk = false;
             storeRusult(false);
         }
     }

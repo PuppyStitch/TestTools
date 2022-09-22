@@ -28,11 +28,11 @@ public class ValidationToolsBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         Log.d(TAG, "onReceive action = " + action);
-        if(action == null) return;
-        if(action.equals(ACTION_BOOT_COMPLETED)){
+        if (action == null) return;
+        if (action.equals(ACTION_BOOT_COMPLETED)) {
             String bootmode = SystemProperties.get(BOOT_MODE, "unknow");
             Log.d(TAG, "onReceive bootmode = " + bootmode);
-            if(bootmode != null && bootmode.equals(BOOT_MODE_APKMMI)){
+            if (bootmode != null && bootmode.equals(BOOT_MODE_APKMMI)) {
                 Intent i = new Intent(Intent.ACTION_MAIN);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.setClass(context, ValidationToolsMainActivity.class);

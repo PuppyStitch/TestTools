@@ -5,8 +5,11 @@ import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
 
 public class FlashTestActivity extends BaseActivity {
@@ -14,6 +17,25 @@ public class FlashTestActivity extends BaseActivity {
     private static final String TAG = "FlashTestActivity";
     private CameraManager camManager;
     String cameraId = null;
+
+    public Handler mHandler = new Handler();
+    private static final int TIMEOUT = 8000;
+    private boolean isOk = true;
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            if (isOk) {
+                Toast.makeText(FlashTestActivity.this, R.string.text_pass,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(true);
+            } else {
+                Toast.makeText(FlashTestActivity.this, R.string.text_fail,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(false);
+            }
+            mHandler.removeCallbacks(runnable);
+            finish();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +55,13 @@ public class FlashTestActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }
+        mHandler.postDelayed(runnable, TIMEOUT);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(runnable);
     }
 
     @Override

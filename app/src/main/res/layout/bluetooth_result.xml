@@ -4,6 +4,10 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
     <TextView
         android:id="@+id/bt_addr"
         android:layout_width="fill_parent"

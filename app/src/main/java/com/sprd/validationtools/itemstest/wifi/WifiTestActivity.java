@@ -33,7 +33,7 @@ public class WifiTestActivity extends BaseActivity {
     private boolean mIs5GHzBandSupported = false;
 
     /*SPRD bug 848729:Marlin3 support*/
-    private static final int TIMEOUT  = 20000;
+    private static final int TIMEOUT = 20000;
     private Runnable mR = new Runnable() {
         public void run() {
             if (mFindFlag) {
@@ -52,7 +52,7 @@ public class WifiTestActivity extends BaseActivity {
     };
 
     @Override
-    public void onClick(View v){
+    public void onClick(View v) {
         mHandler.removeCallbacks(mR);
         wifiTestUtil.stopTest();
         super.onClick(v);
@@ -77,7 +77,7 @@ public class WifiTestActivity extends BaseActivity {
         wifiTestUtil = new WifiTestUtil(mWifiManager) {
 
             public void wifiStateChange(int newState) {
-                Log.d(TAG, "wifiStateChange newState="+newState);
+                Log.d(TAG, "wifiStateChange newState=" + newState);
                 switch (newState) {
                     case WifiManager.WIFI_STATE_ENABLED:
                         tvWifiState.setText("Wifi ON,Discovering...");
@@ -109,24 +109,24 @@ public class WifiTestActivity extends BaseActivity {
                 boolean mFind5GFlag = false;
                 boolean mFind24GFlag = false;
                 tvWifiDeviceList.setText("");
-                Log.d(TAG, "wifiDeviceListChange mIs5GHzBandSupported="+mIs5GHzBandSupported);
+                Log.d(TAG, "wifiDeviceListChange mIs5GHzBandSupported=" + mIs5GHzBandSupported);
                 for (ScanResult result : wifiDeviceList) {
                     tvWifiDeviceList.append("device name: ");
                     tvWifiDeviceList.append(result.SSID);
                     tvWifiDeviceList.append("\nsignal level: ");
                     tvWifiDeviceList.append(String.valueOf(result.level));
                     tvWifiDeviceList.append("\n\n");
-                    Log.d(TAG, "wifiDeviceListChange result="+result.toString());
-                    if(mIs5GHzBandSupported){
+                    Log.d(TAG, "wifiDeviceListChange result=" + result.toString());
+                    if (mIs5GHzBandSupported) {
                         boolean is5GHz = result.is5GHz();
-                        Log.d(TAG, "wifiDeviceListChange is5GHz="+is5GHz);
-                        if(is5GHz){
+                        Log.d(TAG, "wifiDeviceListChange is5GHz=" + is5GHz);
+                        if (is5GHz) {
                             mFind5GFlag = true;
-                        }else{
+                        } else {
                             mFind24GFlag = true;
                         }
                         mFindFlag = mFind5GFlag && mFind24GFlag;
-                    }else{
+                    } else {
                         mFindFlag = true;
                     }
                 }

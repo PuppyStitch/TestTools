@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.dspread.xpos.CQPOSService;
 import com.dspread.xpos.QPOSService;
+import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
 
 import java.util.Hashtable;
@@ -18,12 +20,42 @@ public class SPVersionTestActivity extends BaseActivity {
 
     QPOSService qposService;
 
+    public Handler mHandler = new Handler();
+    private static final int TIMEOUT = 16000;
+    private boolean isOk = false;
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            if (isOk) {
+                Toast.makeText(SPVersionTestActivity.this, R.string.text_pass,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(true);
+            } else {
+                Toast.makeText(SPVersionTestActivity.this, R.string.text_fail,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(false);
+            }
+            mHandler.removeCallbacks(runnable);
+            finish();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         open(QPOSService.CommunicationMode.UART);
         qposService.getQposInfo();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mHandler.postDelayed(runnable, TIMEOUT);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(runnable);
     }
 
     private void open(QPOSService.CommunicationMode mode) {
@@ -59,6 +91,7 @@ public class SPVersionTestActivity extends BaseActivity {
             for (Map.Entry<String, String> entry : posInfoData.entrySet()) {
                 Log.i(TAG, entry.getKey() + " = " + entry.getValue());
             }
+            isOk = true;
         }
     }
 }

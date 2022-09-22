@@ -6,21 +6,30 @@
     tools:ignore="CoarseFineLocation">
 
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES"
+    <uses-permission
+        android:name="android.permission.FORCE_STOP_PACKAGES"
         android:protectionLevel="signature"
         tools:ignore="ProtectedPermissions" />
 
-    <permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" android:protectionLevel="signature"/>
-    <permission android:name="android.permission.INTERACT_ACROSS_USERS" android:protectionLevel="signature"/>
+    <permission
+        android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
+        android:protectionLevel="signature" />
+    <permission
+        android:name="android.permission.INTERACT_ACROSS_USERS"
+        android:protectionLevel="signature" />
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.LOCAL_MAC_ADDRESS"
+    <uses-permission
+        android:name="android.permission.LOCAL_MAC_ADDRESS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.MODIFY_PHONE_STATE"
+    <uses-permission
+        android:name="android.permission.MODIFY_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -29,86 +38,96 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.CALL_PRIVILEGED"
+    <uses-permission
+        android:name="android.permission.CALL_PRIVILEGED"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
-    <uses-permission android:name="android.permission.ACCESS_FM_RADIO"
+    <uses-permission
+        android:name="android.permission.ACCESS_FM_RADIO"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_ROUTING"
+    <uses-permission
+        android:name="android.permission.MODIFY_AUDIO_ROUTING"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.NFC" />
-    <uses-permission android:name="android.permission.MASTER_CLEAR"
+    <uses-permission
+        android:name="android.permission.MASTER_CLEAR"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.ACCESS_BROADCAST_RADIO"
+    <uses-permission
+        android:name="android.permission.ACCESS_BROADCAST_RADIO"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="sprd.permission.PROTECT_PROCESS" />
-<!--    <permission android:name="com.android.permission.SAVE_PHASECHECK"/>-->
+
+    <permission android:name="com.android.permission.SAVE_PHASECHECK" />
 
 
     <application
+        android:directBootAware="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:requestLegacyExternalStorage="true"
-        android:directBootAware="true">
-<!--    <uses-library android:name="com.broadcom.bt" />-->
-<!--    <service android:name=".ValidationToolsService" android:priority="1000"></service>-->
-    <!--
-    <receiver android:name="com.sprd.validationtools.ValidationToolsBroadcastReceiver"
-        android:exported="true"
-        android:directBootAware="true">
-        <intent-filter android:priority="1000">
-            <action android:name="android.intent.action.BOOT_COMPLETED" />
-        </intent-filter>
-        <intent-filter>
-            <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
-        </intent-filter>
-        <intent-filter android:priority="1000">
-            <action android:name="android.provider.Telephony.SECRET_CODE" />
+        android:priority="1000"
+        android:requestLegacyExternalStorage="true">
+        <!--    <uses-library android:name="com.broadcom.bt" />-->
+        <!--    <service android:name=".ValidationToolsService" android:priority="1000"></service>-->
+        <!--
+        <receiver android:name="com.sprd.validationtools.ValidationToolsBroadcastReceiver"
+            android:exported="true"
+            android:directBootAware="true">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter android:priority="1000">
+                <action android:name="android.provider.Telephony.SECRET_CODE" />
 
-            <data
-                android:host="83789"
-                android:scheme="android_secret_code" />
-        </intent-filter>
-        <intent-filter android:priority="1000">
-            <action android:name="android.provider.Telephony.SECRET_CODE" />
+                <data
+                    android:host="83789"
+                    android:scheme="android_secret_code" />
+            </intent-filter>
+            <intent-filter android:priority="1000">
+                <action android:name="android.provider.Telephony.SECRET_CODE" />
 
-            <data
-                android:host="654987"
-                android:scheme="android_secret_code" />
-        </intent-filter>
-        <intent-filter android:priority="1000">
-            <action android:name="android.provider.Telephony.SECRET_CODE" />
+                <data
+                    android:host="654987"
+                    android:scheme="android_secret_code" />
+            </intent-filter>
+            <intent-filter android:priority="1000">
+                <action android:name="android.provider.Telephony.SECRET_CODE" />
 
-            <data
-                android:host="833"
-                android:scheme="android_secret_code" />
-        </intent-filter>
-        <intent-filter android:priority="1000">
-            <action android:name="com.unisoc.action.UNISOC_SECRET_CODE" />
+                <data
+                    android:host="833"
+                    android:scheme="android_secret_code" />
+            </intent-filter>
+            <intent-filter android:priority="1000">
+                <action android:name="com.unisoc.action.UNISOC_SECRET_CODE" />
 
-            <data
-                android:host="83789"
-                android:scheme="unisoc_secret_code" />
-        </intent-filter>
-    </receiver>
-    -->
+                <data
+                    android:host="83789"
+                    android:scheme="unisoc_secret_code" />
+            </intent-filter>
+        </receiver>
+        -->
         <receiver
             android:name="com.sprd.validationtools.PhaseCheckBroadcastReceiver"
-            android:permission="com.android.permission.SAVE_PHASECHECK"
-            android:exported="true">
+            android:exported="true"
+            android:permission="com.android.permission.SAVE_PHASECHECK">
             <intent-filter>
                 <action android:name="com.sprd.validationtools.SAVE_PHASECHECK" />
             </intent-filter>
@@ -120,8 +139,7 @@
             android:configChanges="keyboardHidden"
             android:label="@string/tof_calibration_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
         <!-- AITest -->
         <activity
@@ -129,42 +147,38 @@
             android:configChanges="keyboardHidden"
             android:label="@string/ai_test_title"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.ValidationToolsMainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|mnc|mcc"
+            android:exported="true"
             android:label="@string/title_activity_validation_tools_main"
             android:screenOrientation="portrait"
-            android:exported="true"
             android:theme="@android:style/Theme.Black">
-                        <intent-filter>
-                            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-                            <category android:name="android.intent.category.LAUNCHER" />
-                        </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            </intent-filter>
         </activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.ListItemTestActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|mnc|mcc"
-            android:screenOrientation="portrait"
             android:exported="true"
-            android:theme="@android:style/Theme.Black" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.backlight.BackLightTest"
             android:configChanges="keyboardHidden"
             android:label="@string/backlight_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.lcd.ScreenColorTest"
             android:configChanges="keyboardHidden"
             android:label="@string/lcd_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
         <!-- TP test begin -->
         <activity
@@ -172,29 +186,25 @@
             android:configChanges="keyboardHidden"
             android:label="@string/touchpoint_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.tp.DrawRectTestAcvity"
             android:configChanges="keyboardHidden"
             android:label="@string/touchpoint_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.tp.MutiTouchTest"
             android:configChanges="keyboardHidden"
             android:label="@string/muti_touchpoint_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.tp.MutiTouchDoubleScreenTest"
             android:configChanges="keyboardHidden"
             android:label="@string/muti_touchpoint_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <!-- TP test end -->
 
 
@@ -204,22 +214,19 @@
             android:configChanges="keyboardHidden"
             android:label="@string/status_indicator_red"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.led.GreenLightTest"
             android:configChanges="keyboardHidden"
             android:label="@string/status_indicator_green"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.led.BlueLightTest"
             android:configChanges="keyboardHidden"
             android:label="@string/status_indicator_blue"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <!-- LED test end -->
 
         <activity
@@ -227,8 +234,7 @@
             android:configChanges="keyboardHidden"
             android:label="@string/key_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
         <!-- charger test begin -->
         <activity
@@ -236,42 +242,36 @@
             android:configChanges="keyboardHidden"
             android:label="@string/charger_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <!-- charger test end -->
 
         <activity
             android:name="com.sprd.validationtools.testinfo.TestInfoMainActivity"
             android:label="TestInfo"
-            android:theme="@android:style/Theme.Black" >
-        </activity>
+            android:theme="@android:style/Theme.Black"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.rtc.RTCTest"
             android:configChanges="keyboardHidden"
             android:label="@string/rtc_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.TestResultActivity"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.sysinfo.RFCALITest"
             android:configChanges="keyboardHidden"
             android:label="@string/rf_cali_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.sysinfo.SystemVersionTest"
             android:configChanges="keyboardHidden"
             android:label="@string/version_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
         <!-- audio test begin -->
         <activity
@@ -279,36 +279,31 @@
             android:configChanges="keyboardHidden"
             android:label="@string/smartpa_calibration_test_title"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.audio.MelodyTest"
             android:configChanges="keyboardHidden"
             android:label="@string/vibrator_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name="com.sprd.validationtools.itemstest.audio.PhoneLoopBackTest"
             android:configChanges="keyboardHidden"
             android:label="@string/phone_loopback_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name="com.sprd.validationtools.itemstest.audio.SoundTriggerTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/soundtrigger_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name="com.sprd.validationtools.itemstest.audio.HeadSetTest"
             android:configChanges="keyboardHidden"
             android:label="@string/headset_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <!-- audio test end -->
 
         <!-- fm test begin -->
@@ -317,8 +312,7 @@
             android:configChanges="keyboardHidden"
             android:label="@string/fm_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <!-- fm test begin -->
 
         <!-- wcn test begin -->
@@ -327,22 +321,19 @@
             android:configChanges="keyboardHidden"
             android:label="@string/bt_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.wifi.WifiTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/wifi_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.gps.GpsTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/gps_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <!-- wcn test end -->
 
 
@@ -352,15 +343,13 @@
             android:configChanges="keyboardHidden"
             android:label="@string/sdcard_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.otg.OTGTest"
             android:configChanges="keyboardHidden"
             android:label="@string/otg_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <!-- storage test end -->
 
 
@@ -370,15 +359,13 @@
             android:configChanges="keyboardHidden"
             android:label="@string/sim_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.telephony.PhoneCallTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/phone_call_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <!-- telephony test end -->
 
 
@@ -387,8 +374,7 @@
             android:name="com.sprd.validationtools.background.BackgroundTestActivity"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <!-- background test begin -->
 
 
@@ -398,78 +384,67 @@
             android:configChanges="keyboardHidden"
             android:label="@string/magnetic_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.sensor.GyroscopeTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/gyroscope_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.sensor.PressureTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/pressure_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.sensor.ASensorCalibrationActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/a_sensor_calibration"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.sensor.GSensorCalibrationActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/g_sensor_calibration"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.sensor.MSensorCalibrationActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/m_sensor_calibration"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.sensor.ProxSensorCalibrationActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/prox_sensor_calibration"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.sensor.LsensorNoiseTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/proximity_sensor_noise_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.sensor.GsensorTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/gravity_sensor_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.sensor.CompassTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/oritention_sensor_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.sensor.PsensorTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/proximity_sensor_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <!-- Sensor end -->
 
 
@@ -479,50 +454,43 @@
             android:configChanges="keyboardHidden"
             android:label="@string/back_camera_title_text"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.camera.FrontCameraTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/front_camera_title_text"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.camera.FrontSecondaryCameraTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/front_secondary_camera_title_text"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.camera.SecondaryCameraTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/secondary_camera_title_text"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.camera.ColorTemperatureTestActivty"
             android:configChanges="keyboardHidden"
             android:label="@string/color_temperature_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.camera.SpwCameraTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/back_third_camera_title_text"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.sprd.validationtools.itemstest.camera.MacroLensCameraTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/macrolens_camera_title_text"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <!-- Camera end -->
 
 
@@ -533,75 +501,67 @@
             android:label="@string/nfc_test"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <!-- Nfc end -->
 
         <activity
             android:name="com.sprd.validationtools.itemstest.wholetest.QRCodeTestActivity"
             android:configChanges="keyboardHidden"
-            android:label="@string/barcode_test"
+            android:label="@string/qrcode_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
         <activity
             android:name="com.sprd.validationtools.itemstest.wholetest.BarcodeTestActivity"
             android:configChanges="keyboardHidden"
-            android:label="@string/qrcode_test"
+            android:label="@string/barcode_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
         <activity
             android:name="com.sprd.validationtools.itemstest.wholetest.PrintTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/print_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
         <activity
             android:name="com.sprd.validationtools.itemstest.wholetest.BuzzerTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/buzzer_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
         <activity
             android:name="com.sprd.validationtools.itemstest.wholetest.BatteryTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/battery_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
         <activity
             android:name="com.sprd.validationtools.itemstest.sptest.ICCardTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/icc_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
         <activity
             android:name="com.sprd.validationtools.itemstest.sptest.MCRTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/mcr_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
         <activity
             android:name="com.sprd.validationtools.itemstest.sptest.MyNFCTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/my_nfc_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
-        <activity android:name="com.sprd.validationtools.itemstest.sptest.TimerTestActivity"
+        <activity
+            android:name="com.sprd.validationtools.itemstest.sptest.TimerTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/timer_test"
             android:screenOrientation="portrait"
@@ -609,21 +569,22 @@
 
         </activity>
 
-        <activity android:name="com.sprd.validationtools.itemstest.wholetest.FlashTestActivity"
+        <activity
+            android:name="com.sprd.validationtools.itemstest.wholetest.FlashTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/flash_light_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
-        <activity android:name="com.sprd.validationtools.itemstest.sptest.VirtualLedTestActivity"
+        <activity
+            android:name="com.sprd.validationtools.itemstest.sptest.VirtualLedTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/virtual_led_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
 
-        <activity android:name="com.sprd.validationtools.itemstest.sptest.PosIDTestActivity"
+        <activity
+            android:name="com.sprd.validationtools.itemstest.sptest.PosIDTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/pos_id"
             android:screenOrientation="portrait"
@@ -631,14 +592,15 @@
 
         </activity>
 
-        <activity android:name="com.sprd.validationtools.itemstest.audio.RingtoneTestActivity"
+        <activity
+            android:name="com.sprd.validationtools.itemstest.audio.RingtoneTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/ringtone_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
 
-        <activity android:name="com.sprd.validationtools.itemstest.audio.VibratorTestActivity"
+        <activity
+            android:name="com.sprd.validationtools.itemstest.audio.VibratorTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/my_vibrator_test"
             android:screenOrientation="portrait"
@@ -646,9 +608,19 @@
 
         </activity>
 
-        <activity android:name="com.sprd.validationtools.itemstest.tp.ScreenTestActivity"
+        <activity
+            android:name="com.sprd.validationtools.itemstest.tp.ScreenTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/screen_print_test"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+
+        </activity>
+
+        <activity
+            android:name="com.sprd.validationtools.itemstest.sptest.POSSensorTestActivity"
+            android:configChanges="keyboardHidden"
+            android:label="@string/pos_sensor_test"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 
@@ -669,32 +641,32 @@
         </receiver>
     </application>
 
-<!--    <application-->
-<!--        android:allowBackup="true"-->
-<!--        android:dataExtractionRules="@xml/data_extraction_rules"-->
-<!--        android:fullBackupContent="@xml/backup_rules"-->
-<!--        android:hardwareAccelerated="true"-->
-<!--        android:sharedUserId="android.uid.system"-->
-<!--        android:icon="@mipmap/ic_launcher"-->
-<!--        android:label="@string/app_name"-->
-<!--        android:roundIcon="@mipmap/ic_launcher_round"-->
-<!--        android:supportsRtl="true"-->
-<!--        android:theme="@style/Theme.TestTools"-->
-<!--        tools:targetApi="31">-->
-<!--        <activity-->
-<!--            android:name=".NewTestActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".MainActivity"-->
-<!--            android:exported="true"-->
-<!--            android:label="@string/app_name"-->
-<!--            android:theme="@style/Theme.TestTools.NoActionBar">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+    <!--    <application-->
+    <!--        android:allowBackup="true"-->
+    <!--        android:dataExtractionRules="@xml/data_extraction_rules"-->
+    <!--        android:fullBackupContent="@xml/backup_rules"-->
+    <!--        android:hardwareAccelerated="true"-->
+    <!--        android:sharedUserId="android.uid.system"-->
+    <!--        android:icon="@mipmap/ic_launcher"-->
+    <!--        android:label="@string/app_name"-->
+    <!--        android:roundIcon="@mipmap/ic_launcher_round"-->
+    <!--        android:supportsRtl="true"-->
+    <!--        android:theme="@style/Theme.TestTools"-->
+    <!--        tools:targetApi="31">-->
+    <!--        <activity-->
+    <!--            android:name=".NewTestActivity"-->
+    <!--            android:exported="false" />-->
+    <!--        <activity-->
+    <!--            android:name=".MainActivity"-->
+    <!--            android:exported="true"-->
+    <!--            android:label="@string/app_name"-->
+    <!--            android:theme="@style/Theme.TestTools.NoActionBar">-->
+    <!--            <intent-filter>-->
+    <!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-<!--    </application>-->
+    <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+    <!--            </intent-filter>-->
+    <!--        </activity>-->
+    <!--    </application>-->
 
 </manifest>

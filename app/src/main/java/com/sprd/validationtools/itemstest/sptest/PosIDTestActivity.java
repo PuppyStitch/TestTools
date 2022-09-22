@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dspread.xpos.CQPOSService;
 import com.dspread.xpos.QPOSService;
+import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
-import com.sprd.validationtools.Const;
 
 import java.util.Hashtable;
 import java.util.Map;
@@ -17,14 +19,42 @@ public class PosIDTestActivity extends BaseActivity {
 
     private static final String TAG = "PosIDTestActivity";
 
+    TextView posIdTV;
+
     QPOSService qposService;
+
+    public Handler mHandler = new Handler();
+    private static final int TIMEOUT = 16000;
+    private boolean isOk = false;
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            if (isOk) {
+                Toast.makeText(PosIDTestActivity.this, R.string.text_pass,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(true);
+            } else {
+                Toast.makeText(PosIDTestActivity.this, R.string.text_fail,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(false);
+            }
+            mHandler.removeCallbacks(runnable);
+            finish();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.pos_id_test_layout);
+        posIdTV = findViewById(R.id.pos_id);
         open(QPOSService.CommunicationMode.UART);
         qposService.getQposId(3000);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mHandler.postDelayed(runnable, TIMEOUT);
     }
 
     private void open(QPOSService.CommunicationMode mode) {
@@ -59,6 +89,7 @@ public class PosIDTestActivity extends BaseActivity {
             int a = 0;
             Log.i(TAG, "onQposIdResult");
             Log.i(TAG, posId.get("posId"));
+            posIdTV.setText(posId.get("posId"));
 
             for (Map.Entry<String, String> entry : posId.entrySet()) {
                 Log.i(TAG, entry.getKey() + " = " + entry.getValue());

@@ -5,6 +5,10 @@
     android:layout_marginBottom="@dimen/pass_fail_button_size"
     android:orientation="vertical" >
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

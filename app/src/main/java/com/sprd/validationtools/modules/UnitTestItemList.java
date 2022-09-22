@@ -10,6 +10,7 @@ import com.sprd.validationtools.itemstest.bt.BluetoothTestActivity;
 import com.sprd.validationtools.itemstest.camera.CameraTestActivity;
 import com.sprd.validationtools.itemstest.charger.ChargerTest;
 //import com.sprd.validationtools.itemstest.fingerprint.FingerprintTestActivity;
+import com.sprd.validationtools.itemstest.sptest.POSSensorTestActivity;
 import com.sprd.validationtools.itemstest.tp.ScreenTestActivity;
 import com.sprd.validationtools.itemstest.gps.GpsTestActivity;
 import com.sprd.validationtools.itemstest.keypad.KeyTestActivity;
@@ -42,7 +43,7 @@ public class UnitTestItemList extends TestItemList {
             PosIDTestActivity.class.getName(),                                          // todo:SP版本测试
             ScreenColorTest.class.getName(),                                            // LCD测试
             BackLightTest.class.getName(),                                              // 背景光测试
-            ScreenTestActivity.class.getName(),                                  // todo:触摸屏
+            ScreenTestActivity.class.getName(),                                         // todo:触摸屏
             KeyTestActivity.class.getName(),                                            // 按键测试 todo need to modify
             RingtoneTestActivity.class.getName(),                                       // 铃声测试
             VibratorTestActivity.class.getName(),                                       // 震动测试
@@ -58,15 +59,14 @@ public class UnitTestItemList extends TestItemList {
             ICCardTestActivity.class.getName(),                                         // todo:IC卡测试   ok
             MCRTestActivity.class.getName(),                                            // todo:磁卡测试    ok
             VirtualLedTestActivity.class.getName(),                                     // todo:LED灯及蜂鸣器    ok
-            BuzzerTestActivity.class.getName(),
+            BuzzerTestActivity.class.getName(),                                         // 蜂鸣器测试
             PrintTestActivity.class.getName(),                                          // todo:打印机     ok
             CameraTestActivity.class.getName(),                                         // 后相机测试
             QRCodeTestActivity.class.getName(),                                         // todo:二维码     ok
             BarcodeTestActivity.class.getName(),                                        // todo:一维码     ok
             PsensorTestActivity.class.getName(),                                        // 距离和光传感器测试
             RTCTest.class.getName(),                                                    // RTC时钟测试
-                                                                                        // todo:POS TP识别测试      ok
-                                                                                        // todo:POS Sensor测试
+            POSSensorTestActivity.class.getName(),                                      // todo:POS Sensor测试
 //            MelodyTest.class.getName(),                                                 // 喇叭和马达测试
 //            RFCALITest.class.getName(),
 //            TofCalibrationTest.class.getName(),

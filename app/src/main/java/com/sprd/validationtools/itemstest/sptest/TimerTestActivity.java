@@ -10,11 +10,18 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+
+import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
+
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TimerTestActivity extends BaseActivity {
 
@@ -23,8 +30,28 @@ public class TimerTestActivity extends BaseActivity {
     TextView mContent;
     private PendingIntent mPendingIntent;
     MyHandler myHandler;
-    static int MSG_RESULT_SUCCESS = 0;
-    static int MSG_RESULT_FAILED = 1;
+    final int MSG_RESULT_SUCCESS = 0;
+    final int MSG_RESULT_FAILED = 1;
+    final int MSG_UPDATE_TIMER = 2;
+
+    public Handler mHandler = new Handler();
+    private static final int TIMEOUT = 16000;
+    private boolean isOk = true;
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            if (isOk) {
+                Toast.makeText(TimerTestActivity.this, R.string.text_pass,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(true);
+            } else {
+                Toast.makeText(TimerTestActivity.this, R.string.text_fail,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(false);
+            }
+            mHandler.removeCallbacks(runnable);
+            finish();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +63,8 @@ public class TimerTestActivity extends BaseActivity {
         mContent.setTextSize(20);
         setTitle("Timer");
         setContentView(mContent);
-        mPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this,getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        mPendingIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         Log.d(TAG, "onCreate");
         myHandler = new MyHandler(this);
     }
@@ -44,13 +72,11 @@ public class TimerTestActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日   HH:mm:ss");
-        Date curDate = new Date(System.currentTimeMillis());
-        String str = format.format(curDate);
-        mContent.setText(str);
+        setTimerText();
         Message msg = new Message();
         msg.what = MSG_RESULT_SUCCESS;
         myHandler.sendMessageDelayed(msg, 1000);
+        mHandler.postDelayed(runnable, TIMEOUT);
     }
 
     @Override
@@ -59,8 +85,18 @@ public class TimerTestActivity extends BaseActivity {
         myHandler.removeCallbacksAndMessages(null);
     }
 
-    private void storeResult(boolean isSuccess) {
-        storeRusult(isSuccess);
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(runnable);
+    }
+
+    private void setTimerText() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日   HH:mm:ss");
+        Date curDate = new Date(System.currentTimeMillis());
+        String str = format.format(curDate);
+        mContent.setText(str);
+        isOk = true;
     }
 
     public class MyHandler extends Handler {
@@ -73,7 +109,17 @@ public class TimerTestActivity extends BaseActivity {
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-            storeResult(msg.what == MSG_RESULT_SUCCESS);
+            switch (msg.what) {
+                case MSG_RESULT_SUCCESS:
+//                    storeResult(msg.what == MSG_RESULT_SUCCESS);
+                    break;
+                case MSG_UPDATE_TIMER:
+                    setTimerText();
+                    break;
+                default:
+                    break;
+            }
+
         }
     }
 }

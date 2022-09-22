@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/tx_notice"
+        android:layout_marginTop="@dimen/pass_fail_button_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/headset_notice"
@@ -46,7 +48,6 @@
         android:layout_marginBottom="@dimen/pass_fail_button_size"
         android:enabled="false"
         android:text="@string/headset_answer_key"
-        android:textSize="@dimen/headset_text_size" >
-    </Button>
+        android:textSize="@dimen/headset_text_size"></Button>
 
 </RelativeLayout>

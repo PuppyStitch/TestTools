@@ -33,12 +33,12 @@ public class FileUtils {
             e.printStackTrace();
         } catch (NumberFormatException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
-                if(isr != null){
+                if (isr != null) {
                     isr.close();
                 }
-                if(fIn != null){
+                if (fIn != null) {
                     fIn.close();
                 }
             } catch (IOException e2) {
@@ -49,7 +49,7 @@ public class FileUtils {
     }
 
     public static void writeFile(String filename, String content) {
-        try (FileOutputStream fos = new FileOutputStream(filename)){
+        try (FileOutputStream fos = new FileOutputStream(filename)) {
             byte[] bytes = content.getBytes();
             fos.write(bytes);
             fos.flush();
@@ -69,7 +69,7 @@ public class FileUtils {
         } catch (NullPointerException e) {
             e.printStackTrace();
             return false;
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -81,7 +81,7 @@ public class FileUtils {
         File file = new File(path);
         StringBuffer sBuffer = new StringBuffer();
         try (InputStream fIn = new FileInputStream(file);
-             BufferedReader bReader = new BufferedReader(new InputStreamReader(fIn,Charset.defaultCharset()))) {
+             BufferedReader bReader = new BufferedReader(new InputStreamReader(fIn, Charset.defaultCharset()))) {
             String str = bReader.readLine();
 
             while (str != null) {

@@ -60,19 +60,19 @@ public class BluetoothTestActivity extends BaseActivity {
                     case BluetoothAdapter.STATE_ON:
                         tvBtState.setText("Bluetooth ON,Discovering...");
                         // SPRD: update bluetooth address when bt power on
-                        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                            // TODO: Consider calling
-                            //    ActivityCompat#requestPermissions
-                            // here to request the missing permissions, and then overriding
-                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                            //                                          int[] grantResults)
-                            // to handle the case where the user grants the permission. See the documentation
-                            // for ActivityCompat#requestPermissions for more details.
-
-                            Log.e(TAG, "permission error");
-
-                            return;
-                        }
+//                        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+//                            // TODO: Consider calling
+//                            //    ActivityCompat#requestPermissions
+//                            // here to request the missing permissions, and then overriding
+//                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                            //                                          int[] grantResults)
+//                            // to handle the case where the user grants the permission. See the documentation
+//                            // for ActivityCompat#requestPermissions for more details.
+//
+//                            Log.e(TAG, "permission error");
+//
+//                            return;
+//                        }
                         tvBtAddr.setText(btTestUtil.getBluetoothAdapter().getAddress() + "\n");
                         break;
                     case BluetoothAdapter.STATE_TURNING_OFF:
@@ -98,17 +98,17 @@ public class BluetoothTestActivity extends BaseActivity {
 
                 if (device != null) {
                     mBluetoothDeviceList.add(device);
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        Log.e(TAG, "getBondState permission error");
-                        return;
-                    }
+//                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+//                        // TODO: Consider calling
+//                        //    ActivityCompat#requestPermissions
+//                        // here to request the missing permissions, and then overriding
+//                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                        //                                          int[] grantResults)
+//                        // to handle the case where the user grants the permission. See the documentation
+//                        // for ActivityCompat#requestPermissions for more details.
+//                        Log.e(TAG, "getBondState permission error");
+//                        return;
+//                    }
                     if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
                         String name = device.getName();
                         if (name == null || name.isEmpty()) {

@@ -207,8 +207,8 @@
     <string name="alert_dialog_title">請檢查結果</string>
     <string name="alert_dialog_test">是 - 通過\n否 - 失敗\n或 按BACK鍵重試</string>
     <string name="alert_finish_test">是否忽略現象而通過？</string>
-    <string name="full_test">系統測試</string>
-    <string name="item_test">單項測試</string>
+    <string name="full_test">自動測試</string>
+    <string name="item_test">手動測試</string>
     <string name="test_info">測試信息</string>
     <string name="reset">恢復出廠設定</string>
     <string name="has_camera_title">"你的手機是否有拍照鍵？"</string>
@@ -284,4 +284,5 @@
     <string name="ringtone_test">鈴聲測試</string>
     <string name="my_vibrator_test">震動測試</string>
     <string name="screen_print_test">屏幕觸摸測試</string>
+    <string name="pos_sensor_test">POS Sensor防拆測試</string>
 </resources>

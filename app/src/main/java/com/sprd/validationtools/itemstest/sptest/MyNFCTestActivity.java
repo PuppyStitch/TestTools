@@ -1,24 +1,16 @@
 package com.sprd.validationtools.itemstest.sptest;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
-import android.view.Gravity;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import androidx.annotation.NonNull;
+import android.widget.Toast;
+
 
 import com.dspread.xpos.CQPOSService;
 import com.dspread.xpos.QPOSService;
 import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
-import com.sprd.validationtools.Const;
-import java.lang.ref.WeakReference;
 import java.util.Hashtable;
 
 
@@ -28,11 +20,42 @@ public class MyNFCTestActivity extends BaseActivity {
 
     private static final String TAG = "MyNFCTestActivity";
 
+    public Handler mHandler = new Handler();
+    private static final int TIMEOUT = 16000;
+    private boolean isOk = false;
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            if (isOk) {
+                Toast.makeText(MyNFCTestActivity.this, R.string.text_pass,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(true);
+            } else {
+                Toast.makeText(MyNFCTestActivity.this, R.string.text_fail,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(false);
+            }
+            mHandler.removeCallbacks(runnable);
+            finish();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         open(QPOSService.CommunicationMode.UART);
         qposService.testPosFunctionCommand(3000, QPOSService.TestCommand.NFC_TEST);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(runnable);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mHandler.postDelayed(runnable, TIMEOUT);
     }
 
     private void open(QPOSService.CommunicationMode mode) {
@@ -56,7 +79,9 @@ public class MyNFCTestActivity extends BaseActivity {
         @Override
         public void onQposTestCommandResult(boolean isSuccess, String data) {
             super.onQposTestCommandResult(isSuccess, data);
-            Log.i(TAG,"isSuccess "+ isSuccess);
+            Log.i(TAG, "isSuccess " + isSuccess);
+            Toast.makeText(MyNFCTestActivity.this, R.string.text_pass,
+                    Toast.LENGTH_SHORT).show();
             storeRusult(isSuccess);
         }
 
@@ -68,7 +93,8 @@ public class MyNFCTestActivity extends BaseActivity {
         @Override
         public void onError(QPOSService.Error errorState) {
             super.onError(errorState);
-            Log.i(TAG,"Error "+ errorState.name());
+            Log.i(TAG, "Error " + errorState.name());
+            isOk = false;
             storeRusult(false);
         }
     }

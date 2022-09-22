@@ -4,6 +4,10 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
     <LinearLayout
         android:id="@+id/LinearLayout01"
         android:layout_width="fill_parent"
@@ -85,6 +89,7 @@
 
         <TableRow
             android:id="@+id/TableRow04"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 
@@ -110,6 +115,7 @@
 
         <TableRow
             android:id="@+id/TableRow05"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" >
 

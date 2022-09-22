@@ -1,10 +1,7 @@
 
 package com.sprd.validationtools.itemstest.charger;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,16 +13,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
-import android.os.SystemProperties;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
 import com.sprd.validationtools.Const;
 import com.sprd.validationtools.PhaseCheckParse;
-import com.simcom.testtools.R;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class ChargerTest extends BaseActivity {
 
@@ -40,7 +40,7 @@ public class ChargerTest extends BaseActivity {
     /*SPRD bug 850012:Read battery id*/
     private String mBatteryTypeId = "";
     private TableRow mBatteryTypeIdTableRow = null;
-    private TextView mBatteryTypeIdTextView= null;
+    private TextView mBatteryTypeIdTextView = null;
     private static final String ID_BYD = "04";
     private static final String ID_BAK = "17";
     private static final String FD_BATTERY_ID = "sys/class/power_supply/battery/bat_id";
@@ -65,29 +65,35 @@ public class ChargerTest extends BaseActivity {
     private TableRow mTemperatureTableRow;
     private TableRow mBatteryElectronicTableRow;
 
-    /** Replace real_time_current*/
+    /**
+     * Replace real_time_current
+     */
     private static final String ENG_CHARGER_CURRENT_K414 = "/sys/class/power_supply/battery/current_now";
-    /** Replace fgu_current*/
+    /**
+     * Replace fgu_current
+     */
     private static final String ENG_CHARGER_FGU_CURRENT_K414 = "/sys/class/power_supply/sc27xx-fgu/current_now";
-    /** Replace charger_voltage*/
+    /**
+     * Replace charger_voltage
+     */
     private static final String ENG_CHARGER_VOLTAGE_K414 = "/sys/class/power_supply/sc27xx-fgu/constant_charge_voltage";
     private static final String ENG_REAL_BATTERY_TEMPERATURE = "sys/class/power_supply/sc27xx-fgu/temp";
 
     private boolean mIsSupportK414 = false;
-    private static final boolean ENABLE_BATTRY_TEMPERATURE = com.sprd.validationtools.utils.FileUtils.fileIsExists(ENG_REAL_BATTERY_TEMPERATURE);
+    private static final boolean ENABLE_BATTERY_TEMPERATURE = com.sprd.validationtools.utils.FileUtils.fileIsExists(ENG_REAL_BATTERY_TEMPERATURE);
 
-    private void initSupportK414(){
+    private void initSupportK414() {
         File file = new File(ENG_CHARGER_VOLTAGE_K414);
-        Log.d(TAG, "initSupportK414 file="+file + ",exists="+file.exists());
-        if(file != null && file.exists()){
+        Log.d(TAG, "initSupportK414 file=" + file + ",exists=" + file.exists());
+        if (file != null && file.exists()) {
             mIsSupportK414 = true;
-        }else{
+        } else {
             mIsSupportK414 = false;
         }
     }
 
-    private boolean isSupportK414(){
-        Log.d(TAG, "isSupportK414 mIsSupportK414="+mIsSupportK414);
+    private boolean isSupportK414() {
+        Log.d(TAG, "isSupportK414 mIsSupportK414=" + mIsSupportK414);
         return mIsSupportK414;
     }
 
@@ -109,24 +115,25 @@ public class ChargerTest extends BaseActivity {
     private Runnable mElectronicUpdate = new Runnable() {
         public void run() {
 
-            if(Const.isBoardISharkL210c10()){
+            if (Const.isBoardISharkL210c10()) {
                 mBatteryTypeId = readFile(FD_BATTERY_ID).trim();
-                Log.d(TAG, "mBatteryTypeId="+mBatteryTypeId);
-                if(mBatteryTypeIdTextView != null){
-                    if(!TextUtils.isEmpty(mBatteryTypeId)){
+                Log.d(TAG, "mBatteryTypeId=" + mBatteryTypeId);
+                if (mBatteryTypeIdTextView != null) {
+                    if (!TextUtils.isEmpty(mBatteryTypeId)) {
                         String text = getString(R.string.battery_type_id);
-                        Log.d(TAG, "text ="+ text);
+                        Log.d(TAG, "text =" + text);
                         mBatteryTypeIdTextView.setText(text + (mBatteryTypeId.equals("0") ? ID_BYD : ID_BAK));
                     }
                 }
             }
-            AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>(){
+            @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
 
                 @Override
                 protected String doInBackground(Void... params) {
                     String testResult = getInputElectronicNewStep();
                     return testResult;
                 }
+
                 protected void onPostExecute(String result) {
                     String testResult = result;
                     Log.d(TAG, "mElectronicUpdate data,mChargerVoltage=" + mChargerVoltage
@@ -140,7 +147,7 @@ public class ChargerTest extends BaseActivity {
                             mTestResultTextView.setText(getString(R.string.charger_test_success));
                             mTestResultTextView.setTextColor(Color.GREEN);
                             /*SPRD bug 760913:Test can pass/fail must click button*/
-                            if(Const.isBoardISharkL210c10()){
+                            if (Const.isBoardISharkL210c10()) {
                                 mPassButton.setVisibility(View.VISIBLE);
                                 return;
                             }
@@ -170,7 +177,9 @@ public class ChargerTest extends BaseActivity {
                             mHandler.postDelayed(mElectronicUpdate, 2000);
                         }
                     }
-                };
+                }
+
+                ;
             };
             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Void[0]);
         }
@@ -179,13 +188,13 @@ public class ChargerTest extends BaseActivity {
     private Runnable mCompleteTest = new Runnable() {
         public void run() {
             /*SPRD bug 760913:Test can pass/fail must click button*/
-            if(Const.isBoardISharkL210c10()){
+            if (Const.isBoardISharkL210c10()) {
                 Log.d("", "isBoardISharkL210c10 is return!");
                 return;
             }
             /*@}*/
             mHandler.postDelayed(new Runnable() {
-                 public void run() {
+                public void run() {
                     finish();
                 }
             }, 1000);
@@ -212,21 +221,21 @@ public class ChargerTest extends BaseActivity {
         /* SPRD Bug 773805:Show NTC temperature in charger test. @{ */
         mTemperatureTextView = (TextView) findViewById(R.id.batterytemperatureTextView);
         mTemperatureTableRow = (TableRow) findViewById(R.id.TableRow06);
-        if(Const.isBoardISharkL210c10() || ENABLE_BATTRY_TEMPERATURE){
+        if (Const.isBoardISharkL210c10() || ENABLE_BATTERY_TEMPERATURE) {
             mTemperatureTableRow.setVisibility(View.VISIBLE);
         }
         /* @} */
         /*SPRD bug 850012:Read battery id*/
         mBatteryTypeIdTextView = (TextView) findViewById(R.id.battery_type_id);
         mBatteryTypeIdTableRow = (TableRow) findViewById(R.id.TableRow08);
-        if(Const.isBoardISharkL210c10()){
+        if (Const.isBoardISharkL210c10()) {
             mBatteryTypeIdTableRow.setVisibility(View.VISIBLE);
         }
         /*@}*/
 
         mBatteryElectronicTextView = (TextView) findViewById(R.id.battery_electronic_tv);
         mBatteryElectronicTableRow = (TableRow) findViewById(R.id.TableRow09);
-        if (ENABLE_BATTRY_TEMPERATURE) {
+        if (ENABLE_BATTERY_TEMPERATURE) {
             mTemperatureTableRow.setVisibility(View.VISIBLE);
             mBatteryElectronicTableRow.setVisibility(View.VISIBLE);
         }
@@ -235,7 +244,7 @@ public class ChargerTest extends BaseActivity {
         filter.addAction(Intent.ACTION_BATTERY_CHANGED);
         registerReceiver(mBroadcastReceiver, filter);
         /*SPRD bug 760913:Test can pass/fail must click button*/
-        if(Const.isBoardISharkL210c10()){
+        if (Const.isBoardISharkL210c10()) {
             mPassButton.setVisibility(View.GONE);
         }
         /*@}*/
@@ -245,7 +254,7 @@ public class ChargerTest extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        if (ENABLE_BATTRY_TEMPERATURE) {
+        if (ENABLE_BATTERY_TEMPERATURE) {
             int batteryElectronic = Integer.parseInt(readFile(ENG_CHARGER_FGU_CURRENT_K414).trim()) / 1000;
             mBatteryElectronicTextView.setText(batteryElectronic + " ma");
 
@@ -281,9 +290,9 @@ public class ChargerTest extends BaseActivity {
             stopCharge();
             Thread.sleep(2000);
             int c1 = 0;
-            if(isSupportK414()){
+            if (isSupportK414()) {
                 c1 = Integer.parseInt(readFile(ENG_CHARGER_FGU_CURRENT_K414).trim()) / 1000;
-            }else{
+            } else {
                 c1 = Integer.parseInt(readFile(CHARGER_ELECTRONIC).trim());
             }
             Log.d(TAG, "getInputElectronicNewStep inputCurrent c1=[" + c1 + "]");
@@ -292,19 +301,19 @@ public class ChargerTest extends BaseActivity {
                 @Override
                 public void run() {
                     mBatteryTextView.setText(c11 + " ma");
-            if (ENABLE_BATTRY_TEMPERATURE) {
-                int batteryElectronic = Integer.parseInt(readFile(ENG_CHARGER_FGU_CURRENT_K414).trim()) / 1000;
-                mBatteryElectronicTextView.setText(batteryElectronic + " ma");
-            }
+                    if (ENABLE_BATTERY_TEMPERATURE) {
+                        int batteryElectronic = Integer.parseInt(readFile(ENG_CHARGER_FGU_CURRENT_K414).trim()) / 1000;
+                        mBatteryElectronicTextView.setText(batteryElectronic + " ma");
+                    }
                 }
             });
             //step2.Start charge, read charging current
             startCharge();
             Thread.sleep(2000);
             int c2 = 0;
-            if(isSupportK414()){
-                c2 = Integer.parseInt(readFile(ENG_CHARGER_FGU_CURRENT_K414).trim())  / 1000;
-            }else{
+            if (isSupportK414()) {
+                c2 = Integer.parseInt(readFile(ENG_CHARGER_FGU_CURRENT_K414).trim()) / 1000;
+            } else {
                 c2 = Integer.parseInt(readFile(CHARGER_ELECTRONIC).trim());
             }
             Log.d(TAG, "getInputElectronicNewStep inputCurrent c2=[" + c2 + "]");
@@ -312,14 +321,13 @@ public class ChargerTest extends BaseActivity {
             Log.d(TAG, "getInputElectronicNewStep inputCurrent i1=[" + i1 + "]");
             Log.d(TAG, "getInputElectronicNewStep inputCurrent mChargerVoltage=[" + mChargerVoltage + "]");
             //i1 >= 200mA PASS
-            if (i1 >= 200) {
+            if (i1 >= 200 || mIsPlugUSB) {
                 result = TEST_RESULT_SUCCESS;
             }
             //i1 > 100mA && i1 < 200mA && mChargerVoltage >= 4100 PASS
-            else if(i1 > 100 && i1 < 200 && mChargerVoltage >= 4100){
+            else if (i1 > 100 && i1 < 200 && mChargerVoltage >= 4100) {
                 result = TEST_RESULT_SUCCESS;
-            }
-            else {
+            } else {
                 result = TEST_RESULT_FAIL;
             }
             final int i11 = i1;
@@ -327,13 +335,13 @@ public class ChargerTest extends BaseActivity {
                 @Override
                 public void run() {
                     mBatteryTextView.setText(i11 + " ma");
-            if (ENABLE_BATTRY_TEMPERATURE) {
-                int batteryElectronic = Integer.parseInt(readFile(ENG_CHARGER_FGU_CURRENT_K414).trim()) / 1000;
-                mBatteryElectronicTextView.setText(batteryElectronic + " ma");
-            }
+                    if (ENABLE_BATTERY_TEMPERATURE) {
+                        int batteryElectronic = Integer.parseInt(readFile(ENG_CHARGER_FGU_CURRENT_K414).trim()) / 1000;
+                        mBatteryElectronicTextView.setText(batteryElectronic + " ma");
+                    }
                 }
             });
-        } catch (NumberFormatException | InterruptedException  e) {
+        } catch (NumberFormatException | InterruptedException e) {
             Log.w(TAG, "getInputElectronicNewStep fail", e);
             e.printStackTrace();
         }
@@ -342,16 +350,16 @@ public class ChargerTest extends BaseActivity {
 
     private void initView() {
         //Support kernel 4.14
-        if(isSupportK414()){
+        if (isSupportK414()) {
             mChargerElectronic = getDateFromNode(ENG_CHARGER_CURRENT_K414) / 1000;
             mChargerVoltage = getDateFromNode(ENG_CHARGER_VOLTAGE_K414) / 1000;
-        }else{
+        } else {
             mChargerElectronic = getDateFromNode(CHARGER_ELECTRONIC);
             mChargerVoltage = getDateFromNode(ENG_CHARGER_VOL);
         }
-        Log.d(TAG, "initView mChargerElectronic="+mChargerElectronic+",mChargerVoltage="+mChargerVoltage);
+        Log.d(TAG, "initView mChargerElectronic=" + mChargerElectronic + ",mChargerVoltage=" + mChargerVoltage);
         /* SPRD Bug 773805:Show NTC temperature in charger test. @{ */
-        if (ENABLE_BATTRY_TEMPERATURE) {
+        if (ENABLE_BATTERY_TEMPERATURE) {
             mBatteryTemperature = getDateFromNode(ENG_REAL_BATTERY_TEMPERATURE);
         } else {
             mBatteryTemperature = getDateFromNode(ENG_CHARGER_TEMP);
@@ -374,7 +382,7 @@ public class ChargerTest extends BaseActivity {
         }
 
         /* SPRD Bug 773805:Show NTC temperature in charger test. @{ */
-        if(Const.isBoardISharkL210c10() || ENABLE_BATTRY_TEMPERATURE){
+        if (Const.isBoardISharkL210c10() || ENABLE_BATTERY_TEMPERATURE) {
             mTemperatureTextView.setText(mBatteryTemperature / 10 + " \u2103");
         }
         /* @} */
@@ -398,7 +406,7 @@ public class ChargerTest extends BaseActivity {
             e.printStackTrace();
         } catch (NumberFormatException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             try {
                 if (file != null) {
                     file.close();
@@ -468,7 +476,7 @@ public class ChargerTest extends BaseActivity {
                 statusTextView.setText(statusString);
                 pluggedTextView.setText(mPluggeString);
                 voltageTextView.setText(Integer.toString(voltage) + " mv");
-                if (ENABLE_BATTRY_TEMPERATURE) {
+                if (ENABLE_BATTERY_TEMPERATURE) {
                     int batteryElectronic = Integer.parseInt(readFile(ENG_CHARGER_FGU_CURRENT_K414).trim()) / 1000;
                     mBatteryElectronicTextView.setText(batteryElectronic + " ma");
 
@@ -514,11 +522,25 @@ public class ChargerTest extends BaseActivity {
 
     private void stopCharge() {
         boolean res = PhaseCheckParse.getInstance().writeChargeSwitch(1);
-        Log.d(TAG, "stopCharge res="+res);
+        Log.d(TAG, "stopCharge res = " + res);
     }
 
     private void startCharge() {
         boolean res = PhaseCheckParse.getInstance().writeChargeSwitch(0);
-        Log.d(TAG, "stopCharge res="+res);
+        Log.d(TAG, "stopCharge res = " + res);
     }
+
+//    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            if (null == intent) {
+//                return;
+//            }
+//
+//            mVoltage = intent.getIntExtra(EXTRA_VOLTAGE, -1);
+//            mLevel = intent.getIntExtra(EXTRA_LEVEL, 0);
+//
+//            updateUI();
+//        }
+//    };
 }

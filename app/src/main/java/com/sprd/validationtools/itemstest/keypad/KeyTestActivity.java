@@ -4,12 +4,14 @@ import java.util.HashMap;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemProperties;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyCharacterMap;
@@ -30,6 +32,7 @@ public class KeyTestActivity extends BaseActivity {
     private ImageButton mHomeButton;
     private ImageButton mMenuButton;
     private ImageButton mBackButton;
+    private ImageButton mPowerButton;
     private ImageButton mVolumeUpButton;
     private ImageButton mVolumeDownButton;
     private ImageButton mCameraButton;
@@ -47,6 +50,11 @@ public class KeyTestActivity extends BaseActivity {
     private int mPressedKeyCount = 0;
     private static final int COLUMNCOUNT = 4;
     private static final long TEST_TIMEOUT = 60000;
+
+    private PressKeyBroadcastReceiver pressKeyBroadcastReceiver;
+    private static final String ACTION_TESTING_POWER_KEY = "action.press.powerbutton";
+    private static final String ACTION_TESTING_SWITCH_KEY = "action.press.switchbutton";
+    private static final String ACTION_TESTING_HOME_KEY = "action.press.homebutton";
 
     private Button mAiButton = null;
 
@@ -105,24 +113,27 @@ public class KeyTestActivity extends BaseActivity {
             mHomeButton = (ImageButton) findViewById(R.id.home_button);
             mMenuButton = (ImageButton) findViewById(R.id.menu_button);
             mBackButton = (ImageButton) findViewById(R.id.back_button);
+            mPowerButton = (ImageButton) findViewById(R.id.power_button);
             mVolumeUpButton = (ImageButton) findViewById(R.id.volume_up_button);
             mVolumeDownButton = (ImageButton) findViewById(R.id.volume_down_button);
             mCameraButton = (ImageButton) findViewById(R.id.camera_button);
             isShowNavigationBar = ValidationToolsUtils.hasNavigationBar(this);
             mHasPhysicalNavigationKey = checkDeviceHasNavigationBar(mContext) && !isShowNavigationBar;
-            showHasCameraDialog();
+//            showHasCameraDialog();
             /* SPRD bug 760913:Test can pass/fail must click button */
             if (Const.isBoardISharkL210c10()) {
                 mPassButton.setVisibility(View.GONE);
             }
             /* @} */
-            if (isShowNavigationBar) {
-                mPassButton.setVisibility(View.GONE);
-                mFailButton.setVisibility(View.GONE);
-            }
+//            if (isShowNavigationBar) {
+//                Log.i(TAG, "button is invisible");
+//                mPassButton.setVisibility(View.GONE);
+//                mFailButton.setVisibility(View.GONE);
+//            }
             mAiButton = (Button) findViewById(R.id.ai_button);
             mAiButton.setVisibility(View.GONE);
         }
+        registerPressKeyReceiver();
     }
 
     @Override
@@ -332,6 +343,7 @@ public class KeyTestActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         mHandler.removeCallbacks(mTimeOutRunnable);
+        unregisterReceiver(pressKeyBroadcastReceiver);
         super.onDestroy();
     }
 
@@ -343,4 +355,30 @@ public class KeyTestActivity extends BaseActivity {
             finish();
         }
     };
+
+    public void registerPressKeyReceiver() {
+        pressKeyBroadcastReceiver = new PressKeyBroadcastReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ACTION_TESTING_POWER_KEY);
+        filter.addAction(ACTION_TESTING_SWITCH_KEY);
+        filter.addAction(ACTION_TESTING_HOME_KEY);
+        registerReceiver(pressKeyBroadcastReceiver, filter);
+    }
+
+    class PressKeyBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (ACTION_TESTING_POWER_KEY.equals(action)) {
+                mPowerButton.setPressed(true);
+                Log.i(TAG, "POWER KEY PRESSED");
+            } else if (ACTION_TESTING_SWITCH_KEY.equals(action)) {
+                mMenuButton.setPressed(true);
+                Log.i(TAG, "SWITCH KEY PRESSED");
+            } else if (ACTION_TESTING_HOME_KEY.equals(action)) {
+                Log.i(TAG, "HOME KEY PRESSED");
+                mHomeButton.setPressed(true);
+            }
+        }
+    }
 }

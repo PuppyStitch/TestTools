@@ -240,7 +240,7 @@
     <string name="otg_begin_test">OTG is begin test...</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_validation_tools_main">MMI test</string>
+    <string name="title_activity_validation_tools_main">测试模式</string>
     <string name="alert_dialog_title">Please check the result</string>
     <string name="alert_dialog_test">Yes - Pass\nNo - Fail\nOr press BACK for retry</string>
     <string name="alert_finish_test">Pass the test anyway?</string>
@@ -256,8 +256,8 @@
     <string name="hall_induction">Hall Sensor Test</string>
     <string name="font_msg_text">Open Front camera?</string>
     <string name="text_retry">Retry</string>
-    <string name="full_test">Full Test</string>
-    <string name="item_test">Item Test</string>
+    <string name="full_test">Auto Test</string>
+    <string name="item_test">Manual Test</string>
     <string name="test_info">Test Info</string>
     <string name="reset">Reset</string>
     <string name="camera_cali_verify">Camera calibration verification</string>
@@ -445,5 +445,6 @@
     <string name="ringtone_test">Ringtone Test</string>
     <string name="my_vibrator_test">Vibrator Test</string>
     <string name="screen_print_test">Screen Print Test</string>
+    <string name="pos_sensor_test">POS Sensor Test</string>
 
 </resources>

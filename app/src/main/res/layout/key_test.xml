@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
@@ -10,7 +13,10 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:visibility="gone"
-        android:src="@drawable/voice_up" />
+        android:src="@drawable/voice_up"
+        tools:layout_editor_absoluteX="-18dp"
+        tools:layout_editor_absoluteY="34dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageButton
         android:id="@+id/volume_down_button"
@@ -18,23 +24,33 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:visibility="gone"
-        android:src="@drawable/voice_down" />
+        android:src="@drawable/voice_down"
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="120dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageButton
-        android:id="@+id/menu_button"
+        android:id="@+id/camera_button"
         android:layout_width="180dip"
         android:layout_height="wrap_content"
         android:clickable="false"
-        android:gravity="center"
-        android:src="@drawable/menu" />
+        android:src="@drawable/camera"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/back_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/home_button"
+        android:id="@+id/power_button"
         android:layout_width="180dip"
         android:layout_height="wrap_content"
         android:clickable="false"
-        android:gravity="center"
-        android:src="@drawable/home" />
+        android:src="@drawable/power_off"
+        app:layout_constraintBottom_toTopOf="@+id/back_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/back_button"
@@ -42,21 +58,46 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:gravity="center"
-        android:src="@drawable/back" />
+        android:src="@drawable/back"
+        app:layout_constraintBottom_toTopOf="@id/home_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/power_button" />
 
     <ImageButton
-        android:id="@+id/camera_button"
+        android:id="@+id/home_button"
         android:layout_width="180dip"
         android:layout_height="wrap_content"
         android:clickable="false"
-        android:visibility="gone"
-        android:src="@drawable/camera" />
+        android:gravity="center"
+        android:src="@drawable/home"
+        app:layout_constraintBottom_toTopOf="@id/menu_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_button"/>
+
+    <ImageButton
+        android:id="@+id/menu_button"
+        android:layout_width="180dip"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:gravity="center"
+        android:src="@drawable/menu"
+        app:layout_constraintBottom_toTopOf="@id/ai_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_button" />
 
     <Button
         android:id="@+id/ai_button"
         android:layout_width="180dip"
         android:layout_height="wrap_content"
         android:clickable="false"
-        android:text="@string/ai_key_test" />
+        android:text="@string/ai_key_test"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menu_button" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

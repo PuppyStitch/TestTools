@@ -2,6 +2,8 @@ package com.sprd.validationtools.itemstest.wholetest;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.widget.Toast;
 
 import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
@@ -12,6 +14,25 @@ public class BuzzerTestActivity extends BaseActivity {
 
     private MediaPlayer mediaPlayer;
 
+    public Handler mHandler = new Handler();
+    private static final int TIMEOUT = 8000;
+    private boolean isOk = false;
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            if (isOk) {
+                Toast.makeText(BuzzerTestActivity.this, R.string.text_pass,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(true);
+            } else {
+                Toast.makeText(BuzzerTestActivity.this, R.string.text_fail,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(false);
+            }
+            mHandler.removeCallbacks(runnable);
+            finish();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +41,7 @@ public class BuzzerTestActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
-
+        mHandler.postDelayed(runnable, TIMEOUT);
         super.onResume();
         try {
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -28,11 +49,18 @@ public class BuzzerTestActivity extends BaseActivity {
                 public void onPrepared(MediaPlayer mp) {
                     mp.setLooping(true);
                     mp.start();
+                    isOk = true;
                 }
             });
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(runnable);
     }
 
     @Override

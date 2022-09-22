@@ -3,10 +3,14 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
 
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <LinearLayout
