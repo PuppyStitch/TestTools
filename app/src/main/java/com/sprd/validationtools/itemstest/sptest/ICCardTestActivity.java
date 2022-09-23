@@ -77,7 +77,7 @@ public class ICCardTestActivity extends BaseActivity {
         @Override
         public void onQposTestCommandResult(boolean isSuccess, String data) {
             super.onQposTestCommandResult(isSuccess, data);
-            Log.i(TAG,"isSuccess "+ isSuccess);
+            Log.i(TAG, "isSuccess " + isSuccess + " " + data);
             isOk = true;
             Toast.makeText(ICCardTestActivity.this, mContext.getText(R.string.text_pass) +
                     " " + data, Toast.LENGTH_SHORT).show();

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dspread.xpos.CQPOSService;
@@ -19,6 +20,8 @@ public class SPVersionTestActivity extends BaseActivity {
     private static final String TAG = "SPVersionTestActivity";
 
     QPOSService qposService;
+
+    TextView textView;
 
     public Handler mHandler = new Handler();
     private static final int TIMEOUT = 16000;
@@ -42,6 +45,8 @@ public class SPVersionTestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.sp_version_layout);
+        textView = findViewById(R.id.sp_version);
         open(QPOSService.CommunicationMode.UART);
         qposService.getQposInfo();
     }
@@ -87,6 +92,7 @@ public class SPVersionTestActivity extends BaseActivity {
         @Override
         public void onQposInfoResult(Hashtable<String, String> posInfoData) {
             super.onQposInfoResult(posInfoData);
+            textView.setText(posInfoData.get("firmwareVersion"));
             for (Map.Entry<String, String> entry : posInfoData.entrySet()) {
                 Log.i(TAG, entry.getKey() + " = " + entry.getValue());
             }

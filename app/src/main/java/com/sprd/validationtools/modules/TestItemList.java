@@ -32,19 +32,19 @@ public abstract class TestItemList {
 
     public TestItem getTestItemByClassName(String className) {
         synchronized (mTestItemList) {
-            for(TestItem testItem : mTestItemList){
-                if(className != null && className.equals(testItem.getTestClassName())){
-                    Log.d(TAG, "getTestItemByClassName className="+className);
+            for (TestItem testItem : mTestItemList) {
+                if (className != null && className.equals(testItem.getTestClassName())) {
+                    Log.d(TAG, "getTestItemByClassName className=" + className);
                     return testItem;
                 }
             }
-            Log.d(TAG, "getTestItemByClassName NOT FOUND!");
+            Log.e(TAG, "getTestItemByClassName NOT FOUND!");
             return null;
         }
     }
 
     private ArrayList<TestItem> addAndFilterTestItemList(Context context,
-            final String[] filterClassName) {
+                                                         final String[] filterClassName) {
         if (filterClassName == null) {
             return null;
         }
@@ -59,7 +59,7 @@ public abstract class TestItemList {
                 e1.printStackTrace();
             }
 
-            if(actInfo == null) return null;
+            if (actInfo == null) return null;
             String testName_ = context.getString(actInfo.labelRes);
             if (TextUtils.isEmpty(testName_)) {
                 testName_ = comName.getShortClassName();

@@ -387,6 +387,7 @@
     <string name="my_vibrator_test">震动测试</string>
     <string name="screen_print_test">屏幕触摸测试</string>
     <string name="pos_sensor_test">POS Sensor防拆测试</string>
+    <string name="sp_version">SP版本</string>
 
 
 </resources>

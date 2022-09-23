@@ -92,13 +92,13 @@ public class ValidationToolsMainActivity extends Activity implements
         mIntent = getIntent();
 
         mode = mIntent.getStringExtra(Const.KEY);
-        if (Const.MMI1_VALUE.equals(mode)) {
-            testList = MMI1TestItems.FILTER_CLASS_NAMES;
-        } else if (Const.MMI2_VALUE.equals(mode)) {
-            testList = MMI2TestItems.FILTER_CLASS_NAMES;
-        } else {
-            testList = SMTTestItems.FILTER_CLASS_NAMES;
-        }
+//        if (Const.MMI1_VALUE.equals(mode)) {
+//            testList = MMI1TestItems.FILTER_CLASS_NAMES;
+//        } else if (Const.MMI2_VALUE.equals(mode)) {
+//            testList = MMI2TestItems.FILTER_CLASS_NAMES;
+//        } else {
+//            testList = SMTTestItems.FILTER_CLASS_NAMES;
+//        }
 
         setContentView(R.layout.activity_validation_tools_main);
         if (SUPPORT_CAMERA_FEATURE && Const.isSupportCameraCaliVeri()) {
@@ -151,7 +151,7 @@ public class ValidationToolsMainActivity extends Activity implements
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (resultCode == Const.TEST_ITEM_DONE) {
-            Log.d(TAG, "auto test because requesting");
+            Log.d(TAG, "auto test because resultCode == 0");
             autoTest();
         }
     }

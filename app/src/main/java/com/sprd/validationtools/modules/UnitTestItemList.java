@@ -12,6 +12,7 @@ import com.sprd.validationtools.itemstest.camera.CameraTestActivity;
 import com.sprd.validationtools.itemstest.charger.ChargerTest;
 //import com.sprd.validationtools.itemstest.fingerprint.FingerprintTestActivity;
 import com.sprd.validationtools.itemstest.sptest.POSSensorTestActivity;
+import com.sprd.validationtools.itemstest.sptest.SPVersionTestActivity;
 import com.sprd.validationtools.itemstest.sptest.TimerTestActivity;
 import com.sprd.validationtools.itemstest.tp.ScreenTestActivity;
 import com.sprd.validationtools.itemstest.gps.GpsTestActivity;
@@ -67,7 +68,8 @@ public class UnitTestItemList extends TestItemList {
             QRCodeTestActivity.class.getName(),                                         // todo:二维码     ok
             BarcodeTestActivity.class.getName(),                                        // todo:一维码     ok
             PsensorTestActivity.class.getName(),                                        // 距离和光传感器测试
-            TimerTestActivity.class.getName(),                                                    // RTC时钟测试
+            TimerTestActivity.class.getName(),                                          // RTC时钟测试
+            SPVersionTestActivity.class.getName(),                                      // SP版本测试
             POSSensorTestActivity.class.getName(),                                      // todo:POS Sensor测试
 //            MelodyTest.class.getName(),                                                 // 喇叭和马达测试
 //            RFCALITest.class.getName(),
@@ -120,14 +122,14 @@ public class UnitTestItemList extends TestItemList {
 
     @Override
     public String[] getFilterClassName() {
-        if (Const.TEST_VALUE == Const.SMT_VALUE) {
-            return SMTTestItems.FILTER_CLASS_NAMES;
-        }
-        if (Const.TEST_VALUE == Const.MMI2_VALUE) {
-            return MMI2TestItems.FILTER_CLASS_NAMES;
-        }
-        return MMI1TestItems.FILTER_CLASS_NAMES;
-//        return FILTER_CLASS_NAMES;
+//        if (Const.TEST_VALUE == Const.SMT_VALUE) {
+//            return SMTTestItems.FILTER_CLASS_NAMES;
+//        }
+//        if (Const.TEST_VALUE == Const.MMI2_VALUE) {
+//            return MMI2TestItems.FILTER_CLASS_NAMES;
+//        }
+//        return MMI1TestItems.FILTER_CLASS_NAMES;
+        return FILTER_CLASS_NAMES;
     }
 
 }

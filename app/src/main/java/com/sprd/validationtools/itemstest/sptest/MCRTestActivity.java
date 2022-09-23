@@ -82,9 +82,15 @@ public class MCRTestActivity extends BaseActivity {
         public void onQposTestCommandResult(boolean isSuccess, String data) {
             super.onQposTestCommandResult(isSuccess, data);
             Log.i(TAG, "isSuccess " + isSuccess);
-            Toast.makeText(MCRTestActivity.this, mContext.getText(R.string.text_pass) +
-                    " " + data, Toast.LENGTH_SHORT).show();
-            storeRusult(isSuccess);
+            if (isSuccess && "010101".equals(data)) {
+                Toast.makeText(MCRTestActivity.this, mContext.getText(R.string.text_pass) +
+                        " " + data, Toast.LENGTH_SHORT).show();
+                storeRusult(true);
+            } else {
+                Toast.makeText(MCRTestActivity.this, mContext.getText(R.string.text_fail) +
+                        " " + data, Toast.LENGTH_SHORT).show();
+                storeRusult(false);
+            }
             finish();
         }
 

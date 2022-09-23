@@ -82,7 +82,7 @@ public class MyNFCTestActivity extends BaseActivity {
         @Override
         public void onQposTestCommandResult(boolean isSuccess, String data) {
             super.onQposTestCommandResult(isSuccess, data);
-            Log.i(TAG, "isSuccess " + isSuccess);
+            Log.i(TAG, "isSuccess " + isSuccess + " " + data);
             Toast.makeText(MyNFCTestActivity.this, mContext.getText(R.string.text_pass)
                             + "" + data , Toast.LENGTH_SHORT).show();
             storeRusult(isSuccess);
