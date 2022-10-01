@@ -59,9 +59,13 @@ public abstract class TestItemList {
                 e1.printStackTrace();
             }
 
-            if (actInfo == null) return null;
+            if (actInfo == null) {
+                Log.e(TAG, "actInfo is null: " + testItemClassName);
+                return null;
+            }
             String testName_ = context.getString(actInfo.labelRes);
             if (TextUtils.isEmpty(testName_)) {
+                Log.e(TAG, "testName is null: " + testItemClassName);
                 testName_ = comName.getShortClassName();
             }
             int labelRes = actInfo.labelRes;
@@ -73,7 +77,10 @@ public abstract class TestItemList {
             boolean isSupport = Const.isSupport(testItemClassName, context);
             //Log.d(TAG, "filterTestItemList isSupport=" + isSupport+",testClassName_="+testClassName_);
             if (isSupport) {
+                Log.e(TAG, "add item: " + testItemClassName);
                 mTestItemList.add(iTestItem);
+            } else {
+                Log.e(TAG, "do not add item: " + testItemClassName);
             }
         }
         return mTestItemList;

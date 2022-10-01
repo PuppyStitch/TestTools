@@ -57,6 +57,12 @@ public class PosIDTestActivity extends BaseActivity {
         mHandler.postDelayed(runnable, TIMEOUT);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        qposService.closeUart();
+    }
+
     private void open(QPOSService.CommunicationMode mode) {
         MyPosListener listener = new MyPosListener();
         //实现类的单例模式

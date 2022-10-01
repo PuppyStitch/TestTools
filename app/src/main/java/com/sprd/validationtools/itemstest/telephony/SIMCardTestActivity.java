@@ -27,6 +27,7 @@ public class SIMCardTestActivity extends BaseActivity {
     private int mSimReadyCount = 0;
     private int phoneCount;
     public Handler mHandler = new Handler();
+    private int TIME_OUT = 1000;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,32 +37,29 @@ public class SIMCardTestActivity extends BaseActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         container = (LinearLayout) findViewById(R.id.sim_test_result_container);
         setTitle(R.string.sim_card_test_tittle);
-        phoneCount = TelephonyManager.from(SIMCardTestActivity.this).getPhoneCount();
+        phoneCount = TelephonyManager.from(SIMCardTestActivity.this).getPhoneCount() > 0 ? 1 : 0;
         showDevice();
         /*SPRD bug 760913:Test can pass/fail must click button*/
         if(Const.isBoardISharkL210c10()){
             mPassButton.setVisibility(View.GONE);
         }
         /*@}*/
-        int phoneCount = TelephonyManager.from(SIMCardTestActivity.this).getPhoneCount();
+//        int phoneCount = TelephonyManager.from(SIMCardTestActivity.this).getPhoneCount();
         Log.d(TAG, "onCreate phoneCount="+phoneCount+",mSimReadyCount="+mSimReadyCount);
         if (phoneCount == mSimReadyCount) {
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(SIMCardTestActivity.this,
-                            R.string.text_pass, Toast.LENGTH_SHORT).show();
-                    /*SPRD bug 760913:Test can pass/fail must click button*/
-                    if(Const.isBoardISharkL210c10()){
-                        Log.d("", "isBoardISharkL210c10 is return!");
-                        mPassButton.setVisibility(View.VISIBLE);
-                        return;
-                    }
-                    /*@}*/
-                    storeRusult(true);
-                    finish();
+            mHandler.postDelayed(() -> {
+                Toast.makeText(SIMCardTestActivity.this,
+                        R.string.text_pass, Toast.LENGTH_SHORT).show();
+                /*SPRD bug 760913:Test can pass/fail must click button*/
+                if(Const.isBoardISharkL210c10()){
+                    Log.d("", "isBoardISharkL210c10 is return!");
+                    mPassButton.setVisibility(View.VISIBLE);
+                    return;
                 }
-            }, 1000);
+                /*@}*/
+                storeRusult(true);
+                finish();
+            }, TIME_OUT);
         }else {
             mHandler.postDelayed(new Runnable() {
                 @Override
@@ -76,7 +74,7 @@ public class SIMCardTestActivity extends BaseActivity {
                     storeRusult(false);
                     finish();
                 }
-            }, 1000);
+            }, TIME_OUT);
         }
         /*SPRD bug 760913:Test can pass/fail must click button*/
         if(Const.isBoardISharkL210c10()){

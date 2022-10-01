@@ -74,11 +74,15 @@ public class PrintTestActivity extends BaseActivity {
 
     public void start() {
         //start an other to print
-        Log.d(TAG, "go to print page");
-        Intent intent = new Intent();
-        ComponentName componentName = new ComponentName("com.example.myprinterdemo", "com.example.myprinterdemo.ui.CitPrintTestActivity");
-        intent.setComponent(componentName);
-        startActivity(intent);
+        try {
+            Log.d(TAG, "go to print page");
+            Intent intent = new Intent();
+            ComponentName componentName = new ComponentName("com.example.myprinterdemo", "com.example.myprinterdemo.ui.CitPrintTestActivity");
+            intent.setComponent(componentName);
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

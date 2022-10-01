@@ -61,6 +61,7 @@ public class SPVersionTestActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
         mHandler.removeCallbacks(runnable);
+        qposService.closeUart();
     }
 
     private void open(QPOSService.CommunicationMode mode) {

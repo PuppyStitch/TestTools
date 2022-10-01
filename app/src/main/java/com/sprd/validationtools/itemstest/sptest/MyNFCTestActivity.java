@@ -53,6 +53,7 @@ public class MyNFCTestActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
         mHandler.removeCallbacks(runnable);
+        qposService.closeUart();
     }
 
     @Override

@@ -190,7 +190,7 @@ public class ChargerTest extends BaseActivity {
             /*@}*/
             mHandler.postDelayed(new Runnable() {
                 public void run() {
-                    finish();
+//                    finish();
                 }
             }, 1000);
         }
@@ -418,6 +418,7 @@ public class ChargerTest extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
+            Log.i(TAG, "ACTION_BATTERY_CHANGED");
             if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
                 int status = intent.getIntExtra(STATUS, 0);
                 int plugged = intent.getIntExtra(PLUGGED, 0);
@@ -470,7 +471,8 @@ public class ChargerTest extends BaseActivity {
 
                 statusTextView.setText(statusString);
                 pluggedTextView.setText(mPluggeString);
-                voltageTextView.setText(Integer.toString(voltage) + " mv");
+                Log.i(TAG, "ACTION_BATTERY_CHANGED: voltage: " + voltage);
+                voltageTextView.setText(voltage + " mv");
                 if (ENABLE_BATTERY_TEMPERATURE) {
                     int batteryElectronic = Integer.parseInt(readFile(ENG_CHARGER_FGU_CURRENT_K414).trim()) / 1000;
                     mBatteryElectronicTextView.setText(batteryElectronic + " ma");

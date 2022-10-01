@@ -431,8 +431,8 @@
     <string name="qrcode_test">QRCode Test</string>
     <string name="print_test">Print Test</string>
     <string name="buzzer_test">Buzzer Test</string>
-    <string name="start_play">Start Play</string>
-    <string name="stop_play">Stop Play</string>
+    <string name="turn_on_lights">Turn On The Lights</string>
+    <string name="turn_off_lights">Turn Off The Lights</string>
     <string name="battery_test">Battery Test</string>
     <string name="my_nfc_test">My NFC Test</string>
     <string name="icc_test">ICC Test</string>

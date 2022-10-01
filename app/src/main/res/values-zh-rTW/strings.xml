@@ -269,8 +269,8 @@
     <string name="qrcode_test">二維碼測試</string>
     <string name="print_test">打印測試</string>
     <string name="buzzer_test">蜂鳴器測試</string>
-    <string name="start_play">開始播放</string>
-    <string name="stop_play">停止播放</string>
+    <string name="turn_on_lights">亮燈</string>
+    <string name="turn_off_lights">滅燈</string>
     <string name="battery_test">電流測試</string>
 
     <string name="my_nfc_test">NFC測試</string>
