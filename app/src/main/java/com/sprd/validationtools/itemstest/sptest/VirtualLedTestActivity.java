@@ -26,25 +26,6 @@ public class VirtualLedTestActivity extends BaseActivity {
     private Button mStartButton, mStopButton;
     ActivityManager activityManager;
 
-    public Handler mHandler = new Handler();
-    private static final int TIMEOUT = 20000;
-    private boolean isOk = false;
-    private Runnable runnable = new Runnable() {
-        public void run() {
-            if (isOk) {
-                Toast.makeText(VirtualLedTestActivity.this, R.string.text_pass,
-                        Toast.LENGTH_SHORT).show();
-                storeRusult(true);
-            } else {
-                Toast.makeText(VirtualLedTestActivity.this, R.string.text_fail,
-                        Toast.LENGTH_SHORT).show();
-                storeRusult(false);
-            }
-            mHandler.removeCallbacks(runnable);
-            finish();
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,13 +56,11 @@ public class VirtualLedTestActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mHandler.postDelayed(runnable, TIMEOUT);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mHandler.removeCallbacks(runnable);
     }
 
     private void start() {
@@ -90,10 +69,8 @@ public class VirtualLedTestActivity extends BaseActivity {
             activityManager.showYellow(true);
             activityManager.showGreen(true);
             activityManager.showRed(true);
-            isOk = true;
         } catch (RemoteException e) {
             e.printStackTrace();
-            isOk = false;
         }
     }
 
@@ -103,10 +80,8 @@ public class VirtualLedTestActivity extends BaseActivity {
             activityManager.showYellow(false);
             activityManager.showGreen(false);
             activityManager.showRed(false);
-            isOk = true;
         } catch (RemoteException e) {
             e.printStackTrace();
-            isOk = false;
         }
     }
 }

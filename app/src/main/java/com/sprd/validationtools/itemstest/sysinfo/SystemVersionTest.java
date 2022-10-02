@@ -36,23 +36,6 @@ public class SystemVersionTest extends BaseActivity {
     private TextView platformSn, imei, kernel;
 
     public Handler mHandler = new Handler();
-    private static final int TIMEOUT = 5000;
-    private boolean isOk = true;
-    private Runnable runnable = new Runnable() {
-        public void run() {
-            if (isOk) {
-                Toast.makeText(SystemVersionTest.this, R.string.text_pass,
-                        Toast.LENGTH_SHORT).show();
-                storeRusult(true);
-            } else {
-                Toast.makeText(SystemVersionTest.this, R.string.text_fail,
-                        Toast.LENGTH_SHORT).show();
-                storeRusult(false);
-            }
-            mHandler.removeCallbacks(runnable);
-            finish();
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,13 +72,11 @@ public class SystemVersionTest extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mHandler.postDelayed(runnable, TIMEOUT);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mHandler.removeCallbacks(runnable);
     }
 
     public String getImei() {

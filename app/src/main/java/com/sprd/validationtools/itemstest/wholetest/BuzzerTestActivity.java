@@ -41,7 +41,6 @@ public class BuzzerTestActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
-        mHandler.postDelayed(runnable, TIMEOUT);
         super.onResume();
         try {
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -49,7 +48,6 @@ public class BuzzerTestActivity extends BaseActivity {
                 public void onPrepared(MediaPlayer mp) {
                     mp.setLooping(true);
                     mp.start();
-                    isOk = true;
                 }
             });
         } catch (Exception e) {
@@ -60,7 +58,6 @@ public class BuzzerTestActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        mHandler.removeCallbacks(runnable);
     }
 
     @Override

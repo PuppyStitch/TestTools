@@ -43,25 +43,6 @@ public class BackLightTest extends BaseActivity implements OnClickListener {
     private static final int MAX_BRIGHTNESS = 255;
     private static final boolean TEST_SCREEN_LIGHT = true;
 
-    public Handler mHandler = new Handler();
-    private static final int TIMEOUT = 10000;
-    private boolean isOk = true;
-    private Runnable runnable = new Runnable() {
-        public void run() {
-            if (isOk) {
-                Toast.makeText(BackLightTest.this, R.string.text_pass,
-                        Toast.LENGTH_SHORT).show();
-                storeRusult(true);
-            } else {
-                Toast.makeText(BackLightTest.this, R.string.text_fail,
-                        Toast.LENGTH_SHORT).show();
-                storeRusult(false);
-            }
-            mHandler.removeCallbacks(runnable);
-            finish();
-        }
-    };
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,13 +114,11 @@ public class BackLightTest extends BaseActivity implements OnClickListener {
             mFailButton.setVisibility(View.GONE);
             hideNavigationBar();
         }
-        mHandler.postDelayed(runnable, TIMEOUT);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mHandler.removeCallbacks(runnable);
     }
 
     private void setScreenLight(Activity context, int brightness) {

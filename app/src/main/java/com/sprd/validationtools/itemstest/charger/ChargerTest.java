@@ -190,7 +190,7 @@ public class ChargerTest extends BaseActivity {
             /*@}*/
             mHandler.postDelayed(new Runnable() {
                 public void run() {
-//                    finish();
+                    finish();
                 }
             }, 1000);
         }

@@ -38,25 +38,6 @@ public class ScreenColorTest extends BaseActivity implements OnClickListener {
             Color.WHITE, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW
     };
 
-    public Handler mHandler = new Handler();
-    private static final int TIMEOUT = 10000;
-    private boolean isOk = true;
-    private Runnable runnable = new Runnable() {
-        public void run() {
-            if (isOk) {
-                Toast.makeText(ScreenColorTest.this, R.string.text_pass,
-                        Toast.LENGTH_SHORT).show();
-                storeRusult(true);
-            } else {
-                Toast.makeText(ScreenColorTest.this, R.string.text_fail,
-                        Toast.LENGTH_SHORT).show();
-                storeRusult(false);
-            }
-            mHandler.removeCallbacks(runnable);
-            finish();
-        }
-    };
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,13 +84,11 @@ public class ScreenColorTest extends BaseActivity implements OnClickListener {
             mFailButton.setVisibility(View.GONE);
             hideNavigationBar();
         }
-        mHandler.postDelayed(runnable, TIMEOUT);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mHandler.removeCallbacks(runnable);
     }
 
     @Override

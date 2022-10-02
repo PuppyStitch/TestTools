@@ -22,10 +22,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class PsensorTestActivity extends BaseActivity {
-    /** the value of change color */
+    /**
+     * the value of change color
+     */
     private static final float VALUE_OF_CHANGE_COLOR = 0.5f;
 
-    /** the default value */
+    /**
+     * the default value
+     */
     private static final int LSENSOR_DEFAULT_VALUE = 0;
     private static final float PSENSOR_DEFAULT_VALUE = 1.0f;
 
@@ -33,51 +37,81 @@ public class PsensorTestActivity extends BaseActivity {
 
     private static final String VALUE_CLOSE = "Closer";
 
-    /** sensor manager object */
+    /**
+     * sensor manager object
+     */
     private SensorManager pManager = null;
 
-    /** sensor object */
+    /**
+     * sensor object
+     */
     private Sensor pSensor = null;
 
-    /** sensor listener object */
+    /**
+     * sensor listener object
+     */
     private SensorEventListener pListener = null;
 
-    /** the status of p-sensor */
+    /**
+     * the status of p-sensor
+     */
     private TextView psensorTextView;
 
     private static final float MAXIMUM_BACKLIGHT = 1.0f;
 
-    /** Screen backlight when the value of the darkest */
+    /**
+     * Screen backlight when the value of the darkest
+     */
     private static final float MINIMUM_BACKLIGHT = 0.1f;
 
-    /** sensor manager object */
+    /**
+     * sensor manager object
+     */
     private SensorManager lManager = null;
 
-    /** sensor object */
+    /**
+     * sensor object
+     */
     private Sensor lSensor = null;
 
-    /** sensor listener object */
+    /**
+     * sensor listener object
+     */
     private SensorEventListener lListener = null;
 
-    /** the progressBar object */
+    /**
+     * the progressBar object
+     */
     private ProgressBar lsensorProgressBar;
 
-    /** the textview object */
+    /**
+     * the textview object
+     */
     private TextView valueIllumination;
 
-    /** the max value of progressBar */
+    /**
+     * the max value of progressBar
+     */
     private static final int MAX_VALUE_PROGRESSBAR = 300;
 
-    /** System backlight value */
+    /**
+     * System backlight value
+     */
     private int mCurrentValue;
 
-    /** Integer into a floating-point type */
+    /**
+     * Integer into a floating-point type
+     */
     private float mBrightnessValue;
 
-    /** Brightness current value */
+    /**
+     * Brightness current value
+     */
     private static final int BRIGHTNESS_CURRENT_VALUE = 180;
 
-    /** Brightness max value */
+    /**
+     * Brightness max value
+     */
     private static final float BRIGHTNESS_MAX_VALUE = 255.0f;
 
     private Context mContext;
@@ -86,10 +120,11 @@ public class PsensorTestActivity extends BaseActivity {
     private int mSensorMax = -1;
 
     private boolean mIsCloseDone = false;
-    private boolean mIsDistantDone = false;
+    private boolean mIsDistantDone = true;
 
     private static final String TAG = "PsensorTestActivity";
     private boolean mSupportLsensor = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,11 +153,11 @@ public class PsensorTestActivity extends BaseActivity {
 
         /*SPRD bug 857094:Check light sensor*/
         mSupportLsensor = lSensor != null;
-        Log.d(TAG, "onCreate lSensor="+lSensor+",mSupportLsensor="+mSupportLsensor);
+        Log.d(TAG, "onCreate lSensor=" + lSensor + ",mSupportLsensor=" + mSupportLsensor);
         lsensorProgressBar.setVisibility(!mSupportLsensor ? View.GONE : View.VISIBLE);
         valueIllumination.setVisibility(!mSupportLsensor ? View.GONE : View.VISIBLE);
         TextView textTile = (TextView) findViewById(R.id.test_tile);
-        if(textTile != null){
+        if (textTile != null) {
             textTile.setText(!mSupportLsensor ? R.string.tip_for_psensor_zte : R.string.tip_for_psensor);
         }
         /*@}*/
@@ -149,19 +184,19 @@ public class PsensorTestActivity extends BaseActivity {
                 if ((mSensorMax - mSensorMin) > 0
                         && mIsCloseDone && mIsDistantDone) {
                     /*SPRD bug 760913:Test can pass/fail must click button*/
-                    if(Const.isBoardISharkL210c10()){
+                    if (Const.isBoardISharkL210c10()) {
                         Log.d("", "isBoardISharkL210c10 is return!");
                         return;
                     }
                     /*@}*/
-//                    Toast.makeText(mContext, R.string.text_pass, Toast.LENGTH_SHORT).show();
-//                    storeRusult(true);
-//                    finish();
+                    Toast.makeText(mContext, R.string.text_pass, Toast.LENGTH_SHORT).show();
+                    storeRusult(true);
+                    finish();
                 }
             }
         };
         /*SPRD bug 760913:Test can pass/fail must click button*/
-        if(Const.isBoardISharkL210c10()){
+        if (Const.isBoardISharkL210c10()) {
             mPassButton.setVisibility(View.GONE);
         }
         /*@}*/
@@ -236,24 +271,24 @@ public class PsensorTestActivity extends BaseActivity {
                     mIsCloseDone = true;
                 } else {
                     /*SPRD bug 744593:We check P sensor success only near to far.*/
-                    if(mIsCloseDone){
+                    if (mIsCloseDone) {
                         setPsensorDisplay(VALUE_FAR, x, Color.WHITE);
                         mIsDistantDone = true;
-                    }else{
+                    } else {
                         Log.d("", "Must be test near first!");
                     }
                     /*@}*/
                 }
 
                 /*SPRD bug 744593:We check P sensor success only near to far.*/
-                Log.d("PsensorTestActivity", "onSensorChanged22 mSensorMax="+mSensorMax+",mSensorMin="+mSensorMin+
-                        ",mIsCloseDone="+mIsCloseDone+",mIsDistantDone="+mIsDistantDone+",mSupportLsensor="+mSupportLsensor);
-                if(mSupportLsensor){
+                Log.d("PsensorTestActivity", "onSensorChanged22 mSensorMax=" + mSensorMax + ",mSensorMin=" + mSensorMin +
+                        ",mIsCloseDone=" + mIsCloseDone + ",mIsDistantDone=" + mIsDistantDone + ",mSupportLsensor=" + mSupportLsensor);
+                if (mSupportLsensor) {
                     if ((mSensorMax - mSensorMin) > 0
                             && mIsCloseDone && mIsDistantDone) {
                         Toast.makeText(mContext, R.string.text_pass, Toast.LENGTH_SHORT).show();
                         /*SPRD bug 760913:Test can pass/fail must click button*/
-                        if(Const.isBoardISharkL210c10()){
+                        if (Const.isBoardISharkL210c10()) {
                             Log.d("", "isBoardISharkL210c10 is return!");
                             mPassButton.setVisibility(View.VISIBLE);
                             return;
@@ -261,12 +296,12 @@ public class PsensorTestActivity extends BaseActivity {
                         /*@}*/
                         storeRusult(true);
                         finish();
-                    }   
-                }else{
+                    }
+                } else {
                     if (mIsCloseDone && mIsDistantDone) {
                         Toast.makeText(mContext, R.string.text_pass, Toast.LENGTH_SHORT).show();
                         /*SPRD bug 760913:Test can pass/fail must click button*/
-                        if(Const.isBoardISharkL210c10()){
+                        if (Const.isBoardISharkL210c10()) {
                             Log.d("", "isBoardISharkL210c10 is return!");
                             mPassButton.setVisibility(View.VISIBLE);
                             return;
@@ -276,7 +311,7 @@ public class PsensorTestActivity extends BaseActivity {
                         finish();
                     }
                 }
-                
+
             }
         };
     }
