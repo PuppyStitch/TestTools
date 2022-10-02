@@ -1,10 +1,14 @@
 package com.sprd.validationtools.itemstest.sptest;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.dspread.xpos.CQPOSService;
@@ -23,6 +27,7 @@ public class ICCardTestActivity extends BaseActivity {
     QPOSService qposService;
     Context mContext;
 
+    private Button mStartButton;
     public Handler mHandler = new Handler();
     private static final int TIMEOUT = 8000;
     private boolean isOk = false;
@@ -46,8 +51,24 @@ public class ICCardTestActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         open(QPOSService.CommunicationMode.UART);
-        qposService.testPosFunctionCommand(3000, QPOSService.TestCommand.ICC_TEST);
+        LinearLayout barcodeLayout = new LinearLayout(this);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT);
+        barcodeLayout.setLayoutParams(params);
+        barcodeLayout.setOrientation(LinearLayout.VERTICAL);
+        barcodeLayout.setGravity(Gravity.CENTER);
+        mStartButton = new Button(this);
+        mStartButton.setTextSize(35);
+        barcodeLayout.addView(mStartButton);
+        setContentView(barcodeLayout);
+        setTitle("MyNFCTestActivity");
+        mStartButton.setText(getResources().getText(R.string.color_temperature_start));
+        mStartButton.setOnClickListener(view -> start());
         mContext = this;
+    }
+
+    private void start() {
+        qposService.testPosFunctionCommand(3000, QPOSService.TestCommand.ICC_TEST);
     }
 
     @Override

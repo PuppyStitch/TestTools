@@ -119,7 +119,7 @@ public class PsensorTestActivity extends BaseActivity {
     private int mSensorMin = -1;
     private int mSensorMax = -1;
 
-    private boolean mIsCloseDone = false;
+    private boolean mIsCloseDone = true;
     private boolean mIsDistantDone = true;
 
     private static final String TAG = "PsensorTestActivity";
@@ -181,7 +181,7 @@ public class PsensorTestActivity extends BaseActivity {
 
                 showStatus(x);
 
-                if ((mSensorMax - mSensorMin) > 0
+                if ((mSensorMax - mSensorMin) > 100
                         && mIsCloseDone && mIsDistantDone) {
                     /*SPRD bug 760913:Test can pass/fail must click button*/
                     if (Const.isBoardISharkL210c10()) {

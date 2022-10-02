@@ -1,10 +1,14 @@
 package com.sprd.validationtools.itemstest.sptest;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
@@ -22,6 +26,7 @@ public class MyNFCTestActivity extends BaseActivity {
     private static final String TAG = "MyNFCTestActivity";
 
     private Context mContext;
+    private Button mStartButton;
     public Handler mHandler = new Handler();
     private static final int TIMEOUT = 16000;
     private boolean isOk = false;
@@ -44,8 +49,21 @@ public class MyNFCTestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LinearLayout barcodeLayout = new LinearLayout(this);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT);
+        barcodeLayout.setLayoutParams(params);
+        barcodeLayout.setOrientation(LinearLayout.VERTICAL);
+        barcodeLayout.setGravity(Gravity.CENTER);
+        mStartButton = new Button(this);
+        mStartButton.setTextSize(35);
+        barcodeLayout.addView(mStartButton);
+        setContentView(barcodeLayout);
+        setTitle("MyNFCTestActivity");
+        mStartButton.setText(getResources().getText(R.string.color_temperature_start));
+        mStartButton.setOnClickListener(view -> start());
         open(QPOSService.CommunicationMode.UART);
-        qposService.testPosFunctionCommand(3000, QPOSService.TestCommand.NFC_TEST);
         mContext = this;
     }
 
@@ -60,6 +78,10 @@ public class MyNFCTestActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         mHandler.postDelayed(runnable, TIMEOUT);
+    }
+
+    private void start() {
+        qposService.testPosFunctionCommand(3000, QPOSService.TestCommand.NFC_TEST);
     }
 
     private void open(QPOSService.CommunicationMode mode) {
