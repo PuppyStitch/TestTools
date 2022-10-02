@@ -43,7 +43,7 @@ public class UnitTestItemList extends TestItemList {
      */
     private static final String[] FILTER_CLASS_NAMES = {
             SystemVersionTest.class.getName(),                                          // AP版本测试
-            PosIDTestActivity.class.getName(),                                          // todo:SP版本测试
+            SPVersionTestActivity.class.getName(),                                      // SP版本测试
             ScreenColorTest.class.getName(),                                            // LCD测试
             BackLightTest.class.getName(),                                              // 背景光测试
             ScreenTestActivity.class.getName(),                                         // todo:触摸屏
@@ -69,7 +69,7 @@ public class UnitTestItemList extends TestItemList {
             BarcodeTestActivity.class.getName(),                                        // todo:一维码     ok
             PsensorTestActivity.class.getName(),                                        // 距离和光传感器测试
             TimerTestActivity.class.getName(),                                          // RTC时钟测试
-            SPVersionTestActivity.class.getName(),                                      // SP版本测试
+            PosIDTestActivity.class.getName(),                                          // todo:SP版本测试
             POSSensorTestActivity.class.getName(),                                      // todo:POS Sensor测试
 //            MelodyTest.class.getName(),                                                 // 喇叭和马达测试
 //            RFCALITest.class.getName(),
