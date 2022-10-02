@@ -232,14 +232,15 @@ public class BaseActivity extends Activity implements OnClickListener {
     @Override
     public void onBackPressed() {
         /* SPRD bug 760913:Test can pass/fail must click button */
+        super.onBackPressed();
         if (Const.isBoardISharkL210c10()) {
             Log.d("", "isBoardISharkL210c10 is return!");
             return;
         }
         /* @} */
-        Intent intent = BaseActivity.this.getIntent();
-        BaseActivity.this.startActivityForResult(intent, 0);
-        finish();
+//        Intent intent = BaseActivity.this.getIntent();
+//        BaseActivity.this.startActivityForResult(intent, 0);
+//        finish();
     }
 
     @Override
