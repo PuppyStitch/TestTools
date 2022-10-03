@@ -45,6 +45,7 @@ import com.sprd.validationtools.modules.MMI1TestItems;
 import com.sprd.validationtools.modules.MMI2TestItems;
 import com.sprd.validationtools.modules.SMTTestItems;
 import com.sprd.validationtools.modules.TestItem;
+import com.sprd.validationtools.modules.UnitTestItemList;
 import com.sprd.validationtools.sqlite.EngSqlite;
 import com.sprd.validationtools.testinfo.TestInfoMainActivity;
 import com.sprd.validationtools.utils.ValidationToolsUtils;
@@ -311,7 +312,13 @@ public class ValidationToolsMainActivity extends Activity implements
             Log.d(TAG, "clickItem:" + clickItem);
             if (getString(R.string.full_test).equals(clickItem)) {
                 time = System.currentTimeMillis();
-                mAutoTestArray = AutoTestItemList.getInstance(this).getTestItemList();
+                ArrayList<TestItem> list = null;
+                if (Const.TEST_VALUE == Const.MMI2_VALUE) {
+                    mAutoTestArray = AutoTestItemList.getInstance(this).getMMI2ItemList();
+                } else {
+                    mAutoTestArray = AutoTestItemList.getInstance(this).getTestItemList();
+                }
+//                mAutoTestArray = AutoTestItemList.getInstance(this).getTestItemList();
                 mAutoTestCur = 0;
                 mIsTested = true;
 //                startBackgroundTest();

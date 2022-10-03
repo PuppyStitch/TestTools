@@ -57,8 +57,17 @@ public class ListItemTestActivity extends Activity {
         if (engSqlite == null) {
             return;
         }
-        mItemsListView.addAll(UnitTestItemList.getInstance(
-                ListItemTestActivity.this).getTestItemList());
+
+        ArrayList<TestItem> list = null;
+        if (Const.TEST_VALUE == Const.MMI2_VALUE) {
+            list = UnitTestItemList.getInstance(
+                    ListItemTestActivity.this).getMMI2ItemList();
+        } else {
+            list = UnitTestItemList.getInstance(
+                    ListItemTestActivity.this).getTestItemList();
+        }
+
+        mItemsListView.addAll(list);
         TestItem testResult = new TestItem("TestResult",
                 TestResultActivity.class.getPackage().getName(),
                 TestResultActivity.class.getName(), -2, R.string.test_result_title);

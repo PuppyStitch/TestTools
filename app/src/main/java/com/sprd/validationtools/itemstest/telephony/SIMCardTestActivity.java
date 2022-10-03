@@ -27,7 +27,7 @@ public class SIMCardTestActivity extends BaseActivity {
     private int mSimReadyCount = 0;
     private int phoneCount;
     public Handler mHandler = new Handler();
-    private int TIME_OUT = 1000;
+    private int TIME_OUT = 10000;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

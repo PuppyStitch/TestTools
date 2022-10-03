@@ -96,7 +96,7 @@ public class PosIDTestActivity extends BaseActivity {
             Log.i(TAG, "onQposIdResult");
             Log.i(TAG, posId.get("posId"));
             posIdTV.setText(posId.get("posId"));
-
+            isOk = true;
             for (Map.Entry<String, String> entry : posId.entrySet()) {
                 Log.i(TAG, entry.getKey() + " = " + entry.getValue());
             }
