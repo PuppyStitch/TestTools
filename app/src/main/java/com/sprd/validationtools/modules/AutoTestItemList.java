@@ -146,14 +146,14 @@ public class AutoTestItemList extends TestItemList {
 
     @Override
     public String[] getFilterClassName() {
-//        if (Const.TEST_VALUE == Const.SMT_VALUE) {
-//            return SMTTestItems.FILTER_CLASS_NAMES;
-//        }
-//        if (Const.TEST_VALUE == Const.MMI2_VALUE) {
-//            return MMI2TestItems.FILTER_CLASS_NAMES;
-//        }
-//        return MMI1TestItems.FILTER_CLASS_NAMES;
-        return FILTER_CLASS_NAMES;
+        if (Const.TEST_VALUE == Const.SMT_VALUE) {
+            return SMTTestItems.FILTER_CLASS_NAMES;
+        }
+        if (Const.TEST_VALUE == Const.MMI2_VALUE) {
+            return MMI2TestItems.FILTER_CLASS_NAMES;
+        }
+        return MMI1TestItems.FILTER_CLASS_NAMES;
+//        return FILTER_CLASS_NAMES;
     }
 
 }

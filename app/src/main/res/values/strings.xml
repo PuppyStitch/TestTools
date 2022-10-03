@@ -447,5 +447,6 @@
     <string name="screen_print_test">Screen Print Test</string>
     <string name="pos_sensor_test">POS Sensor Test</string>
     <string name="sp_version">SP VERSION</string>
+    <string name="wifi_bluetooth_address">WIFI and BLUETOOTH address</string>
 
 </resources>

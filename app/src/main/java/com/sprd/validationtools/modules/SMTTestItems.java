@@ -27,6 +27,7 @@ import com.sprd.validationtools.itemstest.wholetest.BuzzerTestActivity;
 import com.sprd.validationtools.itemstest.wholetest.FlashTestActivity;
 import com.sprd.validationtools.itemstest.wholetest.PrintTestActivity;
 import com.sprd.validationtools.itemstest.wholetest.QRCodeTestActivity;
+import com.sprd.validationtools.itemstest.wholetest.WiFiBluetoothAddressTest;
 import com.sprd.validationtools.itemstest.wifi.WifiTestActivity;
 
 public class SMTTestItems {
@@ -45,6 +46,7 @@ public class SMTTestItems {
             OTGTest.class.getName(),                                                    // OTG测试
             ChargerTest.class.getName(),                                                // 充电测试
             SIMCardTestActivity.class.getName(),                                        // SIM卡测试
+            WiFiBluetoothAddressTest.class.getName(),                                   // 蓝牙wifi地址测试
             WifiTestActivity.class.getName(),                                           // wifi测试
             BluetoothTestActivity.class.getName(),                                      // 蓝牙测试
             GpsTestActivity.class.getName(),                                            // GPS测试

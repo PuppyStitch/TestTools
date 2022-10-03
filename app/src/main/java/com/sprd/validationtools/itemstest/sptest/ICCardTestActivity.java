@@ -65,6 +65,7 @@ public class ICCardTestActivity extends BaseActivity {
         mStartButton.setText(getResources().getText(R.string.color_temperature_start));
         mStartButton.setOnClickListener(view -> start());
         mContext = this;
+        disablePassButton();
     }
 
     private void start() {
@@ -104,7 +105,8 @@ public class ICCardTestActivity extends BaseActivity {
             Toast.makeText(ICCardTestActivity.this, mContext.getText(R.string.text_pass) +
                     " " + data, Toast.LENGTH_SHORT).show();
             storeRusult(isSuccess);
-            finish();
+            enablePassButton();
+//            finish();
         }
 
         @Override

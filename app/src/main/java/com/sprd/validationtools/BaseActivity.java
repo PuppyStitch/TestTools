@@ -128,6 +128,20 @@ public class BaseActivity extends Activity implements OnClickListener {
         super.onDestroy();
     }
 
+    protected void disablePassButton() {
+        if (mPassButton != null) {
+            mPassButton.setEnabled(false);
+            mPassButton.setBackgroundColor(Color.GRAY);
+        }
+    }
+
+    protected void enablePassButton() {
+        if (mPassButton != null) {
+            mPassButton.setEnabled(true);
+            mPassButton.setBackgroundColor(Color.GREEN);
+        }
+    }
+
     public void createButton(boolean isPassButton) {
         int buttonSize = getResources().getDimensionPixelSize(
                 R.dimen.pass_fail_button_size);

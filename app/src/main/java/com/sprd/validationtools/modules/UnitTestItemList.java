@@ -33,6 +33,7 @@ import com.sprd.validationtools.itemstest.wholetest.BuzzerTestActivity;
 import com.sprd.validationtools.itemstest.wholetest.FlashTestActivity;
 import com.sprd.validationtools.itemstest.wholetest.PrintTestActivity;
 import com.sprd.validationtools.itemstest.wholetest.QRCodeTestActivity;
+import com.sprd.validationtools.itemstest.wholetest.WiFiBluetoothAddressTest;
 import com.sprd.validationtools.itemstest.wifi.WifiTestActivity;
 
 public class UnitTestItemList extends TestItemList {
@@ -55,6 +56,7 @@ public class UnitTestItemList extends TestItemList {
             OTGTest.class.getName(),                                                    // OTG测试
             ChargerTest.class.getName(),                                                // 充电测试
             SIMCardTestActivity.class.getName(),                                        // SIM卡测试
+            WiFiBluetoothAddressTest.class.getName(),                                   // 蓝牙wifi地址测试
             WifiTestActivity.class.getName(),                                           // wifi测试
             BluetoothTestActivity.class.getName(),                                      // 蓝牙测试
             GpsTestActivity.class.getName(),                                            // GPS测试
@@ -122,14 +124,14 @@ public class UnitTestItemList extends TestItemList {
 
     @Override
     public String[] getFilterClassName() {
-//        if (Const.TEST_VALUE == Const.SMT_VALUE) {
-//            return SMTTestItems.FILTER_CLASS_NAMES;
-//        }
-//        if (Const.TEST_VALUE == Const.MMI2_VALUE) {
-//            return MMI2TestItems.FILTER_CLASS_NAMES;
-//        }
-//        return MMI1TestItems.FILTER_CLASS_NAMES;
-        return FILTER_CLASS_NAMES;
+        if (Const.TEST_VALUE == Const.SMT_VALUE) {
+            return SMTTestItems.FILTER_CLASS_NAMES;
+        }
+        if (Const.TEST_VALUE == Const.MMI2_VALUE) {
+            return MMI2TestItems.FILTER_CLASS_NAMES;
+        }
+        return MMI1TestItems.FILTER_CLASS_NAMES;
+//        return FILTER_CLASS_NAMES;
     }
 
 }

@@ -63,6 +63,7 @@ public class MyNFCTestActivity extends BaseActivity {
         setTitle("MyNFCTestActivity");
         mStartButton.setText(getResources().getText(R.string.color_temperature_start));
         mStartButton.setOnClickListener(view -> start());
+        disablePassButton();
         open(QPOSService.CommunicationMode.UART);
         mContext = this;
     }
@@ -109,7 +110,8 @@ public class MyNFCTestActivity extends BaseActivity {
             Toast.makeText(MyNFCTestActivity.this, mContext.getText(R.string.text_pass)
                             + "" + data , Toast.LENGTH_SHORT).show();
             storeRusult(isSuccess);
-            finish();
+            enablePassButton();
+//            finish();
         }
 
         @Override

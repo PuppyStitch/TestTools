@@ -17,11 +17,13 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
 import com.sprd.validationtools.Const;
 import com.sprd.validationtools.PhaseCheckParse;
+import com.sprd.validationtools.itemstest.sptest.POSSensorTestActivity;
 
 import java.io.File;
 import java.io.FileReader;
@@ -60,6 +62,7 @@ public class ChargerTest extends BaseActivity {
     private boolean mIsPlugUSB = false;
     private float mChargerElectronic;
     private float mChargerVoltage;
+    private boolean isOk = false;
     /* SPRD Bug 773805:Show NTC temperature in charger test. @{ */
     private float mBatteryTemperature;
     private TableRow mTemperatureTableRow;
@@ -106,6 +109,24 @@ public class ChargerTest extends BaseActivity {
     };
     /* @} */
 
+    public Handler myHandler = new Handler();
+    private static final int TIMEOUT = 16000;
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            if (isOk) {
+                Toast.makeText(ChargerTest.this, R.string.text_pass,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(true);
+            } else {
+                Toast.makeText(ChargerTest.this, R.string.text_fail,
+                        Toast.LENGTH_SHORT).show();
+                storeRusult(false);
+            }
+            mHandler.removeCallbacks(runnable);
+            finish();
+        }
+    };
+
     private String mInputCurrent = null;
     private int mRetryNum = 0;
     private int mWaitTime = 3000;
@@ -145,7 +166,9 @@ public class ChargerTest extends BaseActivity {
 
                         if (mIsPlugUSB) {
                             mTestResultTextView.setText(getString(R.string.charger_test_success));
+                            isOk = true;
                             mTestResultTextView.setTextColor(Color.GREEN);
+                            enablePassButton();
                             /*SPRD bug 760913:Test can pass/fail must click button*/
                             if (Const.isBoardISharkL210c10()) {
                                 mPassButton.setVisibility(View.VISIBLE);
@@ -162,6 +185,8 @@ public class ChargerTest extends BaseActivity {
 
                         if (mIsPlugUSB) {
                             mTestResultTextView.setText(getString(R.string.charger_test_success));
+                            isOk = true;
+                            enablePassButton();
                             mTestResultTextView.setTextColor(Color.GREEN);
                             mHandler.post(mElectronicUpdate);
                         } else {
@@ -207,6 +232,7 @@ public class ChargerTest extends BaseActivity {
         mHandler = new Handler();
         //Update kernel 4.14
         initSupportK414();
+        disablePassButton();
         statusTextView = (TextView) findViewById(R.id.statusTextView);
         pluggedTextView = (TextView) findViewById(R.id.pluggedTextView);
         voltageTextView = (TextView) findViewById(R.id.voltageTextView);
@@ -257,6 +283,7 @@ public class ChargerTest extends BaseActivity {
             mTemperatureTextView.setText(mBatteryTemperature / 10 + " \u2103");
         }
         mHandler.postDelayed(mElectronicUpdate, 500);
+        myHandler.postDelayed(runnable, TIMEOUT);
     }
 
     @Override
@@ -264,6 +291,7 @@ public class ChargerTest extends BaseActivity {
         super.onPause();
         mHandler.removeCallbacks(mElectronicUpdate);
         mHandler.removeCallbacks(mRealtimeShow);
+        myHandler.removeCallbacks(runnable);
     }
 
     private String getInputElectronicNewStep() {

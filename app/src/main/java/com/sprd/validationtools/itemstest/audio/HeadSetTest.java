@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
+
 import android.os.SystemProperties;
 
 import android.app.Activity;

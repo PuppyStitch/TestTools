@@ -63,6 +63,7 @@ public class MCRTestActivity extends BaseActivity {
         mStartButton.setText(getResources().getText(R.string.color_temperature_start));
         mStartButton.setOnClickListener(view -> start());
         mContext = this;
+        disablePassButton();
     }
 
     private void start() {
@@ -107,6 +108,7 @@ public class MCRTestActivity extends BaseActivity {
             if (isSuccess && "010101".equals(data)) {
                 Toast.makeText(MCRTestActivity.this, mContext.getText(R.string.text_pass) +
                         " " + data, Toast.LENGTH_SHORT).show();
+                enablePassButton();
                 storeRusult(true);
             } else {
                 Toast.makeText(MCRTestActivity.this, mContext.getText(R.string.text_fail) +

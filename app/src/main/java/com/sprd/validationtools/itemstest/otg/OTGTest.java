@@ -81,6 +81,7 @@ public class OTGTest extends BaseActivity {
         mStorageManager.getStorageVolumes();
 
         uDiskName(this);
+        disablePassButton();
     }
 
     @Override
@@ -160,6 +161,7 @@ public class OTGTest extends BaseActivity {
             availSize = availableBlocks * blockSize / 1024 / 1024;
             Log.d(TAG, "total size is = " + totalBlocks * blockSize / 1024 / 1024);
             Log.d(TAG, "avail size is = " + availableBlocks * blockSize / 1024 / 1024);
+            enablePassButton();
         } catch (Exception e) {
             e.printStackTrace();
         }
