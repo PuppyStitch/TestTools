@@ -148,16 +148,16 @@ public class BluetoothTestActivity extends BaseActivity {
         tvBtDeviceList = (TextView) findViewById(R.id.tv_bt_device_list);
 
         /*SPRD bug 817253:Maybe cause NullPointerException.*/
-        if(btTestUtil.getBluetoothAdapter() != null){
+        if (btTestUtil.getBluetoothAdapter() != null) {
             tvBtAddr.setText(btTestUtil.getBluetoothAdapter().getAddress() + "\n");
-        }else{
+        } else {
             tvBtAddr.setText("NA");
             Log.w(TAG, "onCreate mBluetoothAdapter == null");
         }
         //tvBtAddr.setText(btTestUtil.getBluetoothAdapter().getAddress() + "\n");
     }
 
-    public void onClick(View v){
+    public void onClick(View v) {
         btTestUtil.stopTest();
         super.onClick(v);
     }
@@ -176,7 +176,7 @@ public class BluetoothTestActivity extends BaseActivity {
     }
     /* @}*/
 
-    public void onBackPressed(){
+    public void onBackPressed() {
         btTestUtil.stopTest();
         super.onBackPressed();
     }

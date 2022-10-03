@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
 import android.media.AudioSystem;
+
 import com.sprd.validationtools.Const;
 import com.sprd.validationtools.utils.FileUtils;
 import com.sprd.validationtools.utils.IATUtils;
@@ -73,7 +74,7 @@ public class HeadSetTest extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.headset_test);
         mAudioWhaleHalFlag = ValidationToolsUtils.isSupportAGDSP(getApplicationContext());
-        Log.d(TAG, "onCreate mAudioWhaleHalFlag="+mAudioWhaleHalFlag);
+        Log.d(TAG, "onCreate mAudioWhaleHalFlag=" + mAudioWhaleHalFlag);
         mAudioManager = (AudioManager) this
                 .getSystemService(Context.AUDIO_SERVICE);
         mInsertHeadsetNotice = (TextView) findViewById(R.id.tx_insert_headset);
@@ -82,8 +83,8 @@ public class HeadSetTest extends BaseActivity {
         mEarKey = (Button) findViewById(R.id.btn_earkey);
         mEarKey.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d(TAG, "onClick isRollbackStarted="+isRollbackStarted);
-                if(!isRollbackStarted){
+                Log.d(TAG, "onClick isRollbackStarted=" + isRollbackStarted);
+                if (!isRollbackStarted) {
                     step(STEP_PRESS_HEADSET_KEY);
                     startMmiAudio();
                     isRollbackStarted = true;
@@ -128,11 +129,12 @@ public class HeadSetTest extends BaseActivity {
     }
 
     private boolean mIsPausing = false;
+
     @Override
     protected void onResume() {
         super.onResume();
         mIsPausing = false;
-        Log.d(TAG, "onResume isRollbackStarted="+isRollbackStarted);
+        Log.d(TAG, "onResume isRollbackStarted=" + isRollbackStarted);
         if (isRollbackStarted) {
             step(STEP_PRESS_HEADSET_KEY);
             startMmiAudio();
@@ -155,12 +157,12 @@ public class HeadSetTest extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_HEADSETHOOK) {
-            Log.d(TAG, "onKeyDown isRollbackStarted="+isRollbackStarted);
-            Log.d(TAG, "onKeyDown isRollbackStarted="+isDestroyed()+",isFinishing()="+isFinishing() + mIsPausing);
-            if(isDestroyed() || isFinishing() || mIsPausing){
+            Log.d(TAG, "onKeyDown isRollbackStarted=" + isRollbackStarted);
+            Log.d(TAG, "onKeyDown isRollbackStarted=" + isDestroyed() + ",isFinishing()=" + isFinishing() + mIsPausing);
+            if (isDestroyed() || isFinishing() || mIsPausing) {
                 return super.onKeyDown(keyCode, event);
             }
-            if(!isRollbackStarted){
+            if (!isRollbackStarted) {
                 step(STEP_PRESS_HEADSET_KEY);
                 startMmiAudio();
                 isRollbackStarted = true;
@@ -253,19 +255,19 @@ public class HeadSetTest extends BaseActivity {
              **/
             new Thread() {
                 public void run() {
-                    if(mIsThirdPartHeadset){
-                       mAudioManager.setParameter("test_out_stream_route", "0x8");
-                    }else{
-                       mAudioManager.setParameter("test_out_stream_route", "0x4");
+                    if (mIsThirdPartHeadset) {
+                        mAudioManager.setParameter("test_out_stream_route", "0x8");
+                    } else {
+                        mAudioManager.setParameter("test_out_stream_route", "0x4");
                     }
-                    if(mIsThirdPartHeadset){
-                       mAudioManager.setParameter("test_in_stream_route",
-                            "0x80000004");
-                    }else{
-                       mAudioManager.setParameter("test_in_stream_route",
-                            "0x80000010");
+                    if (mIsThirdPartHeadset) {
+                        mAudioManager.setParameter("test_in_stream_route",
+                                "0x80000004");
+                    } else {
+                        mAudioManager.setParameter("test_in_stream_route",
+                                "0x80000010");
                     }
-                    mAudioManager.setParameter("dsp_delay","2000");
+                    mAudioManager.setParameter("dsp_delay", "2000");
                     mAudioManager.setParameter("dsploop_type", "1");
                     mAudioManager.setParameter("dsp_loop", "1");
                     mHandler.post(new Runnable() {
@@ -282,7 +284,7 @@ public class HeadSetTest extends BaseActivity {
     private void rollbackMmiAudio() {
         Log.i("HeadSetLoopBackTest",
                 "=== create thread to execute HeadSetLoopBackTest test command! ===");
-        if (!isWhaleSupport  && !mAudioWhaleHalFlag) {
+        if (!isWhaleSupport && !mAudioWhaleHalFlag) {
             new Thread() {
                 public void run() {
                     String result = IATUtils.sendATCmd(
