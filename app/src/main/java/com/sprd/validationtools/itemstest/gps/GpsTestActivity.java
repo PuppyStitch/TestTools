@@ -216,11 +216,6 @@ public class GpsTestActivity extends BaseActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        return ;
-    }
-
     private void showSatelliteCount() {
         int count = 0;
         boolean flag = false;
