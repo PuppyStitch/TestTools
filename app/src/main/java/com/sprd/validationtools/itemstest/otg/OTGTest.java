@@ -95,8 +95,9 @@ public class OTGTest extends BaseActivity {
                 && event.getY() > location[1]
                 && event.getX() < location[0] + rangView.getWidth()
                 && event.getY() < location[1] + rangView.getHeight()) {
-            storeRusult(true);
-            finish();
+            enablePassButton();
+//            storeRusult(true);
+//            finish();
         }
         return super.onGenericMotionEvent(event);
     }
@@ -123,6 +124,7 @@ public class OTGTest extends BaseActivity {
                 mounted[0] = 0;
                 Log.i(TAG, "=== OTG mount succeed ===");
                 usbMassStoragePath = otgPath;
+                enablePassButton();
                 getSize(otgPath);
             } else {
                 mounted[0] = 1;
@@ -161,7 +163,6 @@ public class OTGTest extends BaseActivity {
             availSize = availableBlocks * blockSize / 1024 / 1024;
             Log.d(TAG, "total size is = " + totalBlocks * blockSize / 1024 / 1024);
             Log.d(TAG, "avail size is = " + availableBlocks * blockSize / 1024 / 1024);
-            enablePassButton();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -236,8 +237,8 @@ public class OTGTest extends BaseActivity {
                             return;
                         }
                         /*@}*/
-                        storeRusult(false);
-                        finish();
+//                        storeRusult(false);
+//                        finish();
                     } else {
                         mHandler.sendEmptyMessageDelayed(UPDATE_TIME, 1000);
                     }

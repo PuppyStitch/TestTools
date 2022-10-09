@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/status"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:paddingLeft="10px"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
         </TableRow>
 
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/voltage"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
 
             <TextView
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:paddingLeft="10px"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
         </TableRow>
 
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/plugged"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
 
             <TextView
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:paddingLeft="10px"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
         </TableRow>
 
@@ -99,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/charger_Voltage"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
 
             <TextView
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:paddingLeft="10px"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
         </TableRow>
 
@@ -125,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/charger_electronic"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
 
             <TextView
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:paddingLeft="10px"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
         </TableRow>
 
@@ -152,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/battery_temperature"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
 
             <TextView
@@ -162,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:paddingLeft="10px"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
         </TableRow>
         <!-- @} -->
@@ -178,7 +178,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/battery_electronic"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
 
             <TextView
@@ -188,7 +188,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:paddingLeft="10px"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
         </TableRow>
         <!-- SPRD Bug 850012:Show battery type id in charger test. @{ -->
@@ -204,7 +204,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/battery_type_id"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
 
             <TextView
@@ -214,7 +214,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
         </TableRow>
         <!-- @} -->
@@ -231,7 +231,7 @@
                 android:text="@string/charging_test"
                 android:paddingLeft="10px"
                 android:visibility="gone"
-                android:textColor="#ffffff" >
+                android:textColor="#000000" >
             </TextView>
         </TableRow>
     </LinearLayout>

@@ -19,6 +19,13 @@
 		<item name="android:textStyle">bold</item>
 		<item name="android:textColor">#FFFFFF</item>
 	</style>
+
+    <style name="MyItemTextKeyStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ff000000</item>
+    </style>
+
 	<style name="itemTextValueStyle">
 		<item name="android:textSize">20sp</item>
 	</style>

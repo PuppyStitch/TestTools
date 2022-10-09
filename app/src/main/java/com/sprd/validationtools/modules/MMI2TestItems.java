@@ -41,11 +41,11 @@ public class MMI2TestItems {
 //            KeyTestActivity.class.getName(),                                            // 按键测试 todo need to modify
             RingtoneTestActivity.class.getName(),                                       // 铃声测试
             VibratorTestActivity.class.getName(),                                       // 震动测试
-            HeadSetTest.class.getName(),                                                // 耳机测试
+//            HeadSetTest.class.getName(),                                                // 耳机测试
             FlashTestActivity.class.getName(),                                          // todo:闪光灯
             OTGTest.class.getName(),                                                    // OTG测试
-            ChargerTest.class.getName(),                                                // 充电测试
-            SIMCardTestActivity.class.getName(),                                        // SIM卡测试
+//            ChargerTest.class.getName(),                                                // 充电测试
+//            SIMCardTestActivity.class.getName(),                                        // SIM卡测试
             WifiTestActivity.class.getName(),                                           // wifi测试
             BluetoothTestActivity.class.getName(),                                      // 蓝牙测试
             GpsTestActivity.class.getName(),                                            // GPS测试

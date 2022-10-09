@@ -22,12 +22,14 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.simcom.testtools.R;
 import com.sprd.validationtools.sqlite.EngSqlite;
 
 import java.lang.ref.WeakReference;
 
-public class BaseActivity extends Activity implements OnClickListener {
+public class BaseActivity extends AppCompatActivity implements OnClickListener {
     private static final String TAG = "BaseActivity";
     private String mTestname = null;
     private String mTestClassName = null;

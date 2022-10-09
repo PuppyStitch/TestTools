@@ -111,6 +111,8 @@ public class MyNFCTestActivity extends BaseActivity {
                             + "" + data , Toast.LENGTH_SHORT).show();
             storeRusult(isSuccess);
             enablePassButton();
+            isOk = true;
+            mHandler.post(runnable);
 //            finish();
         }
 

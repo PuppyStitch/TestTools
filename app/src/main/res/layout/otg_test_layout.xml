@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/status"
-            android:textColor="#ffffff" >
+            android:textColor="#000000" >
         </TextView>
 
         <TextView
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:paddingLeft="10px"
-            android:textColor="#ffffff" >
+            android:textColor="#000000" >
         </TextView>
     </TableRow>
 
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="已使用容量"
-            android:textColor="#ffffff" >
+            android:textColor="#000000" >
         </TextView>
 
         <TextView
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:paddingLeft="10px"
-            android:textColor="#ffffff" >
+            android:textColor="#000000" >
         </TextView>
     </TableRow>
 
@@ -108,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="剩余容量"
-            android:textColor="#ffffff" >
+            android:textColor="#000000" >
         </TextView>
 
         <TextView
@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:paddingLeft="10px"
-            android:textColor="#ffffff" >
+            android:textColor="#000000" >
         </TextView>
     </TableRow>
 
