@@ -434,7 +434,7 @@
     <string name="turn_on_lights">Turn On The Lights</string>
     <string name="turn_off_lights">Turn Off The Lights</string>
     <string name="battery_test">Battery Test</string>
-    <string name="my_nfc_test">My NFC Test</string>
+    <string name="my_nfc_test">NFC Test</string>
     <string name="icc_test">ICC Test</string>
     <string name="mcr_test">MCR Test</string>
 

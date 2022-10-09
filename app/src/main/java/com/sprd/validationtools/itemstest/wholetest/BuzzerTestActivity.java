@@ -47,8 +47,8 @@ public class BuzzerTestActivity extends BaseActivity {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
                     mp.setLooping(true);
-                    mp.setVolume(1.0f, 1.0f);
                     mp.start();
+                    mp.setVolume(1.0f, 1.0f);
                 }
             });
         } catch (Exception e) {

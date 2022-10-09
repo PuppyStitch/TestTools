@@ -43,7 +43,6 @@ public class VirtualLedTestActivity extends BaseActivity {
         barcodeLayout.addView(mStartButton);
         barcodeLayout.addView(mStopButton);
         setContentView(barcodeLayout);
-        setTitle("VirtualLedTestActivity");
         mStartButton.setText(getResources().getText(R.string.turn_on_lights));
         mStartButton.setOnClickListener(view -> start());
         mStopButton.setText(getResources().getText(R.string.turn_off_lights));

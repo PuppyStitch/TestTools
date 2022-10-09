@@ -61,7 +61,6 @@ public class ICCardTestActivity extends BaseActivity {
         mStartButton.setTextSize(35);
         barcodeLayout.addView(mStartButton);
         setContentView(barcodeLayout);
-        setTitle("MyNFCTestActivity");
         mStartButton.setText(getResources().getText(R.string.color_temperature_start));
         mStartButton.setOnClickListener(view -> start());
         mContext = this;
@@ -106,7 +105,7 @@ public class ICCardTestActivity extends BaseActivity {
                     " " + data, Toast.LENGTH_SHORT).show();
             storeRusult(isSuccess);
             enablePassButton();
-//            finish();
+            finish();
         }
 
         @Override
