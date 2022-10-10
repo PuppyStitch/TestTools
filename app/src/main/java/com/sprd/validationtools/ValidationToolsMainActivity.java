@@ -315,8 +315,10 @@ public class ValidationToolsMainActivity extends Activity implements
                 ArrayList<TestItem> list = null;
                 if (Const.TEST_VALUE == Const.MMI2_VALUE) {
                     mAutoTestArray = AutoTestItemList.getInstance(this).getMMI2ItemList();
-                } else {
+                } else if (Const.TEST_VALUE == Const.MMI1_VALUE) {
                     mAutoTestArray = AutoTestItemList.getInstance(this).getTestItemList();
+                } else {
+                    mAutoTestArray = AutoTestItemList.getInstance(this).getSMTItemList();
                 }
 //                mAutoTestArray = AutoTestItemList.getInstance(this).getTestItemList();
                 mAutoTestCur = 0;

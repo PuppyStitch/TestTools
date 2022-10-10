@@ -56,8 +56,8 @@ public class MMI2TestItems {
             BuzzerTestActivity.class.getName(),                                         // 蜂鸣器测试
             PrintTestActivity.class.getName(),                                          // todo:打印机     ok
             CameraTestActivity.class.getName(),                                         // 后相机测试
-//            QRCodeTestActivity.class.getName(),                                         // todo:二维码     ok
-//            BarcodeTestActivity.class.getName(),                                        // todo:一维码     ok
+            QRCodeTestActivity.class.getName(),                                         // todo:二维码     ok
+            BarcodeTestActivity.class.getName(),                                        // todo:一维码     ok
             PsensorTestActivity.class.getName(),                                        // 距离和光传感器测试
             TimerTestActivity.class.getName(),                                          // RTC时钟测试
             PosIDTestActivity.class.getName(),                                          // todo:SP版本测试

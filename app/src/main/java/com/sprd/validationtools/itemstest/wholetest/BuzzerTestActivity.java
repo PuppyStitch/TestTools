@@ -29,7 +29,7 @@ public class BuzzerTestActivity extends BaseActivity {
                 storeRusult(false);
             }
             mHandler.removeCallbacks(runnable);
-            finish();
+//            finish();
         }
     };
 

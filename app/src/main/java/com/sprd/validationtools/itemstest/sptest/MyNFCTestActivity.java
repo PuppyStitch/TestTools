@@ -60,7 +60,6 @@ public class MyNFCTestActivity extends BaseActivity {
         mStartButton.setTextSize(35);
         barcodeLayout.addView(mStartButton);
         setContentView(barcodeLayout);
-        setTitle("MyNFCTestActivity");
         mStartButton.setText(getResources().getText(R.string.color_temperature_start));
         mStartButton.setOnClickListener(view -> start());
         disablePassButton();

@@ -229,8 +229,8 @@ public class OTGTest extends BaseActivity {
 //                    mCountDownView.setText(time + "");
                     if (time == 0) {
                         Log.d(TAG, "time out");
-                        Toast.makeText(OTGTest.this, R.string.text_fail,
-                                Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(OTGTest.this, R.string.text_fail,
+//                                Toast.LENGTH_SHORT).show();
                         /*SPRD bug 760913:Test can pass/fail must click button*/
                         if (Const.isBoardISharkL210c10()) {
                             Log.d("", "isBoardISharkL210c10 is return!");

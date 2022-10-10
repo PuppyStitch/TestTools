@@ -62,9 +62,12 @@ public class ListItemTestActivity extends Activity {
         if (Const.TEST_VALUE == Const.MMI2_VALUE) {
             list = UnitTestItemList.getInstance(
                     ListItemTestActivity.this).getMMI2ItemList();
-        } else {
+        } else if (Const.TEST_VALUE == Const.MMI1_VALUE) {
             list = UnitTestItemList.getInstance(
                     ListItemTestActivity.this).getTestItemList();
+        } else {
+            list = UnitTestItemList.getInstance(
+                    ListItemTestActivity.this).getSMTItemList();
         }
 
         mItemsListView.addAll(list);

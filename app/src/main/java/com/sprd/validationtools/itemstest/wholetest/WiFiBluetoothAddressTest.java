@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +13,10 @@ import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
 import com.sprd.validationtools.utils.BtTestUtil;
 import com.sprd.validationtools.utils.WifiTestUtil;
+
+import java.net.NetworkInterface;
+import java.util.Collections;
+import java.util.List;
 
 public class WiFiBluetoothAddressTest extends BaseActivity {
 
@@ -52,14 +57,16 @@ public class WiFiBluetoothAddressTest extends BaseActivity {
         tvWifiAddr = (TextView) findViewById(R.id.wifi_addr_content);
         tvBtAddr = (TextView) findViewById(R.id.bt_addr_content);
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        disablePassButton();
-        init();
+        wifiTestUtil = new WifiTestUtil(mWifiManager);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        wifiTestUtil.startTest(this);
+        init();
         btTestUtil.startTest(this);
+        disablePassButton();
         mHandler.postDelayed(runnable, TIMEOUT);
     }
 
@@ -67,6 +74,36 @@ public class WiFiBluetoothAddressTest extends BaseActivity {
     protected void onPause() {
         super.onPause();
         btTestUtil.stopTest();
+        wifiTestUtil.stopTest();
+    }
+
+    private static String getMacFromHardware() {
+        //LogUtils.logD(TAG, "获取WifiMac地址===》getMacFromHardware方法 当前系统版本==》" + Build.VERSION.SDK_INT);
+        try {
+            List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface nif : all) {
+                if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
+
+                byte[] macBytes = nif.getHardwareAddress();
+                if (macBytes == null) {
+                    return null;
+                }
+
+                StringBuilder res1 = new StringBuilder();
+                for (byte b : macBytes) {
+                    res1.append(String.format("%02X:", b));
+                }
+
+                if (res1.length() > 0) {
+                    res1.deleteCharAt(res1.length() - 1);
+                }
+                Log.i(TAG, res1.toString());
+                return res1.toString();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     private void init() {
@@ -107,8 +144,8 @@ public class WiFiBluetoothAddressTest extends BaseActivity {
         };
 
 
-        wifiTestUtil = new WifiTestUtil(mWifiManager);
-        WifiAddressString = wifiTestUtil.getWifiManager().getConnectionInfo().getMacAddress();
+//        WifiAddressString = wifiTestUtil.getWifiManager().getConnectionInfo().getMacAddress();
+        WifiAddressString = getMacFromHardware();
         tvWifiAddr.setText(WifiAddressString);
         if (WifiAddressString.length() > 4) {
             WifiAddressString = WifiAddressString.substring(0, 5);

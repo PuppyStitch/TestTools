@@ -14,12 +14,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/wifi_addr"
+        android:visibility="gone"
         android:textSize="17dip" />
 
     <TextView
         android:id="@+id/wifi_addr_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:textSize="17dip" />
 
     <TextView
