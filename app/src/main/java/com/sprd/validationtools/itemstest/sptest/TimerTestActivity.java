@@ -35,7 +35,7 @@ public class TimerTestActivity extends BaseActivity {
     final int MSG_UPDATE_TIMER = 2;
 
     public Handler mHandler = new Handler();
-    private static final int TIMEOUT = 16000;
+    private static final int TIMEOUT = 10000;
     private boolean isOk = true;
     private Runnable runnable = new Runnable() {
         public void run() {

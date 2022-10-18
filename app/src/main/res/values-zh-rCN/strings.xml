@@ -54,12 +54,12 @@
     <string name="full_test_title">自动测试</string>
     <string name="test_result_title">测试结果</string>
     <string name="camera_cali_verify">相机标定验证</string>
-    <string name="version_test">系统版本测试</string>
+    <string name="version_test">AP版本测试</string>
     <string name="rf_cali_test">RF CALI测试</string>
     <string name="rtc_test">RTC测试</string>
     <string name="lcd_test">LCD测试</string>
     <string name="rtc_test_info">RTC测试是否通过？</string>
-    <string name="backlight_test">背景光测试</string>
+    <string name="backlight_test">背光测试</string>
     <string name="backlight_des">是否看见背光和按键灯连续闪烁两次？</string>
     <string name="touchpoint_test">单点触摸测试</string>
     <string name="touchpoint_info">请画线连接对角线上的点</string>
@@ -70,7 +70,7 @@
     <string name="muti_touchpoint_info">请通过两点触摸同时移动两个小球</string>
     <string name="ctp_test">CTP测试</string>
     <string name="vibrator_test">铃声马达测试</string>
-    <string name="melody_test">手机铃声测试</string>
+    <string name="melody_test">喇叭测试</string>
     <string name="melody_play_info">是否播放铃声并震动?</string>
     <string name="phone_loopback_test">语音回环测试</string>
     <string name="phone_loopback_test_notice">请对着麦克说点什么</string>
@@ -83,8 +83,8 @@
     <string name="phone_call_info">电话是否正常打出并挂断？</string>
     <string name="sdcard_test">SD卡测试</string>
     <string name="no_sdcard">SD卡未插入</string>
-    <string name="charger_test">充电器测试</string>
-    <string name="headset_test">耳机测试</string>
+    <string name="charger_test">充电测试</string>
+    <string name="headset_test">耳机</string>
     <string name="fm_test">收音机测试</string>
     <string name="atv_test">ATV测试</string>
     <string name="wifi_test">WIFI测试</string>
@@ -93,12 +93,12 @@
     <string name="btut_test">BTEUT测试</string>
     <string name="gravity_sensor_test">重力传感器测试</string>
     <string name="oritention_sensor_test">罗盘测试</string>
-    <string name="p_sensor_test">光传感器测试</string>
+    <string name="p_sensor_test">光感测试</string>
     <string name="camera_test">照相机测试</string>
     <string name="key_test">按键测试</string>
     <string name="key_test_info">是否与所按的键符合？</string>
     <string name="front_camera_title_text">前相机测试</string>
-    <string name="back_camera_title_text">后相机测试</string>
+    <string name="back_camera_title_text">拍照测试</string>
     <string name="camera_failue">相机测试失败！</string>
     <string name="camera_pass">相机测试成功！</string>
     <string name="take_picture">获取图片</string>
@@ -369,7 +369,7 @@
 
     <string name="barcode_test">一维码测试</string>
     <string name="qrcode_test">二维码测试</string>
-    <string name="print_test">打印测试</string>
+    <string name="print_test">打印机测试</string>
     <string name="buzzer_test">蜂鸣器测试</string>
     <string name="turn_on_lights">亮灯</string>
     <string name="turn_off_lights">灭灯</string>
@@ -380,14 +380,17 @@
     <string name="mcr_test">磁卡测试</string>
 
     <string name="flash_light_test">闪光灯测试</string>
-    <string name="timer_test">时钟模块测试</string>
-    <string name="virtual_led_test">虚拟LED灯测试</string>
-    <string name="pos_id">POS ID测试</string>
-    <string name="ringtone_test">铃声测试</string>
-    <string name="my_vibrator_test">震动测试</string>
-    <string name="screen_print_test">屏幕触摸测试</string>
-    <string name="pos_sensor_test">POS Sensor防拆测试</string>
-    <string name="sp_version">SP版本</string>
-    <string name="wifi_bluetooth_address">wifi和蓝牙地址</string>
+    <string name="timer_test">RTC时钟测试</string>
+    <string name="virtual_led_test">LED灯及蜂鸣器</string>
+    <string name="pos_id">POS TP识别测试</string>
+    <string name="ringtone_test">喇叭</string>
+    <string name="my_vibrator_test">马达</string>
+    <string name="screen_print_test">触摸屏测试</string>
+    <string name="pos_sensor_test">POS Sensor测试</string>
+    <string name="sp_version">SP版本测试</string>
+    <string name="wifi_bluetooth_address">蓝牙和WIFI地址</string>
+
+    <string name="mouse_moving">鼠标正在移动</string>
+    <string name="begin_testing">开始测试</string>
 
 </resources>

@@ -60,6 +60,8 @@ public class OTGTest extends BaseActivity {
 
     private boolean isMousePass = false;
     private boolean isUsbStoragePass = false;
+    Thread vtThread;
+    boolean shouldNotChange = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,9 @@ public class OTGTest extends BaseActivity {
                 && event.getX() < location[0] + rangView.getWidth()
                 && event.getY() < location[1] + rangView.getHeight()) {
             enablePassButton();
+//            vtThread.interrupt();
+            shouldNotChange = true;
+            statusTextView.setText(getResources().getText(R.string.otg_test_success));
 //            storeRusult(true);
 //            finish();
         }
@@ -124,7 +129,6 @@ public class OTGTest extends BaseActivity {
                 mounted[0] = 0;
                 Log.i(TAG, "=== OTG mount succeed ===");
                 usbMassStoragePath = otgPath;
-                enablePassButton();
                 getSize(otgPath);
             } else {
                 mounted[0] = 1;
@@ -254,6 +258,7 @@ public class OTGTest extends BaseActivity {
             Log.i(TAG, "=== display OTG test succeed info! ===");
             if (mounted[0] == 0) {
                 if (result[0] == 0) {
+                    enablePassButton();
                     statusTextView.setText(getResources().getText(R.string.otg_test_success));
                     availTextView.setText(availSize + " MB");
                     totalTextView.setText(totalSize + " MB");
@@ -266,7 +271,9 @@ public class OTGTest extends BaseActivity {
                     /*@}*/
                     storeRusult(true);
                 } else {
-                    statusTextView.setText(getResources().getText(R.string.otg_test_fail));
+                    if (!shouldNotChange) {
+                        statusTextView.setText(getResources().getText(R.string.otg_test_fail));
+                    }
                     /*SPRD bug 760913:Test can pass/fail must click button*/
                     if (Const.isBoardISharkL210c10()) {
                         Log.d("", "isBoardISharkL210c10 is return!");
@@ -277,7 +284,9 @@ public class OTGTest extends BaseActivity {
                     finish();
                 }
             } else {
-                statusTextView.setText(getResources().getText(R.string.otg_test_fail));
+                if (!shouldNotChange) {
+                    statusTextView.setText(getResources().getText(R.string.otg_test_fail));
+                }
                 /*SPRD bug 760913:Test can pass/fail must click button*/
                 if (Const.isBoardISharkL210c10()) {
                     Log.d("", "isBoardISharkL210c10 is return!");
@@ -295,7 +304,9 @@ public class OTGTest extends BaseActivity {
             Log.i(TAG, "=== checkOTGdevices! ===");
             checkOTGDevices();
             if (mounted[0] != 0) {
-                statusTextView.setText(getResources().getText(R.string.otg_no_devices));
+                if (!shouldNotChange) {
+                    statusTextView.setText(getResources().getText(R.string.otg_no_devices));
+                }
                 mHandler.postDelayed(mCheckRunnable, 1000);
             } else {
                 startVtThread();
@@ -334,50 +345,51 @@ public class OTGTest extends BaseActivity {
             result[0] = 0;
             mHandler.post(mRunnable);
         } else {
-            Thread vtThread = new Thread() {
-                public void run() {
-                    FileInputStream in = null;
-                    FileOutputStream out = null;
-                    try {
-                        if (mounted[0] == 0) {
-                            File fp = new File(usbMassStoragePath, SPRD_OTG_TESTFILE);
-                            if (fp.exists())
-                                fp.delete();
-                            fp.createNewFile();
-                            out = new FileOutputStream(fp);
-                            mOTGTestFlag[0] = '7';
-                            out.write(mOTGTestFlag, 0, 1);
-                            out.close();
-                            in = new FileInputStream(fp);
-                            in.read(mOTGTestFlag, 0, 1);
-                            in.close();
-                            if (mOTGTestFlag[0] == '7') {
-                                result[0] = 0;
-                            } else {
-                                result[0] = 1;
-                            }
-                        }
-                        //mHandler.post(mRunnable);
-                        mHandler.postDelayed(mRunnable, 2000);
-                    } catch (IOException e) {
-                        Log.i(TAG, "=== error: Exception happens when OTG I/O! ===");
-                        e.printStackTrace();
-                    } finally {
-                        try {
-                            if (out != null) {
-                                out.close();
-                                out = null;
-                            }
-                            if (in != null) {
-                                in.close();
-                                in = null;
-                            }
-                        } catch (IOException io) {
-                            Log.e(TAG, "close in/out err");
+            if (vtThread != null) {
+                return;
+            }
+            vtThread = new Thread(() -> {
+                FileInputStream in = null;
+                FileOutputStream out = null;
+                try {
+                    if (mounted[0] == 0) {
+                        File fp = new File(usbMassStoragePath, SPRD_OTG_TESTFILE);
+                        if (fp.exists())
+                            fp.delete();
+                        fp.createNewFile();
+                        out = new FileOutputStream(fp);
+                        mOTGTestFlag[0] = '7';
+                        out.write(mOTGTestFlag, 0, 1);
+                        out.close();
+                        in = new FileInputStream(fp);
+                        in.read(mOTGTestFlag, 0, 1);
+                        in.close();
+                        if (mOTGTestFlag[0] == '7') {
+                            result[0] = 0;
+                        } else {
+                            result[0] = 1;
                         }
                     }
+                    //mHandler.post(mRunnable);
+                    mHandler.postDelayed(mRunnable, 2000);
+                } catch (IOException e) {
+                    Log.i(TAG, "=== error: Exception happens when OTG I/O! ===");
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (out != null) {
+                            out.close();
+                            out = null;
+                        }
+                        if (in != null) {
+                            in.close();
+                            in = null;
+                        }
+                    } catch (IOException io) {
+                        Log.e(TAG, "close in/out err");
+                    }
                 }
-            };
+            });
             vtThread.start();
         }
         /* @} */

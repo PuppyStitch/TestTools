@@ -53,7 +53,7 @@ public class MMI2TestItems {
             ICCardTestActivity.class.getName(),                                         // todo:IC卡测试   ok
             MCRTestActivity.class.getName(),                                            // todo:磁卡测试    ok
             VirtualLedTestActivity.class.getName(),                                     // todo:LED灯及蜂鸣器    ok
-            BuzzerTestActivity.class.getName(),                                         // 蜂鸣器测试
+//            BuzzerTestActivity.class.getName(),                                         // 蜂鸣器测试
             PrintTestActivity.class.getName(),                                          // todo:打印机     ok
             CameraTestActivity.class.getName(),                                         // 后相机测试
             QRCodeTestActivity.class.getName(),                                         // todo:二维码     ok

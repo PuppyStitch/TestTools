@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.simcom.testtools.R;
+import com.sprd.validationtools.sqlite.EngSqlite;
 
 public class ChoseTestModeActivity extends AppCompatActivity {
 
@@ -28,12 +29,14 @@ public class ChoseTestModeActivity extends AppCompatActivity {
     public void SMT(View view) {
         mIntent.putExtra(Const.KEY, Const.SMT_VALUE);
         Const.TEST_VALUE = Const.SMT_VALUE;
+        EngSqlite.getInstance(this).setCurrentTable(EngSqlite.ENG_SMT_TABLE);
         start();
     }
 
     public void MM1(View view) {
         mIntent.putExtra(Const.KEY, Const.MMI1_VALUE);
         Const.TEST_VALUE = Const.MMI1_VALUE;
+        EngSqlite.getInstance(this).setCurrentTable(EngSqlite.ENG_STRING2INT_TABLE);
         start();
     }
 
@@ -44,6 +47,7 @@ public class ChoseTestModeActivity extends AppCompatActivity {
     public void MM2(View view) {
         mIntent.putExtra(Const.KEY, Const.MMI2_VALUE);
         Const.TEST_VALUE = Const.MMI2_VALUE;
+        EngSqlite.getInstance(this).setCurrentTable(EngSqlite.ENG_MMI2_TABLE);
         start();
     }
 

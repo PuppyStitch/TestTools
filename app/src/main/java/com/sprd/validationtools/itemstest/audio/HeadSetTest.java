@@ -88,6 +88,7 @@ public class HeadSetTest extends BaseActivity {
                 if (!isRollbackStarted) {
                     step(STEP_PRESS_HEADSET_KEY);
                     startMmiAudio();
+                    enablePassButton();
                     isRollbackStarted = true;
                 }
             }
@@ -134,6 +135,7 @@ public class HeadSetTest extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        disablePassButton();
         mIsPausing = false;
         Log.d(TAG, "onResume isRollbackStarted=" + isRollbackStarted);
         if (isRollbackStarted) {
@@ -166,6 +168,7 @@ public class HeadSetTest extends BaseActivity {
             if (!isRollbackStarted) {
                 step(STEP_PRESS_HEADSET_KEY);
                 startMmiAudio();
+                enablePassButton();
                 isRollbackStarted = true;
                 mEarKey.setPressed(true);
             }

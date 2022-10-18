@@ -39,9 +39,20 @@ public class TestResultActivity extends Activity {
         mContext = this;
         mEngSqlite = EngSqlite.getInstance(mContext);
         ListView listView = (ListView) findViewById(R.id.listview_layout);
+        // go to change
+        ArrayList<TestItem> list;
+        if (Const.TEST_VALUE == Const.MMI1_VALUE) {
+            list = UnitTestItemList.getInstance(
+                    mContext).getTestItemList();
+        } else if (Const.TEST_VALUE == Const.MMI2_VALUE) {
+            list = UnitTestItemList.getInstance(
+                    mContext).getMMI2ItemList();
+        } else {
+            list = UnitTestItemList.getInstance(
+                    mContext).getSMTItemList();
+        }
         ListAdapter listAdapter = new ListAdapter(mContext,
-                mEngSqlite.queryData(UnitTestItemList.getInstance(
-                        TestResultActivity.this).getTestItemList()));
+                mEngSqlite.queryData(list));
         listView.setAdapter(listAdapter);
         mTestResultView = (TextView) findViewById(R.id.test_result_text);
         final long time = getIntent().getLongExtra("start_time", 0);

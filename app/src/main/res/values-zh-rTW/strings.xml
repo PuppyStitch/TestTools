@@ -288,4 +288,6 @@
     <string name="sp_version">SP版本</string>
     <string name="wifi_bluetooth_address">wifi和藍牙地址</string>
 
+    <string name="mouse_moving">鼠標正在移動</string>
+    <string name="begin_testing">开始测试</string>
 </resources>

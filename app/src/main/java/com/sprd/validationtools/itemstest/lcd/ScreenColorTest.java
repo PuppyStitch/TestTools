@@ -35,7 +35,7 @@ public class ScreenColorTest extends BaseActivity implements OnClickListener {
     private Runnable mRunnable;
 
     private static final int[] COLOR_ARRAY = new int[] {
-            Color.WHITE, Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW
+            Color.RED, Color.GREEN, Color.BLUE, Color.WHITE
     };
 
     @Override

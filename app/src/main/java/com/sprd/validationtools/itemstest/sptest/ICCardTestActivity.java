@@ -1,21 +1,17 @@
 package com.sprd.validationtools.itemstest.sptest;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.Gravity;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.dspread.xpos.CQPOSService;
 import com.dspread.xpos.QPOSService;
 import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
-import com.sprd.validationtools.itemstest.wholetest.PrintTestActivity;
 
 import java.util.Hashtable;
 
@@ -31,17 +27,17 @@ public class ICCardTestActivity extends BaseActivity {
     public Handler mHandler = new Handler();
     private static final int TIMEOUT = 8000;
     private boolean isOk = false;
+    int count = 0;
     private Runnable runnable = new Runnable() {
         public void run() {
             if (isOk) {
                 Toast.makeText(ICCardTestActivity.this, R.string.text_pass,
                         Toast.LENGTH_SHORT).show();
-                storeRusult(true);
             } else {
                 Toast.makeText(ICCardTestActivity.this, R.string.text_fail,
                         Toast.LENGTH_SHORT).show();
-                storeRusult(false);
             }
+            storeRusult(isOk);
             mHandler.removeCallbacks(runnable);
             finish();
         }
@@ -50,17 +46,10 @@ public class ICCardTestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        count = 0;
         open(QPOSService.CommunicationMode.UART);
-        LinearLayout barcodeLayout = new LinearLayout(this);
-        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT);
-        barcodeLayout.setLayoutParams(params);
-        barcodeLayout.setOrientation(LinearLayout.VERTICAL);
-        barcodeLayout.setGravity(Gravity.CENTER);
-        mStartButton = new Button(this);
-        mStartButton.setTextSize(35);
-        barcodeLayout.addView(mStartButton);
-        setContentView(barcodeLayout);
+        setContentView(R.layout.activity_nfc_test_layout);
+        mStartButton = findViewById(R.id.btn_start);
         mStartButton.setText(getResources().getText(R.string.color_temperature_start));
         mStartButton.setOnClickListener(view -> start());
         mContext = this;
@@ -68,14 +57,26 @@ public class ICCardTestActivity extends BaseActivity {
     }
 
     private void start() {
-        qposService.testPosFunctionCommand(3000, QPOSService.TestCommand.ICC_TEST);
+        qposService.testPosFunctionCommand(8, QPOSService.TestCommand.ICC_TEST);
+        mStartButton.setEnabled(false);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         mHandler.removeCallbacks(runnable);
         qposService.closeUart();
+        Log.i(TAG, "onDestroy closeUart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     private void open(QPOSService.CommunicationMode mode) {
@@ -93,6 +94,8 @@ public class ICCardTestActivity extends BaseActivity {
         //通过handler处理，监听MyPosListener，实现QposService的接口，（回调接口）
         Handler handler = new Handler(Looper.myLooper());
         qposService.initListener(handler, listener);
+        qposService.setDeviceAddress("/dev/ttyS1");
+        qposService.openUart();
     }
 
     class MyPosListener extends CQPOSService {
@@ -100,12 +103,14 @@ public class ICCardTestActivity extends BaseActivity {
         public void onQposTestCommandResult(boolean isSuccess, String data) {
             super.onQposTestCommandResult(isSuccess, data);
             Log.i(TAG, "isSuccess " + isSuccess + " " + data);
-            isOk = true;
-            Toast.makeText(ICCardTestActivity.this, mContext.getText(R.string.text_pass) +
-                    " " + data, Toast.LENGTH_SHORT).show();
-            storeRusult(isSuccess);
-            enablePassButton();
-            finish();
+            isOk = isSuccess;
+            if (count < 3 && !isSuccess) {
+                qposService.testPosFunctionCommand(8, QPOSService.TestCommand.ICC_TEST);
+                count++;
+                return;
+            }
+//            mStartButton.setEnabled(true);
+            mHandler.post(runnable);
         }
 
         @Override
@@ -116,7 +121,7 @@ public class ICCardTestActivity extends BaseActivity {
         @Override
         public void onError(QPOSService.Error errorState) {
             super.onError(errorState);
-            Log.i(TAG,"Error "+ errorState.name());
+            Log.i(TAG, "Error " + errorState.name());
             isOk = false;
             storeRusult(false);
         }

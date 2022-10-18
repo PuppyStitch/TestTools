@@ -29,6 +29,38 @@ public class SIMCardTestActivity extends BaseActivity {
     public Handler mHandler = new Handler();
     private int TIME_OUT = 10000;
 
+    Runnable runnable1 = new Runnable() {
+        @Override
+        public void run() {
+            Toast.makeText(SIMCardTestActivity.this,
+                    R.string.text_pass, Toast.LENGTH_SHORT).show();
+            /*SPRD bug 760913:Test can pass/fail must click button*/
+            if (Const.isBoardISharkL210c10()) {
+                Log.d("", "isBoardISharkL210c10 is return!");
+                mPassButton.setVisibility(View.VISIBLE);
+                return;
+            }
+            /*@}*/
+            SIMCardTestActivity.this.storeRusult(true);
+            SIMCardTestActivity.this.finish();
+        }
+    };
+
+    Runnable runnable2 = new Runnable() {
+        @Override
+        public void run() {
+            Toast.makeText(SIMCardTestActivity.this, R.string.text_fail, Toast.LENGTH_SHORT).show();
+            /*SPRD bug 760913:Test can pass/fail must click button*/
+            if (Const.isBoardISharkL210c10()) {
+                Log.d("", "isBoardISharkL210c10 is return!");
+                return;
+            }
+            /*@}*/
+            storeRusult(false);
+            finish();
+        }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,49 +72,31 @@ public class SIMCardTestActivity extends BaseActivity {
         phoneCount = TelephonyManager.from(SIMCardTestActivity.this).getPhoneCount() > 0 ? 1 : 0;
         showDevice();
         /*SPRD bug 760913:Test can pass/fail must click button*/
-        if(Const.isBoardISharkL210c10()){
+        if (Const.isBoardISharkL210c10()) {
             mPassButton.setVisibility(View.GONE);
         }
         /*@}*/
 //        int phoneCount = TelephonyManager.from(SIMCardTestActivity.this).getPhoneCount();
-        Log.d(TAG, "onCreate phoneCount="+phoneCount+",mSimReadyCount="+mSimReadyCount);
+        Log.d(TAG, "onCreate phoneCount=" + phoneCount + ",mSimReadyCount=" + mSimReadyCount);
         if (phoneCount == mSimReadyCount) {
-            mHandler.postDelayed(() -> {
-                Toast.makeText(SIMCardTestActivity.this,
-                        R.string.text_pass, Toast.LENGTH_SHORT).show();
-                /*SPRD bug 760913:Test can pass/fail must click button*/
-                if(Const.isBoardISharkL210c10()){
-                    Log.d("", "isBoardISharkL210c10 is return!");
-                    mPassButton.setVisibility(View.VISIBLE);
-                    return;
-                }
-                /*@}*/
-                storeRusult(true);
-                finish();
-            }, TIME_OUT);
-        }else {
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(SIMCardTestActivity.this, R.string.text_fail, Toast.LENGTH_SHORT).show();
-                    /*SPRD bug 760913:Test can pass/fail must click button*/
-                    if(Const.isBoardISharkL210c10()){
-                        Log.d("", "isBoardISharkL210c10 is return!");
-                        return;
-                    }
-                    /*@}*/
-                    storeRusult(false);
-                    finish();
-                }
-            }, TIME_OUT);
+            mHandler.postDelayed(runnable1, TIME_OUT);
+        } else {
+            mHandler.postDelayed(runnable2, TIME_OUT);
         }
         /*SPRD bug 760913:Test can pass/fail must click button*/
-        if(Const.isBoardISharkL210c10()){
+        if (Const.isBoardISharkL210c10()) {
             //ignore
-        }else{
+        } else {
             super.removeButton();
         }
         /*@}*/
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacks(runnable1);
+        mHandler.removeCallbacks(runnable2);
     }
 
     private List<String> getResultList(int simId) {
@@ -95,7 +109,7 @@ public class SIMCardTestActivity extends BaseActivity {
             }
         }
         int mSubIds[] = SubscriptionManager.getSubId(simId);
-        if(mSubIds == null || mSubIds.length <= 0) return null;
+        if (mSubIds == null || mSubIds.length <= 0) return null;
         int mSubId = mSubIds[0];
         /* SPRD:436223 Sim test wrong in sigle sim in the phone@{*/
         if (telMgr.getSimState(simId) == TelephonyManager.SIM_STATE_READY) {

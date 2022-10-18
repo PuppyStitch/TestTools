@@ -20,15 +20,19 @@ public class EngSqlite {
     private Context mContext;
     private SQLiteDatabase mSqLiteDatabase = null;
 
-//    public static final String ENG_ENGTEST_DB = Const.PRODUCTINFO_DIR
+    //    public static final String ENG_ENGTEST_DB = Const.PRODUCTINFO_DIR
 //            + "/mmitest.db";
     public static final String ENG_ENGTEST_DB = "test.db";
     public static final String ENG_STRING2INT_TABLE = "str2int";
+    public static final String ENG_MMI2_TABLE = "mmi2";
+    public static final String ENG_SMT_TABLE = "smt";
     public static final String ENG_STRING2INT_NAME = "name";
     public static final String ENG_STRING2INT_DISPLAYNAME = "displayname";
     public static final String ENG_STRING2INT_VALUE = "value";
     public static final String ENG_GROUPID_VALUE = "groupid";
     public static final int ENG_ENGTEST_VERSION = 1;
+
+    public static String currentTable = ENG_STRING2INT_TABLE;
 
     private static EngSqlite mEngSqlite;
 
@@ -57,6 +61,14 @@ public class EngSqlite {
         }
     }
 
+    public void setCurrentTable(String table) {
+        currentTable = table;
+    }
+
+    public String getCurrentTable() {
+        return currentTable;
+    }
+
     public ArrayList<TestItem> queryData(ArrayList<TestItem> queryListitem) {
         ArrayList<TestItem> resultListItem = queryListitem;
         for (int i = 0; i < resultListItem.size(); i++) {
@@ -72,7 +84,7 @@ public class EngSqlite {
             return Const.DEFAULT;
         }
 
-        Cursor cursor = mSqLiteDatabase.query(ENG_STRING2INT_TABLE,
+        Cursor cursor = mSqLiteDatabase.query(currentTable,
                 new String[] { "value" }, "name=" + "\'" + name + "\'", null,
                 null, null, null);
         Log.d(TAG, "name=" + name);
@@ -117,7 +129,7 @@ public class EngSqlite {
         cv.put(ENG_STRING2INT_VALUE, value);
         mSqLiteDatabase.beginTransactionNonExclusive();
         try {
-            mSqLiteDatabase.update(ENG_STRING2INT_TABLE, cv,
+            mSqLiteDatabase.update(currentTable, cv,
                     ENG_STRING2INT_NAME + "= \'" + name + "\'", null);
             mSqLiteDatabase.setTransactionSuccessful();
         } catch (NullPointerException | IllegalStateException e) {
@@ -145,7 +157,7 @@ public class EngSqlite {
         }
 
         try {
-            Cursor c = mSqLiteDatabase.query(ENG_STRING2INT_TABLE,
+            Cursor c = mSqLiteDatabase.query(currentTable,
                     new String[] { ENG_STRING2INT_NAME, ENG_STRING2INT_VALUE },
                     ENG_STRING2INT_NAME + "= \'" + name + "\'", null, null,
                     null, null);
@@ -173,7 +185,7 @@ public class EngSqlite {
             return;
         }
 
-        long returnValue = mSqLiteDatabase.insert(ENG_STRING2INT_TABLE, null, cv);
+        long returnValue = mSqLiteDatabase.insert(currentTable, null, cv);
         Log.e(TAG, "returnValue" + returnValue);
         if (returnValue == -1) {
             Log.e(TAG, "insert DB error!");
@@ -184,8 +196,8 @@ public class EngSqlite {
         int bln = 0;
         if (mSqLiteDatabase == null)
             return bln;
-        Cursor cur = mSqLiteDatabase.query(ENG_STRING2INT_TABLE, new String[] {
-                "name", "value" }, "value=?", new String[] { "2" }, null, null,
+        Cursor cur = mSqLiteDatabase.query(currentTable, new String[] {
+                        "name", "value" }, "value=?", new String[] { "2" }, null, null,
                 null);
         if (cur != null) {
             bln = cur.getCount();
@@ -198,8 +210,8 @@ public class EngSqlite {
         int bln = 0;
         if (mSqLiteDatabase == null)
             return bln;
-        Cursor cur = mSqLiteDatabase.query(ENG_STRING2INT_TABLE, new String[] {
-                "name", "value" }, "value!=?", new String[] { "1" }, null,
+        Cursor cur = mSqLiteDatabase.query(currentTable, new String[] {
+                        "name", "value" }, "value!=?", new String[] { "1" }, null,
                 null, null);
         if (cur != null) {
             bln = cur.getCount();
@@ -210,8 +222,20 @@ public class EngSqlite {
 
     public int querySystemFailCount() {
         ArrayList<TestItem> supportList = new ArrayList<TestItem>();
-        supportList.addAll(UnitTestItemList.getInstance(mContext)
-                .getTestItemList());
+
+        ArrayList<TestItem> list;
+        if (Const.TEST_VALUE == Const.MMI1_VALUE) {
+            list = UnitTestItemList.getInstance(
+                    mContext).getTestItemList();
+        } else if (Const.TEST_VALUE == Const.MMI2_VALUE) {
+            list = UnitTestItemList.getInstance(
+                    mContext).getMMI2ItemList();
+        } else {
+            list = UnitTestItemList.getInstance(
+                    mContext).getSMTItemList();
+        }
+
+        supportList.addAll(list);
         int count = 0;
         for (int i = 0; i < supportList.size(); i++) {
             if (Const.SUCCESS != getTestListItemStatus(supportList.get(i)
@@ -233,8 +257,27 @@ public class EngSqlite {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL("DROP TABLE IF EXISTS " + ENG_STRING2INT_TABLE + ";");
-            db.execSQL("CREATE TABLE " + ENG_STRING2INT_TABLE + " ("
+            createTable(db, ENG_STRING2INT_TABLE, UnitTestItemList.getInstance(
+                    mContext).getTestItemList());
+            createTable(db, ENG_MMI2_TABLE, UnitTestItemList.getInstance(
+                    mContext).getMMI2ItemList());
+            createTable(db, ENG_SMT_TABLE, UnitTestItemList.getInstance(
+                    mContext).getSMTItemList());
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            if (newVersion > oldVersion) {
+                db.execSQL("DROP TABLE IF EXISTS " + ENG_STRING2INT_TABLE + ";");
+                db.execSQL("DROP TABLE IF EXISTS " + ENG_MMI2_TABLE + ";");
+                db.execSQL("DROP TABLE IF EXISTS " + ENG_SMT_TABLE + ";");
+                onCreate(db);
+            }
+        }
+
+        private void createTable(SQLiteDatabase db, String table, ArrayList<TestItem> list) {
+            db.execSQL("DROP TABLE IF EXISTS " + table + ";");
+            db.execSQL("CREATE TABLE " + table + " ("
                     + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + ENG_GROUPID_VALUE + " INTEGER NOT NULL DEFAULT 0,"
                     + ENG_STRING2INT_NAME + " TEXT,"
@@ -242,29 +285,18 @@ public class EngSqlite {
                     + ENG_STRING2INT_VALUE + " INTEGER NOT NULL DEFAULT 0"
                     + ");");
 
-            ArrayList<TestItem> supportArray = UnitTestItemList.getInstance(
-                    mContext).getTestItemList();
-
-            for (int index = 0; index < supportArray.size(); index++) {
+            for (int index = 0; index < list.size(); index++) {
                 ContentValues cv = new ContentValues();
-                cv.put(ENG_STRING2INT_NAME, supportArray.get(index)
+                cv.put(table, list.get(index)
                         .getTestClassName());
-                cv.put(ENG_STRING2INT_DISPLAYNAME, supportArray.get(index)
+                cv.put(ENG_STRING2INT_DISPLAYNAME, list.get(index)
                         .getTestName());
                 cv.put(ENG_STRING2INT_VALUE, String.valueOf(Const.DEFAULT));
-                long returnValue = db.insert(ENG_STRING2INT_TABLE, null, cv);
+                long returnValue = db.insert(table, null, cv);
                 if (returnValue == -1) {
                     Log.e(TAG, "insert DB error!");
                     continue;
                 }
-            }
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            if (newVersion > oldVersion) {
-                db.execSQL("DROP TABLE IF EXISTS " + ENG_STRING2INT_TABLE + ";");
-                onCreate(db);
             }
         }
 

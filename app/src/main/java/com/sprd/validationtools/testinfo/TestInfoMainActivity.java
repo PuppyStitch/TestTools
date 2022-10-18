@@ -216,9 +216,24 @@ public class TestInfoMainActivity extends Activity {
                 if (mIsTested) {
                     if (failCount > 0) {
                         result = "";
-                        ArrayList<TestItem> supportList = UnitTestItemList
-                                .getInstance(TestInfoMainActivity.this)
-                                .getTestItemList();
+
+                        //todo need to change
+//                        ArrayList<TestItem> supportList = UnitTestItemList
+//                                .getInstance(TestInfoMainActivity.this)
+//                                .getTestItemList();
+
+                        ArrayList<TestItem> supportList;
+                        if (Const.TEST_VALUE == Const.MMI1_VALUE) {
+                            supportList = UnitTestItemList.getInstance(
+                                    TestInfoMainActivity.this).getTestItemList();
+                        } else if (Const.TEST_VALUE == Const.MMI2_VALUE) {
+                            supportList = UnitTestItemList.getInstance(
+                                    TestInfoMainActivity.this).getMMI2ItemList();
+                        } else {
+                            supportList = UnitTestItemList.getInstance(
+                                    TestInfoMainActivity.this).getSMTItemList();
+                        }
+
                         int index = 0;
                         for (int i = 0; i < supportList.size(); i++) {
                             if (Const.FAIL == engSqlite

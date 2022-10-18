@@ -17,6 +17,7 @@ import com.sprd.validationtools.itemstest.sptest.MCRTestActivity;
 import com.sprd.validationtools.itemstest.sptest.MyNFCTestActivity;
 import com.sprd.validationtools.itemstest.sptest.POSSensorTestActivity;
 import com.sprd.validationtools.itemstest.sptest.PosIDTestActivity;
+import com.sprd.validationtools.itemstest.sptest.SPVersionTestActivity;
 import com.sprd.validationtools.itemstest.sptest.TimerTestActivity;
 import com.sprd.validationtools.itemstest.sptest.VirtualLedTestActivity;
 import com.sprd.validationtools.itemstest.sysinfo.SystemVersionTest;
@@ -34,7 +35,7 @@ public class SMTTestItems {
 
     public static final String[] FILTER_CLASS_NAMES = {
             SystemVersionTest.class.getName(),                                          // AP版本测试
-            PosIDTestActivity.class.getName(),                                          // todo:SP版本测试
+            SPVersionTestActivity.class.getName(),                                      // SP版本测试
             ScreenColorTest.class.getName(),                                            // LCD测试
             BackLightTest.class.getName(),                                              // 背景光测试
             ScreenTestActivity.class.getName(),                                         // todo:触摸屏
@@ -54,13 +55,14 @@ public class SMTTestItems {
             ICCardTestActivity.class.getName(),                                         // todo:IC卡测试   ok
             MCRTestActivity.class.getName(),                                            // todo:磁卡测试    ok
             VirtualLedTestActivity.class.getName(),                                     // todo:LED灯及蜂鸣器    ok
-            BuzzerTestActivity.class.getName(),                                         // 蜂鸣器测试
+//            BuzzerTestActivity.class.getName(),                                         // 蜂鸣器测试
             PrintTestActivity.class.getName(),                                          // todo:打印机     ok
             CameraTestActivity.class.getName(),                                         // 后相机测试
 //            QRCodeTestActivity.class.getName(),                                         // todo:二维码     ok
 //            BarcodeTestActivity.class.getName(),                                        // todo:一维码     ok
             PsensorTestActivity.class.getName(),                                        // 距离和光传感器测试
             TimerTestActivity.class.getName(),                                                    // RTC时钟测试
+            PosIDTestActivity.class.getName(),                                          // todo:SP版本测试
             POSSensorTestActivity.class.getName(),                                      // todo:POS Sensor测试
     };
 

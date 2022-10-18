@@ -12,6 +12,8 @@ import com.dspread.xpos.QPOSService;
 import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -23,6 +25,8 @@ public class PosIDTestActivity extends BaseActivity {
 
     QPOSService qposService;
 
+    String filePath = "/sys/devices/platform/soc/soc:ap-apb/70800000.i2c/i2c-3/3-0048/cts_firmware/driver_builtin_firmware";
+
     public Handler mHandler = new Handler();
     private static final int TIMEOUT = 16000;
     private boolean isOk = false;
@@ -31,12 +35,11 @@ public class PosIDTestActivity extends BaseActivity {
             if (isOk) {
                 Toast.makeText(PosIDTestActivity.this, R.string.text_pass,
                         Toast.LENGTH_SHORT).show();
-                storeRusult(true);
             } else {
                 Toast.makeText(PosIDTestActivity.this, R.string.text_fail,
                         Toast.LENGTH_SHORT).show();
-                storeRusult(false);
             }
+            storeRusult(isOk);
             mHandler.removeCallbacks(runnable);
             finish();
         }
@@ -47,20 +50,29 @@ public class PosIDTestActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pos_id_test_layout);
         posIdTV = findViewById(R.id.pos_id);
-        open(QPOSService.CommunicationMode.UART);
-        qposService.getQposId(3000);
+//        open(QPOSService.CommunicationMode.UART);
+//        qposService.getQposId(3000);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mHandler.postDelayed(runnable, TIMEOUT);
+        String content = readFile(filePath);
+        Log.i(TAG, "the content is = " + content);
+//        tempPre = str.charAt(str.indexOf("Current temperature:") + "Current temperature:".length());
+        if (content != null) {
+            int index = content.indexOf("hwid: ");
+            int length = "hwid: ".length();
+            String id = content.substring(index + length, index + 6 + length);
+            posIdTV.setText(id);
+        }
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        qposService.closeUart();
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacks(runnable);
     }
 
     private void open(QPOSService.CommunicationMode mode) {
@@ -101,5 +113,29 @@ public class PosIDTestActivity extends BaseActivity {
                 Log.i(TAG, entry.getKey() + " = " + entry.getValue());
             }
         }
+    }
+
+    private String readFile(String path) {
+        char[] buffer = new char[1024];
+        String batteryElectronic = "";
+        FileReader file = null;
+        try {
+            file = new FileReader(path);
+            int len = file.read(buffer, 0, 1024);
+            batteryElectronic = new String(buffer, 0, len);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (file != null) {
+                    file.close();
+                    file = null;
+                }
+            } catch (IOException io) {
+                Log.w(TAG, "read file close fail");
+            }
+        }
+        isOk = true;
+        return batteryElectronic;
     }
 }

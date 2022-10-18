@@ -20,7 +20,7 @@ public class PrintTestActivity extends BaseActivity {
 
     private static final String TAG = "PrintTestActivity";
 
-//    private Button mButton;
+    private Button mButton;
     private final int REQUEST_CODE = 102;
 
     public Handler mHandler = new Handler();
@@ -51,25 +51,26 @@ public class PrintTestActivity extends BaseActivity {
         printLayout.setLayoutParams(params);
         printLayout.setOrientation(LinearLayout.VERTICAL);
         printLayout.setGravity(Gravity.CENTER);
-//        mButton = new Button(this);
-//        mButton.setTextSize(35);
-//        printLayout.addView(mButton);
+        mButton = new Button(this);
+        mButton.setTextSize(35);
+        printLayout.addView(mButton);
         setContentView(printLayout);
         setTitle(R.string.print_test);
-//        mButton.setText(getResources().getText(R.string.print_test));
-        start();
+        disablePassButton();
+        mButton.setText(getResources().getText(R.string.begin_testing));
+//        start();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mHandler.postDelayed(runnable, TIMEOUT);
+//        mHandler.postDelayed(runnable, TIMEOUT);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mHandler.removeCallbacks(runnable);
+//        mHandler.removeCallbacks(runnable);
     }
 
     public void start() {

@@ -146,6 +146,7 @@ public class MelodyTest extends BaseActivity {
         int volumeMusic = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         Log.d(TAG, "volumeMusic = " + volumeMusic);
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volumeMusic, 0);
+        mPlayer.setVolume(1.0f, 1.0f);
         Log.d(TAG, "doPlay audioNumber= " + audioNumber);
         try {
             /* SPRD Bug 771294: The Ringtones motor test need to use the specific ringtone. @{ */

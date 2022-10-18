@@ -28,12 +28,11 @@ public class BarcodeTestActivity extends BaseActivity {
             if (isOk) {
                 Toast.makeText(BarcodeTestActivity.this, R.string.text_pass,
                         Toast.LENGTH_SHORT).show();
-                storeRusult(true);
             } else {
                 Toast.makeText(BarcodeTestActivity.this, R.string.text_fail,
                         Toast.LENGTH_SHORT).show();
-                storeRusult(false);
             }
+            storeRusult(isOk);
             mHandler.removeCallbacks(runnable);
             finish();
         }
@@ -60,6 +59,7 @@ public class BarcodeTestActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         mHandler.postDelayed(runnable, TIMEOUT);
+        disablePassButton();
     }
 
     @Override
@@ -76,7 +76,6 @@ public class BarcodeTestActivity extends BaseActivity {
         Log.d(TAG, "the result is " + result);
         if (result != null) {
             isOk = true;
-
         }
     }
 
@@ -92,9 +91,11 @@ public class BarcodeTestActivity extends BaseActivity {
         @Override
         public void onScanResult(String content) {
             // Successfully.
-            if (activity != null && content != null) {
+            if (activity != null && content != null && !"null".equals(content)) {
                 isOk = true;
                 Toast.makeText(activity, "扫描内容:" + content, Toast.LENGTH_LONG).show();
+                enablePassButton();
+                mHandler.post(runnable);
             } else if (content == null) {
                 isOk = false;
                 mHandler.post(runnable);

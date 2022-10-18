@@ -19,11 +19,11 @@ public class POSSensorTestActivity extends BaseActivity {
             if (isOk) {
                 Toast.makeText(POSSensorTestActivity.this, R.string.text_pass,
                         Toast.LENGTH_SHORT).show();
-                storeRusult(true);
+//                storeRusult(true);
             } else {
                 Toast.makeText(POSSensorTestActivity.this, R.string.text_fail,
                         Toast.LENGTH_SHORT).show();
-                storeRusult(false);
+//                storeRusult(false);
             }
             mHandler.removeCallbacks(runnable);
             finish();

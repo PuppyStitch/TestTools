@@ -25,6 +25,7 @@ public class MyNFCTestActivity extends BaseActivity {
 
     private static final String TAG = "MyNFCTestActivity";
 
+    int count = 0;
     private Context mContext;
     private Button mStartButton;
     public Handler mHandler = new Handler();
@@ -33,14 +34,14 @@ public class MyNFCTestActivity extends BaseActivity {
     private Runnable runnable = new Runnable() {
         public void run() {
             if (isOk) {
+                enablePassButton();
                 Toast.makeText(MyNFCTestActivity.this, R.string.text_pass,
                         Toast.LENGTH_SHORT).show();
-                storeRusult(true);
             } else {
                 Toast.makeText(MyNFCTestActivity.this, R.string.text_fail,
                         Toast.LENGTH_SHORT).show();
-                storeRusult(false);
             }
+            storeRusult(isOk);
             mHandler.removeCallbacks(runnable);
             finish();
         }
@@ -49,22 +50,14 @@ public class MyNFCTestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        LinearLayout barcodeLayout = new LinearLayout(this);
-        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT);
-        barcodeLayout.setLayoutParams(params);
-        barcodeLayout.setOrientation(LinearLayout.VERTICAL);
-        barcodeLayout.setGravity(Gravity.CENTER);
-        mStartButton = new Button(this);
-        mStartButton.setTextSize(35);
-        barcodeLayout.addView(mStartButton);
-        setContentView(barcodeLayout);
-        mStartButton.setText(getResources().getText(R.string.color_temperature_start));
+        setContentView(R.layout.activity_nfc_test_layout);
+        count = 0;
+        mStartButton = findViewById(R.id.btn_start);
         mStartButton.setOnClickListener(view -> start());
         disablePassButton();
         open(QPOSService.CommunicationMode.UART);
         mContext = this;
+        qposService.resetPosStatus();
     }
 
     @Override
@@ -72,6 +65,12 @@ public class MyNFCTestActivity extends BaseActivity {
         super.onPause();
         mHandler.removeCallbacks(runnable);
         qposService.closeUart();
+        qposService.resetPosStatus();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -81,7 +80,8 @@ public class MyNFCTestActivity extends BaseActivity {
     }
 
     private void start() {
-        qposService.testPosFunctionCommand(3000, QPOSService.TestCommand.NFC_TEST);
+        qposService.testPosFunctionCommand(8, QPOSService.TestCommand.NFC_TEST);
+        mStartButton.setEnabled(false);
     }
 
     private void open(QPOSService.CommunicationMode mode) {
@@ -105,14 +105,13 @@ public class MyNFCTestActivity extends BaseActivity {
         @Override
         public void onQposTestCommandResult(boolean isSuccess, String data) {
             super.onQposTestCommandResult(isSuccess, data);
-            Log.i(TAG, "isSuccess " + isSuccess + " " + data);
-            Toast.makeText(MyNFCTestActivity.this, mContext.getText(R.string.text_pass)
-                            + "" + data , Toast.LENGTH_SHORT).show();
-            storeRusult(isSuccess);
-            enablePassButton();
-            isOk = true;
+            isOk = isSuccess;
+            if (count < 3 && !isSuccess) {
+                qposService.testPosFunctionCommand(8, QPOSService.TestCommand.NFC_TEST);
+                count++;
+                return;
+            }
             mHandler.post(runnable);
-//            finish();
         }
 
         @Override

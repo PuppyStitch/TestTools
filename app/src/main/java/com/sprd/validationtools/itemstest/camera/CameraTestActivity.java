@@ -1,4 +1,5 @@
 package com.sprd.validationtools.itemstest.camera;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -72,22 +73,22 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-            case CAMERA_FLASH_LIGHT:
-                openFlashLight(CAMERA_FLASH_LIGHT);
-                break;
-            case CAMERA_SECOND_FLASH_LIGHT:
-                openFlashLight(CAMERA_SECOND_FLASH_LIGHT);
-                break;
-            case CAMERA_FLASH_LIGHT_CLOSE:
-                closeFlashLight(CAMERA_FLASH_LIGHT);
-                break;
-            case CAMERA_SECOND_FLASH_LIGHT_CLOSE:
-                closeFlashLight(CAMERA_SECOND_FLASH_LIGHT);
-                break;
-            case CAMERA_TIME_OUT:
-                CameraTestActivity.this.storeRusult(false);
-                CameraTestActivity.this.finish();
-                break;
+                case CAMERA_FLASH_LIGHT:
+                    openFlashLight(CAMERA_FLASH_LIGHT);
+                    break;
+                case CAMERA_SECOND_FLASH_LIGHT:
+                    openFlashLight(CAMERA_SECOND_FLASH_LIGHT);
+                    break;
+                case CAMERA_FLASH_LIGHT_CLOSE:
+                    closeFlashLight(CAMERA_FLASH_LIGHT);
+                    break;
+                case CAMERA_SECOND_FLASH_LIGHT_CLOSE:
+                    closeFlashLight(CAMERA_SECOND_FLASH_LIGHT);
+                    break;
+                case CAMERA_TIME_OUT:
+                    CameraTestActivity.this.storeRusult(false);
+                    CameraTestActivity.this.finish();
+                    break;
             }
             super.handleMessage(msg);
         }
@@ -99,37 +100,40 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
     };
 
     private Button mTakePhotoBtn;
-    protected class CameraScreenNailProxy{
+
+    protected class CameraScreenNailProxy {
         private static final String TAG = "CameraScreenNailProxy";
 
         public static final int KEY_SIZE_PICTURE = 0;
         public static final int KEY_SIZE_PREVIEW = 1;
 
         private Tuple<Integer, Integer> mScreenSize;
-        protected CameraScreenNailProxy(){
+
+        protected CameraScreenNailProxy() {
             initializeScreenSize();
         }
 
-        private void initializeScreenSize(){
+        private void initializeScreenSize() {
             Display display = getWindowManager().getDefaultDisplay();
             DisplayMetrics metrics = new DisplayMetrics();
             display.getMetrics(metrics);
             mScreenSize = new Tuple<Integer, Integer>(
-                metrics.widthPixels, metrics.heightPixels);
+                    metrics.widthPixels, metrics.heightPixels);
             Log.d(TAG,
-               String.format("screen size = { %dx%d }",
-                  new Object[] { mScreenSize.first, mScreenSize.second }));
+                    String.format("screen size = { %dx%d }",
+                            new Object[]{mScreenSize.first, mScreenSize.second}));
         }
+
         protected Tuple<Integer, Integer>
-            getOptimalSize(int key, ComboPreferences pref){
+        getOptimalSize(int key, ComboPreferences pref) {
 
             Tuple<Integer, Integer> result = null;
             Size size = null;
             boolean b_full_screen = getScreenState(pref);
             int orientation = getOrientation();
             int
-                width = mScreenSize.first,
-                height = mScreenSize.second;
+                    width = mScreenSize.first,
+                    height = mScreenSize.second;
             Parameters mParameters = null;
             mParameters = mCamera.getParameters();
 
@@ -138,7 +142,7 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
                 width = size.width;
                 height = size.height;
                 result = Util.getOptimalSize(
-                    mScreenSize.first, mScreenSize.second, width, height, b_full_screen);
+                        mScreenSize.first, mScreenSize.second, width, height, b_full_screen);
                 width = result.first;
                 height = result.second;
                 if (orientation % 180 == 0) {
@@ -153,10 +157,10 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
                 width = size.width;
                 height = size.height;
                 result = Util.getOptimalSize(
-                    mScreenSize.first, mScreenSize.second, width, height, b_full_screen);
+                        mScreenSize.first, mScreenSize.second, width, height, b_full_screen);
                 width = result.first;
                 height = result.second;
-                if (orientation % 180 == 0){
+                if (orientation % 180 == 0) {
                     int tmp = width;
                     width = height;
                     height = tmp;
@@ -165,8 +169,8 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
 
             result = new Tuple<Integer, Integer>(width, height);
             Log.d(TAG,
-                String.format("get optimal size: key = %d, is_full_screen = %b, size = { %dx%d }",
-                    new Object[] { key, b_full_screen, result.first, result.second }));
+                    String.format("get optimal size: key = %d, is_full_screen = %b, size = { %dx%d }",
+                            new Object[]{key, b_full_screen, result.first, result.second}));
             return result;
         }
 
@@ -174,6 +178,7 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
             return getCameraDisplayOrientation(mCameraId, mCamera);
         }
     }
+
     protected boolean getScreenState(ComboPreferences pref) {
         boolean result = false;
         if (pref != null) {
@@ -183,6 +188,7 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
         }
         return result;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -199,7 +205,7 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
         mPreviewFrameLayout = (PreviewFrameLayout) findViewById(R.id.frame);
         mTextureView = (TextureView) findViewById(R.id.surfaceView);
         mTextureView.setSurfaceTextureListener(this);
-        mLightMsg = (TextView)findViewById(R.id.light_msg);
+        mLightMsg = (TextView) findViewById(R.id.light_msg);
         /*BEGIN 2016/04/13 zhijie.yang BUG535005 mmi add take photes of camera test */
         mTakePhotoBtn = (Button) findViewById(R.id.start_take_picture);
         mTakePhotoBtn.setOnClickListener(new View.OnClickListener() {
@@ -213,30 +219,32 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
                 } else {
                     Log.d(TAG, "mCamera is null.");
                     Toast.makeText(getApplicationContext(),
-                            CameraTestActivity.this.getString(R.string.back_camera_fail_tips), Toast.LENGTH_SHORT)
+                                    CameraTestActivity.this.getString(R.string.back_camera_fail_tips), Toast.LENGTH_SHORT)
                             .show();
                     storeRusult(false);
                     finish();
                 }
             }
-        });;
-        Log.d(TAG, "oncreate IS_SUPPORT_FLASHLIGHT="+IS_SUPPORT_FLASHLIGHT);
-        if(IS_SUPPORT_FLASHLIGHT) {
+        });
+        ;
+        Log.d(TAG, "oncreate IS_SUPPORT_FLASHLIGHT=" + IS_SUPPORT_FLASHLIGHT);
+        if (IS_SUPPORT_FLASHLIGHT) {
             startDoubleFlashLightTest();
         }
         /* @} */
         mHandler.sendEmptyMessageDelayed(CAMERA_TIME_OUT, 120000);
         startBackgroundThread();
-        if(!mIsAutoPass && mPassButton != null){
+        if (!mIsAutoPass && mPassButton != null) {
             mPassButton.setVisibility(View.INVISIBLE);
         }
     }
-    
+
     private Handler mCameraHandler;
     /**
      * An additional thread for running tasks that shouldn't block the UI.
      */
     private HandlerThread mBackgroundThread;
+
     /**
      * Starts a background thread and its {@link Handler}.
      */
@@ -263,9 +271,9 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
 
     /* SPRD Bug 744113:adjust the test plan of the flashlight. @{ */
     private void openFlashLightByCameraId(int cameraId) {
-        if(mIsPause) return;
-        Log.d(TAG, "openFlashLightByCameraId cameraId="+cameraId);
-        if(cameraId == CameraCharacteristics.LENS_FACING_BACK) {
+        if (mIsPause) return;
+        Log.d(TAG, "openFlashLightByCameraId cameraId=" + cameraId);
+        if (cameraId == CameraCharacteristics.LENS_FACING_BACK) {
             writeFlashDev("0x20");
         } else {
             writeFlashDev("0x10");
@@ -278,8 +286,8 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
     }
 
     private void openFlashLight(int type) {
-        if(mIsPause) return;
-        if(type == CAMERA_FLASH_LIGHT) {
+        if (mIsPause) return;
+        if (type == CAMERA_FLASH_LIGHT) {
             writeFlashDev("0x10");
             mHandler.sendEmptyMessageDelayed(CAMERA_FLASH_LIGHT_CLOSE, 1000);
         } else {
@@ -289,7 +297,7 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
     }
 
     private void closeFlashLight(int type) {
-        if(type == CAMERA_FLASH_LIGHT) {
+        if (type == CAMERA_FLASH_LIGHT) {
             writeFlashDev("0x11");
             mHandler.sendEmptyMessageDelayed(CAMERA_SECOND_FLASH_LIGHT, 1000);
         } else {
@@ -311,7 +319,7 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
 
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-            String filePath = StorageUtil.getInternalStoragePath() + "/mmi/" + "backphoto.jpg" ;
+            String filePath = StorageUtil.getInternalStoragePath() + "/mmi/" + "backphoto.jpg";
             File pictureFile = new File(filePath);
             FileOutputStream fos = null;
             try {
@@ -325,7 +333,7 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
                 fos.write(data);
                 android.media.MediaScannerConnection.scanFile(
                         getApplicationContext(),
-                        new String[] { pictureFile.getAbsolutePath() }, null,
+                        new String[]{pictureFile.getAbsolutePath()}, null,
                         null);
             } catch (FileNotFoundException e) {
                 Log.d(TAG, "File not found: " + e.getMessage());
@@ -341,21 +349,21 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
                 }
             }
             /*SPRD bug 753903:Freeze screen in some board*/
-            if(mIsFreezeScreen){
+            if (mIsFreezeScreen) {
                 //Freeze screen here
-                 Log.d(TAG, "Freeze screen here!");
-            }else{
+                Log.d(TAG, "Freeze screen here!");
+            } else {
                 //Bug 614121
                 mHandler.postDelayed(new Runnable() {
                     public void run() {
-                        if(mCamera != null) {
+                        if (mCamera != null) {
                             mCamera.startPreview();
                             mTakePhotoBtn.setEnabled(true);
                         }
                     }
                 }, 1000);
             }
-            if(!mIsAutoPass && mPassButton != null){
+            if (!mIsAutoPass && mPassButton != null) {
                 mPassButton.setVisibility(View.VISIBLE);
             }
             /*@}*/
@@ -426,7 +434,7 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
     }
 
     public static Size getOptimalPreviewSize(Activity currentActivity,
-            List<Size> sizes, double targetRatio) {
+                                             List<Size> sizes, double targetRatio) {
         final double ASPECT_TOLERANCE = 0.001;
         if (sizes == null) return null;
         Size optimalSize = null;
@@ -441,7 +449,7 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
             if (Math.abs(size.height - targetHeight) < minDiff) {
                 optimalSize = size;
                 minDiff = Math.abs(size.height - targetHeight);
-                Log.d(TAG, "getOptimalPreviewSize minDiff="+minDiff);
+                Log.d(TAG, "getOptimalPreviewSize minDiff=" + minDiff);
                 break;
             }
         }
@@ -460,7 +468,7 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
 
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width,
-            int height) {
+                                          int height) {
         Log.d(TAG, "onSurfaceTextureAvailable");
         mSurfaceTexture = surface;
         startCamera();
@@ -468,7 +476,7 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
 
     @Override
     public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width,
-            int height) {
+                                            int height) {
     }
 
     @Override
@@ -484,11 +492,11 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
     protected void onResume() {
         super.onResume();
         mIsPause = false;
-        if(mFlag) {
+        if (mFlag) {
             mCameraHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                     startCamera();
+                    startCamera();
                 }
             });
         }
@@ -518,7 +526,7 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
 
     public static void setCameraDisplayOrientation(
             int cameraId, Camera camera) {
-        int result = getCameraDisplayOrientation(cameraId,camera);
+        int result = getCameraDisplayOrientation(cameraId, camera);
         camera.setDisplayOrientation(result);
     }
 
@@ -533,23 +541,23 @@ public class CameraTestActivity extends BaseActivity implements TextureView.Surf
         } else {
             result = (info.orientation - degrees + 360) % 360;
         }
-          return result;
+        return result;
     }
 
     private void initializeCameraOpenAfter() {
         // SPRD:Fixbug454827,The preview picture of take photo has some defective.
         Tuple<Integer, Integer> size =
-            mCameraScreenNailProxy.getOptimalSize(
-                CameraScreenNailProxy.KEY_SIZE_PREVIEW, mPreferences);
+                mCameraScreenNailProxy.getOptimalSize(
+                        CameraScreenNailProxy.KEY_SIZE_PREVIEW, mPreferences);
         if (mPreviewFrameLayout != null) {
             mPreviewFrameLayout.setAspectRatio((double) size.first / (double) size.second, true);
         }
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         mHandler.removeMessages(CAMERA_TIME_OUT);
-        if(IS_SUPPORT_FLASHLIGHT) {
+        if (IS_SUPPORT_FLASHLIGHT) {
             mHandler.removeMessages(CAMERA_FLASH_LIGHT);
             mHandler.removeMessages(CAMERA_SECOND_FLASH_LIGHT);
             mHandler.removeMessages(CAMERA_FLASH_LIGHT_CLOSE);

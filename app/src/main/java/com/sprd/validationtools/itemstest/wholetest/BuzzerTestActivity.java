@@ -1,8 +1,11 @@
 package com.sprd.validationtools.itemstest.wholetest;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.simcom.testtools.R;
@@ -13,6 +16,7 @@ public class BuzzerTestActivity extends BaseActivity {
     private static final String TAG = "BuzzerTestActivity";
 
     private MediaPlayer mediaPlayer;
+    private AudioManager mAudioManager = null;
 
     public Handler mHandler = new Handler();
     private static final int TIMEOUT = 8000;
@@ -37,6 +41,8 @@ public class BuzzerTestActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mediaPlayer = MediaPlayer.create(this, R.raw.beep);
+        mAudioManager = (AudioManager) this
+                .getSystemService(Context.AUDIO_SERVICE);
     }
 
     @Override
@@ -48,7 +54,9 @@ public class BuzzerTestActivity extends BaseActivity {
                 public void onPrepared(MediaPlayer mp) {
                     mp.setLooping(true);
                     mp.start();
-                    mp.setVolume(1.0f, 1.0f);
+                    int volumeMusic = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                    Log.d(TAG, "volumeMusic = " + volumeMusic);
+                    mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volumeMusic, 0);
                 }
             });
         } catch (Exception e) {

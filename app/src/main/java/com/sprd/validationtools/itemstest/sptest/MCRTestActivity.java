@@ -25,6 +25,7 @@ public class MCRTestActivity extends BaseActivity {
     QPOSService qposService;
     Context mContext;
 
+    int count = 0;
     private Button mStartButton;
     public Handler mHandler = new Handler();
     private static final int TIMEOUT = 16000;
@@ -34,12 +35,11 @@ public class MCRTestActivity extends BaseActivity {
             if (isOk) {
                 Toast.makeText(MCRTestActivity.this, R.string.text_pass,
                         Toast.LENGTH_SHORT).show();
-                storeRusult(true);
             } else {
                 Toast.makeText(MCRTestActivity.this, R.string.text_fail,
                         Toast.LENGTH_SHORT).show();
-                storeRusult(false);
             }
+            storeRusult(isOk);
             mHandler.removeCallbacks(runnable);
             finish();
         }
@@ -48,25 +48,18 @@ public class MCRTestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        count = 0;
         open(QPOSService.CommunicationMode.UART);
-        LinearLayout barcodeLayout = new LinearLayout(this);
-        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT);
-        barcodeLayout.setLayoutParams(params);
-        barcodeLayout.setOrientation(LinearLayout.VERTICAL);
-        barcodeLayout.setGravity(Gravity.CENTER);
-        mStartButton = new Button(this);
-        mStartButton.setTextSize(35);
-        barcodeLayout.addView(mStartButton);
-        setContentView(barcodeLayout);
-        mStartButton.setText(getResources().getText(R.string.color_temperature_start));
+        setContentView(R.layout.activity_mcr_test_layout);
+        mStartButton = findViewById(R.id.btn_start);
         mStartButton.setOnClickListener(view -> start());
         mContext = this;
         disablePassButton();
     }
 
     private void start() {
-        qposService.testPosFunctionCommand(3000, QPOSService.TestCommand.MCR_TEST);
+        qposService.testPosFunctionCommand(8, QPOSService.TestCommand.MCR_TEST);
+        mStartButton.setEnabled(false);
     }
 
     @Override
@@ -80,6 +73,7 @@ public class MCRTestActivity extends BaseActivity {
         super.onPause();
         mHandler.removeCallbacks(runnable);
         qposService.closeUart();
+        qposService.resetPosStatus();
     }
 
     private void open(QPOSService.CommunicationMode mode) {
@@ -97,6 +91,8 @@ public class MCRTestActivity extends BaseActivity {
         //通过handler处理，监听MyPosListener，实现QposService的接口，（回调接口）
         Handler handler = new Handler(Looper.myLooper());
         qposService.initListener(handler, listener);
+        qposService.setDeviceAddress("/dev/ttyS1");
+        qposService.openUart();
     }
 
     class MyPosListener extends CQPOSService {
@@ -105,16 +101,16 @@ public class MCRTestActivity extends BaseActivity {
             super.onQposTestCommandResult(isSuccess, data);
             Log.i(TAG, "isSuccess " + isSuccess);
             if (isSuccess && "010101".equals(data)) {
-                Toast.makeText(MCRTestActivity.this, mContext.getText(R.string.text_pass) +
-                        " " + data, Toast.LENGTH_SHORT).show();
-                enablePassButton();
-                storeRusult(true);
-            } else {
-                Toast.makeText(MCRTestActivity.this, mContext.getText(R.string.text_fail) +
-                        " " + data, Toast.LENGTH_SHORT).show();
-                storeRusult(false);
+                isOk = true;
             }
-            finish();
+
+            if (count < 3 && !isSuccess) {
+                qposService.testPosFunctionCommand(8, QPOSService.TestCommand.MCR_TEST);
+                count++;
+                return;
+            }
+
+            mHandler.post(runnable);
         }
 
         @Override

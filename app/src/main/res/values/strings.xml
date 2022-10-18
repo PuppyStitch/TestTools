@@ -441,12 +441,15 @@
     <string name="flash_light_test">Flash Light Test</string>
     <string name="timer_test">Timer Test</string>
     <string name="virtual_led_test">Virtual Led Test</string>
-    <string name="pos_id">POS ID</string>
+    <string name="pos_id">TP ID</string>
     <string name="ringtone_test">Ringtone Test</string>
     <string name="my_vibrator_test">Vibrator Test</string>
     <string name="screen_print_test">Screen Print Test</string>
     <string name="pos_sensor_test">POS Sensor Test</string>
     <string name="sp_version">SP VERSION</string>
     <string name="wifi_bluetooth_address">WIFI and BLUETOOTH address</string>
+
+    <string name="mouse_moving">Mouse is moving</string>
+    <string name="begin_testing">begin testing</string>
 
 </resources>

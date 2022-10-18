@@ -51,6 +51,8 @@ public class KeyTestActivity extends BaseActivity {
     private static final int COLUMNCOUNT = 4;
     private static final long TEST_TIMEOUT = 60000;
 
+    boolean isHomePressed = false, isBackPressed = false, isRecentPressed = false, isPowerPressed = false;
+
     private PressKeyBroadcastReceiver pressKeyBroadcastReceiver;
     private static final String ACTION_TESTING_POWER_KEY = "action.press.powerbutton";
     private static final String ACTION_TESTING_SWITCH_KEY = "action.press.switchbutton";
@@ -134,14 +136,25 @@ public class KeyTestActivity extends BaseActivity {
             mAiButton.setVisibility(View.GONE);
         }
         registerPressKeyReceiver();
+        isHomePressed = false;
+        isBackPressed = false;
+        isRecentPressed = false;
+        isPowerPressed = false;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        disablePassButton();
 //        if (isShowNavigationBar) {
 //            hideNavigationBar();
 //        }
+    }
+
+    private void needToEnablePassBtn() {
+        if (isHomePressed && isBackPressed && isRecentPressed && isPowerPressed) {
+            enablePassButton();
+        }
     }
 
     public boolean checkDeviceHasNavigationBar(Context context) {
@@ -281,6 +294,8 @@ public class KeyTestActivity extends BaseActivity {
         } else if (KeyEvent.KEYCODE_BACK == keyCode) {
             if (!mBackButton.isPressed()) {
                 mBackButton.setPressed(true);
+                isBackPressed = true;
+                needToEnablePassBtn();
                 keyPressedFlag |= 2;
             } else {
                 return super.onKeyDown(keyCode, event);
@@ -371,14 +386,18 @@ public class KeyTestActivity extends BaseActivity {
             String action = intent.getAction();
             if (ACTION_TESTING_POWER_KEY.equals(action)) {
                 mPowerButton.setPressed(true);
+                isPowerPressed = true;
                 Log.i(TAG, "POWER KEY PRESSED");
             } else if (ACTION_TESTING_SWITCH_KEY.equals(action)) {
                 mMenuButton.setPressed(true);
+                isRecentPressed = true;
                 Log.i(TAG, "SWITCH KEY PRESSED");
             } else if (ACTION_TESTING_HOME_KEY.equals(action)) {
                 Log.i(TAG, "HOME KEY PRESSED");
                 mHomeButton.setPressed(true);
+                isHomePressed = true;
             }
+            needToEnablePassBtn();
         }
     }
 }
