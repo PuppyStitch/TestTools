@@ -6,8 +6,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
 import com.yanzhenjie.zbar.camera.CameraPreview;
@@ -64,15 +62,6 @@ public class QRCodeTestActivity extends BaseActivity {
         mHandler.removeCallbacks(runnable);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "the result is " + result);
-        if (result != null) {
-            isOk = true;
-        }
-    }
 
     private void startScan() {
         mPreview.start();
