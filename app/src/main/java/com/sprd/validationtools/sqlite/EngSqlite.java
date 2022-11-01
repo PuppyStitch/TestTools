@@ -23,8 +23,11 @@ public class EngSqlite {
     //    public static final String ENG_ENGTEST_DB = Const.PRODUCTINFO_DIR
 //            + "/mmitest.db";
     public static final String ENG_ENGTEST_DB = "test.db";
+    // MMI1表
     public static final String ENG_STRING2INT_TABLE = "str2int";
+    // MMI2表
     public static final String ENG_MMI2_TABLE = "mmi2";
+    // SMT表
     public static final String ENG_SMT_TABLE = "smt";
     public static final String ENG_STRING2INT_NAME = "name";
     public static final String ENG_STRING2INT_DISPLAYNAME = "displayname";
