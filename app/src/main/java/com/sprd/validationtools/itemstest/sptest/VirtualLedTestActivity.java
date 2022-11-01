@@ -31,6 +31,7 @@ public class VirtualLedTestActivity extends BaseActivity {
     private MediaPlayer mediaPlayer;
     private AudioManager mAudioManager = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
