@@ -58,25 +58,15 @@ public class VirtualLedTestActivity extends BaseActivity {
 
         mediaPlayer = MediaPlayer.create(this, R.raw.beep);
         mediaPlayer.setOnPreparedListener(listener);
-//        try {
-//            mediaPlayer.prepare();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
         activityManager = (ActivityManager)
                 this.getSystemService(Context.ACTIVITY_SERVICE);
     }
 
-    MediaPlayer.OnPreparedListener listener = new MediaPlayer.OnPreparedListener() {
-        @Override
-        public void onPrepared(MediaPlayer mp) {
-            mp.setLooping(true);
-//            mp.start();
-            int volumeMusic = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-            Log.d(TAG, "volumeMusic = " + volumeMusic);
-            mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volumeMusic, 0);
-        }
+    MediaPlayer.OnPreparedListener listener = mp -> {
+        mp.setLooping(true);
+        int volumeMusic = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        Log.d(TAG, "volumeMusic = " + volumeMusic);
+        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volumeMusic, 0);
     };
 
     @Override

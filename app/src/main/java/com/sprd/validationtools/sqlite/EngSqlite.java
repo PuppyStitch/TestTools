@@ -104,12 +104,10 @@ public class EngSqlite {
                 Log.d(TAG, "cursor.count2=" + cursor.getCount());
                 return Const.DEFAULT;
             }
-        } catch (NullPointerException ex) {
-            ex.printStackTrace();
-        } catch (SQLException ex) {
+        } catch (NullPointerException | SQLException ex) {
             ex.printStackTrace();
         } finally {
-            Log.d(TAG, "fianlly");
+            Log.d(TAG, "finally");
             if (cursor != null) {
                 cursor.close();
                 cursor = null;
