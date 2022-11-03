@@ -29,6 +29,8 @@
     <string name="TestTitleString">工廠測試</string>
     <string name="TestResultTitleString">測試結果</string>
     <string name="TestResultTitleStringFail">測試結果(失败)</string>
+    <string name="TestResultTitleStringSuccess">測試結果(成功)</string>
+    <string name="TestResultTitleStringNA">測試結果(未測試)</string>
     <string name="system_test_title">系統測試</string>
     <string name="item_test_title">單項測試</string>
     <string name="test_info_title">測試信息</string>

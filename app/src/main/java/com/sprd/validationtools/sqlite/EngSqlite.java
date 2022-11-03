@@ -237,14 +237,27 @@ public class EngSqlite {
         }
 
         supportList.addAll(list);
-        int count = 0;
+        int failCnt = 0;
+        int naCnt = 0;
+        int res;
         for (int i = 0; i < supportList.size(); i++) {
-            if (Const.SUCCESS != getTestListItemStatus(supportList.get(i)
-                    .getTestClassName())) {
-                count++;
+            res = getTestListItemStatus(supportList.get(i).getTestClassName());
+            if (Const.FAIL == res) {
+                failCnt++;
+            } else if (Const.DEFAULT == res) {
+                naCnt++;
             }
         }
-        return count;
+
+        if (failCnt > 0) {
+            return -1;
+        }
+
+        if (naCnt == supportList.size()) {
+            return 0;
+        }
+
+        return 1;
     }
 
     private static class ValidationToolsDatabaseHelper extends SQLiteOpenHelper {

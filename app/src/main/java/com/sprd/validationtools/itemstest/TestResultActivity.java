@@ -77,13 +77,20 @@ public class TestResultActivity extends Activity {
 
     @Override
     protected void onResume() {
-        int failCount = mEngSqlite.querySystemFailCount();
-        if (failCount >= 1) {
+        int sign = mEngSqlite.querySystemFailCount();
+        if (sign == -1) {
             mTestResultView.setText(getResources().getString(
                     R.string.TestResultTitleStringFail));
             mTestResultView.setTextColor(Color.RED);
-        } else {
+        } else if (sign == 1) {
+            mTestResultView.setText(getResources().getString(
+                    R.string.TestResultTitleStringSuccess));
+            mTestResultView.setTextColor(Color.GREEN);
             setSuccess();
+        } else {
+            mTestResultView.setText(getResources().getString(
+                    R.string.TestResultTitleStringNA));
+            mTestResultView.setTextColor(Color.GRAY);
         }
         super.onResume();
     }
