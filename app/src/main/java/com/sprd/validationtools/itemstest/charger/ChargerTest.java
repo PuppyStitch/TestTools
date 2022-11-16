@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -126,7 +127,7 @@ public class ChargerTest extends BaseActivity {
                     }
                 }
             }
-            AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
+            @SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
 
                 @Override
                 protected String doInBackground(Void... params) {

@@ -80,7 +80,8 @@ public class MyNFCTestActivity extends BaseActivity {
     }
 
     private void start() {
-        qposService.testPosFunctionCommand(8, QPOSService.TestCommand.NFC_TEST);
+//        qposService.testPosFunctionCommand(8, QPOSService.TestCommand.NFC_TEST);
+        qposService.printText(10, "test");
         mStartButton.setEnabled(false);
     }
 

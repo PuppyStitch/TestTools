@@ -425,6 +425,7 @@
     <string name="macrolens_camera_title_text">Macro Lens Camera Test</string>
     <!-- Text for AI key test -->
     <string name="ai_key_test">AI</string>
+    <string name="reset_key_test" translatable="false">RESET</string>
     <!-- Psensor cali result -->
     <string name="sensor_cali_out_of_maxrange">Calibration result out of max range</string>
     <string name="sensor_cali_out_of_minrange">Calibration result out of min range</string>

@@ -90,7 +90,7 @@ public class EngSqlite {
         Cursor cursor = mSqLiteDatabase.query(currentTable,
                 new String[] { "value" }, "name=" + "\'" + name + "\'", null,
                 null, null, null);
-        Log.d(TAG, "name=" + name);
+//        Log.d(TAG, "name=" + name);
         if(cursor == null) return Const.DEFAULT;
         Log.d(TAG, "cursor.count=" + cursor.getCount());
         try {

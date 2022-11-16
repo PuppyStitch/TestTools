@@ -17,6 +17,7 @@ import com.sprd.validationtools.itemstest.sptest.MCRTestActivity;
 import com.sprd.validationtools.itemstest.sptest.MyNFCTestActivity;
 import com.sprd.validationtools.itemstest.sptest.POSSensorTestActivity;
 import com.sprd.validationtools.itemstest.sptest.PosIDTestActivity;
+import com.sprd.validationtools.itemstest.sptest.PrintTestActivity2;
 import com.sprd.validationtools.itemstest.sptest.SPVersionTestActivity;
 import com.sprd.validationtools.itemstest.sptest.TimerTestActivity;
 import com.sprd.validationtools.itemstest.sptest.VirtualLedTestActivity;
@@ -64,5 +65,6 @@ public class MMI1TestItems {
             TimerTestActivity.class.getName(),                                          // RTC时钟测试
             PosIDTestActivity.class.getName(),                                          // todo:SP版本测试
             POSSensorTestActivity.class.getName(),                                      // todo:POS Sensor测试
+        PrintTestActivity2.class.getName(),                                             // 打印测试
     };
 }

@@ -1,6 +1,7 @@
 
 package com.sprd.validationtools.itemstest.sysinfo;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class SystemVersionTest extends BaseActivity {
 
     public Handler mHandler = new Handler();
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +54,10 @@ public class SystemVersionTest extends BaseActivity {
         androidVersion.setText("\n" + getString(R.string.android_version) + "\n" + Build.VERSION.RELEASE
                 + "\n");
         linuxVersion.setText(getString(R.string.prop_version) + "\n" + getPropVersion() + "\n");
+//        platformVersion.setText(getString(R.string.build_number) + "\n" +
+//                SystemProperties.get("ro.build.display.id", "unknown") + "\n");
         platformVersion.setText(getString(R.string.build_number) + "\n" +
-                SystemProperties.get("ro.build.display.id", "unknown") + "\n");
+                Build.DISPLAY + "\n");
         platformSn.setText(getString(R.string.device_sn) + "\n" + getSn() + "\n");
         imei.setText("imei:" +"\n" + getImei());
         kernel.setText("kernel: " + "\n" + getKernelVersion());

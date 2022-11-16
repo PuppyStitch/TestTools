@@ -44,7 +44,7 @@ public class ZXingUtils {
                 return null;
             }
             Log.d(TAG, "url length= "+ url.length());
-            HashMap<EncodeHintType, String> hints = new HashMap<EncodeHintType, String>();
+            Hashtable<EncodeHintType, String> hints = new Hashtable<EncodeHintType, String>();
             hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
             BitMatrix bitMatrix = new QRCodeWriter().encode(url, BarcodeFormat.QR_CODE, width,
                     height, hints);

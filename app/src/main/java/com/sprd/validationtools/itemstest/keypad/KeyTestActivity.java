@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.sprd.validationtools.BaseActivity;
 import com.sprd.validationtools.Const;
 import com.simcom.testtools.R;
+import com.sprd.validationtools.utils.RootCmdUtils;
 import com.sprd.validationtools.utils.ValidationToolsUtils;
 
 public class KeyTestActivity extends BaseActivity {
@@ -51,14 +53,28 @@ public class KeyTestActivity extends BaseActivity {
     private static final int COLUMNCOUNT = 4;
     private static final long TEST_TIMEOUT = 60000;
 
-    boolean isHomePressed = false, isBackPressed = false, isRecentPressed = false, isPowerPressed = false;
+    boolean isHomePressed = false, isBackPressed = false, isRecentPressed = false,
+            isPowerPressed = false, isResetPressed = false;
 
     private PressKeyBroadcastReceiver pressKeyBroadcastReceiver;
-    private static final String ACTION_TESTING_POWER_KEY = "action.press.powerbutton";
-    private static final String ACTION_TESTING_SWITCH_KEY = "action.press.switchbutton";
-    private static final String ACTION_TESTING_HOME_KEY = "action.press.homebutton";
+    private final String ACTION_TESTING_POWER_KEY = "action.press.powerbutton";
+    private final String ACTION_TESTING_SWITCH_KEY = "action.press.switchbutton";
+    private final String ACTION_TESTING_HOME_KEY = "action.press.homebutton";
+
+//    private final String ECHO_LOCK_UP_KERNEL_ADDRESS = "echo 0x40388eee > /sys/kernel/debug/lookat/addr_rwpv";
+//    private final String ECHO_FREE_KERNEL_ADDRESS = "echo 0x40388eec > /sys/kernel/debug/lookat/addr_rwpv";
+    private final String ECHO_SET_RESET_KEY_TO_VOLUME_UP = "echo 1 > /sys/devices/platform/charger/vol_rst_key";
+    private final String ECHO_SET_VOLUME_UP_TO_RESET_UP = "echo 0 > /sys/devices/platform/charger/vol_rst_key";
+
+    String[] openCMD = new String[1];
+    String[] closeCMD = new String[1];
+
+    private final String SET_RESET_KEY_TO_VOLUME_UP = "lookat -s 0x374 0x40388eec";
+    private final String SET_VOLUME_UP_TO_RESET_UP = "lookat -s 0x37c 0x40388eec";
+    private final String REBOOT = "input keyevent 24\n";
 
     private Button mAiButton = null;
+    private Button mResetButton = null;
 
     private void initView(Context context) {
         Resources res = getResources();
@@ -106,6 +122,15 @@ public class KeyTestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        openCMD[0] = ECHO_LOCK_UP_KERNEL_ADDRESS;
+        openCMD[0] = ECHO_SET_RESET_KEY_TO_VOLUME_UP;
+
+        closeCMD[0] = ECHO_SET_VOLUME_UP_TO_RESET_UP;
+//        closeCMD[1] = ECHO_FREE_KERNEL_ADDRESS;
+
+        RootCmdUtils.echo(openCMD);
+
         mContext = getApplicationContext();
         if (Const.isSupportFeaturePhone()) {
             initView(this);
@@ -119,6 +144,7 @@ public class KeyTestActivity extends BaseActivity {
             mVolumeUpButton = (ImageButton) findViewById(R.id.volume_up_button);
             mVolumeDownButton = (ImageButton) findViewById(R.id.volume_down_button);
             mCameraButton = (ImageButton) findViewById(R.id.camera_button);
+            mResetButton = (Button) findViewById(R.id.reset_button);
             isShowNavigationBar = ValidationToolsUtils.hasNavigationBar(this);
             mHasPhysicalNavigationKey = checkDeviceHasNavigationBar(mContext) && !isShowNavigationBar;
 //            showHasCameraDialog();
@@ -132,14 +158,24 @@ public class KeyTestActivity extends BaseActivity {
 //                mPassButton.setVisibility(View.GONE);
 //                mFailButton.setVisibility(View.GONE);
 //            }
-            mAiButton = (Button) findViewById(R.id.ai_button);
-            mAiButton.setVisibility(View.GONE);
+//            mAiButton = (Button) findViewById(R.id.reset_button);
+//            mAiButton.setVisibility(View.GONE);
         }
         registerPressKeyReceiver();
         isHomePressed = false;
         isBackPressed = false;
         isRecentPressed = false;
         isPowerPressed = false;
+        isResetPressed = false;
+
+        mResetButton.setOnClickListener(v -> {
+//            String res = RootCmdUtils.execRootCmd(SET_RESET_KEY_TO_VOLUME_UP);
+//            Log.i(TAG, );
+        });
+
+//        RootCmdUtils.execRootCmd("dumpsys window | grep mCurrentFocus");
+
+//        RootCmdUtils.execRootCmd(SET_RESET_KEY_TO_VOLUME_UP);
     }
 
     @Override
@@ -152,7 +188,7 @@ public class KeyTestActivity extends BaseActivity {
     }
 
     private void needToEnablePassBtn() {
-        if (isHomePressed && isBackPressed && isRecentPressed && isPowerPressed) {
+        if (isHomePressed && isBackPressed && isRecentPressed && isPowerPressed && isResetPressed) {
             enablePassButton();
         }
     }
@@ -294,6 +330,7 @@ public class KeyTestActivity extends BaseActivity {
         } else if (KeyEvent.KEYCODE_BACK == keyCode) {
             if (!mBackButton.isPressed()) {
                 mBackButton.setPressed(true);
+                mBackButton.setBackgroundColor(Color.GREEN);
                 isBackPressed = true;
                 needToEnablePassBtn();
                 keyPressedFlag |= 2;
@@ -307,8 +344,12 @@ public class KeyTestActivity extends BaseActivity {
             mCameraButton.setPressed(true);
             keyPressedFlag |= 8;
         } else if (KeyEvent.KEYCODE_VOLUME_UP == keyCode) {
-            mVolumeUpButton.setPressed(true);
-            keyPressedFlag |= 16;
+//            mVolumeUpButton.setPressed(true);
+//            keyPressedFlag |= 16;
+            mResetButton.setPressed(true);
+            isResetPressed = true;
+            mResetButton.setBackgroundColor(Color.GREEN);
+            needToEnablePassBtn();
         } else if (KeyEvent.KEYCODE_VOLUME_DOWN == keyCode) {
             mVolumeDownButton.setPressed(true);
             keyPressedFlag |= 32;
@@ -318,35 +359,35 @@ public class KeyTestActivity extends BaseActivity {
             mAiButton.setPressed(true);
             keyPressedFlag |= 64;
         }
-        if (keySupportFlag == keyPressedFlag) {
-            BaseActivity.shouldCanceled = false;
-            // showResultDialog(getString(R.string.key_test_info));
-            /* SPRD bug 760913:Test can pass/fail must click button */
-            if (!Const.isBoardISharkL210c10()) {
-                storeRusult(true);
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
-                    }
-                    /* SPRD bug 752003:Avoid press home key go to launcher */
-                }, 1000);
-            } else {
-                /* SPRD bug 760913:Test can pass/fail must click button */
-                mPassButton.setVisibility(View.VISIBLE);
-            }
-            if (isShowNavigationBar) {
-                storeRusult(true);
-                Toast.makeText(KeyTestActivity.this, R.string.text_pass,
-                        Toast.LENGTH_SHORT).show();
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
-                    }
-                }, 1000);
-            }
-        }
+//        if (keySupportFlag == keyPressedFlag) {
+//            BaseActivity.shouldCanceled = false;
+//            // showResultDialog(getString(R.string.key_test_info));
+//            /* SPRD bug 760913:Test can pass/fail must click button */
+//            if (!Const.isBoardISharkL210c10()) {
+//                storeRusult(true);
+//                mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        finish();
+//                    }
+//                    /* SPRD bug 752003:Avoid press home key go to launcher */
+//                }, 1000);
+//            } else {
+//                /* SPRD bug 760913:Test can pass/fail must click button */
+//                mPassButton.setVisibility(View.VISIBLE);
+//            }
+//            if (isShowNavigationBar) {
+//                storeRusult(true);
+//                Toast.makeText(KeyTestActivity.this, R.string.text_pass,
+//                        Toast.LENGTH_SHORT).show();
+//                mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        finish();
+//                    }
+//                }, 1000);
+//            }
+//        }
         return true;
     }
 
@@ -359,7 +400,11 @@ public class KeyTestActivity extends BaseActivity {
     protected void onDestroy() {
         mHandler.removeCallbacks(mTimeOutRunnable);
         unregisterReceiver(pressKeyBroadcastReceiver);
+//        String res = RootCmdUtils.execRootCmd(SET_VOLUME_UP_TO_RESET_UP);
+//        Log.d(TAG, res);
         super.onDestroy();
+
+        RootCmdUtils.echo(closeCMD);
     }
 
     public Runnable mTimeOutRunnable = new Runnable() {
@@ -385,16 +430,16 @@ public class KeyTestActivity extends BaseActivity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (ACTION_TESTING_POWER_KEY.equals(action)) {
-                mPowerButton.setPressed(true);
+                mPowerButton.setBackgroundColor(Color.GREEN);
                 isPowerPressed = true;
                 Log.i(TAG, "POWER KEY PRESSED");
             } else if (ACTION_TESTING_SWITCH_KEY.equals(action)) {
-                mMenuButton.setPressed(true);
+                mMenuButton.setBackgroundColor(Color.GREEN);
                 isRecentPressed = true;
                 Log.i(TAG, "SWITCH KEY PRESSED");
             } else if (ACTION_TESTING_HOME_KEY.equals(action)) {
                 Log.i(TAG, "HOME KEY PRESSED");
-                mHomeButton.setPressed(true);
+                mHomeButton.setBackgroundColor(Color.GREEN);
                 isHomePressed = true;
             }
             needToEnablePassBtn();

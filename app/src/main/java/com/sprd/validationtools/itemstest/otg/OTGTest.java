@@ -193,7 +193,7 @@ public class OTGTest extends BaseActivity {
 
                 try {
                     Class myclass = Class.forName(volume.getClass().getName());
-                    Method getPath = myclass.getDeclaredMethod("getPath", null);
+                    Method getPath = myclass.getDeclaredMethod("getPath", (Class<?>) null);
                     getPath.setAccessible(true);
                     mPath = (String) getPath.invoke(volume);
                     Log.i("OTGTest", "name: " + label + ", status: " + status
