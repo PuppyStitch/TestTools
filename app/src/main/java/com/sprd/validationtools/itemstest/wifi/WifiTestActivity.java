@@ -118,7 +118,9 @@ public class WifiTestActivity extends BaseActivity {
                     tvWifiDeviceList.append("\n\n");
                     Log.d(TAG, "wifiDeviceListChange result=" + result.toString());
                     if (mIs5GHzBandSupported) {
-                        boolean is5GHz = result.is5GHz();
+//                        boolean is5GHz = result.is5GHz();
+                        boolean is5GHz = true;
+
                         Log.d(TAG, "wifiDeviceListChange is5GHz=" + is5GHz);
                         if (is5GHz) {
                             mFind5GFlag = true;

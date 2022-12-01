@@ -1,10 +1,12 @@
 
 package com.sprd.validationtools.itemstest.lcd;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.hardware.display.DisplayManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemProperties;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,13 +15,10 @@ import android.widget.Button;
 import android.util.Log;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sprd.validationtools.BaseActivity;
 import com.sprd.validationtools.Const;
 import com.simcom.testtools.R;
-import com.sprd.validationtools.itemstest.sptest.PosIDTestActivity;
-import com.sprd.validationtools.utils.ValidationToolsUtils;
 
 public class ScreenColorTest extends BaseActivity implements OnClickListener {
     private String TAG = "ScreenColorTest";
@@ -42,7 +41,8 @@ public class ScreenColorTest extends BaseActivity implements OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        isShowNavigationBar = ValidationToolsUtils.hasNavigationBar(this);
+//        isShowNavigationBar = ValidationToolsUtils.hasNavigationBar(this);
+        isShowNavigationBar = true;
         Log.d(TAG, "isShowNavigationBar=:" + isShowNavigationBar);
         if (isShowNavigationBar) {
             setContentView(R.layout.background_layout);
@@ -83,6 +83,17 @@ public class ScreenColorTest extends BaseActivity implements OnClickListener {
             mPassButton.setVisibility(View.GONE);
             mFailButton.setVisibility(View.GONE);
             hideNavigationBar();
+        }
+
+        showSecondByDisplayManager(getApplicationContext());
+    }
+
+    private void showSecondByDisplayManager(Context context) {
+        DisplayManager mDisplayManager = (DisplayManager) getSystemService(Context.DISPLAY_SERVICE);
+        Display[] displays = mDisplayManager.getDisplays(DisplayManager.DISPLAY_CATEGORY_PRESENTATION);
+        if (displays != null) {
+            BasePresentation presentation = new BasePresentation(context, displays[displays.length - 1]);
+            presentation.show();
         }
     }
 

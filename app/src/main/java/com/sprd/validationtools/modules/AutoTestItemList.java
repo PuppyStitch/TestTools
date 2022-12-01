@@ -4,57 +4,23 @@ import android.content.Context;
 
 import com.sprd.validationtools.Const;
 import com.sprd.validationtools.itemstest.audio.HeadSetTest;
-import com.sprd.validationtools.itemstest.audio.MelodyTest;
-import com.sprd.validationtools.itemstest.audio.PhoneLoopBackTest;
 import com.sprd.validationtools.itemstest.audio.RingtoneTestActivity;
-import com.sprd.validationtools.itemstest.audio.SoundTriggerTestActivity;
 import com.sprd.validationtools.itemstest.audio.VibratorTestActivity;
 import com.sprd.validationtools.itemstest.backlight.BackLightTest;
 import com.sprd.validationtools.itemstest.bt.BluetoothTestActivity;
 import com.sprd.validationtools.itemstest.camera.CameraTestActivity;
-import com.sprd.validationtools.itemstest.camera.FrontCameraTestActivity;
-import com.sprd.validationtools.itemstest.camera.FrontSecondaryCameraTestActivity;
-import com.sprd.validationtools.itemstest.camera.MacroLensCameraTestActivity;
-import com.sprd.validationtools.itemstest.camera.SecondaryCameraTestActivity;
-import com.sprd.validationtools.itemstest.camera.SpwCameraTestActivity;
 import com.sprd.validationtools.itemstest.charger.ChargerTest;
 //import com.sprd.validationtools.itemstest.fingerprint.FingerprintTestActivity;
-import com.sprd.validationtools.itemstest.fm.FMTest;
 import com.sprd.validationtools.itemstest.gps.GpsTestActivity;
 import com.sprd.validationtools.itemstest.keypad.KeyTestActivity;
 import com.sprd.validationtools.itemstest.lcd.ScreenColorTest;
-import com.sprd.validationtools.itemstest.led.BlueLightTest;
-import com.sprd.validationtools.itemstest.led.GreenLightTest;
-import com.sprd.validationtools.itemstest.led.RedLightTest;
-import com.sprd.validationtools.itemstest.nfc.NFCTestActivity;
 import com.sprd.validationtools.itemstest.otg.OTGTest;
-import com.sprd.validationtools.itemstest.rtc.RTCTest;
-import com.sprd.validationtools.itemstest.sensor.ASensorCalibrationActivity;
-import com.sprd.validationtools.itemstest.sensor.CompassTestActivity;
-import com.sprd.validationtools.itemstest.sensor.GSensorCalibrationActivity;
-import com.sprd.validationtools.itemstest.sensor.GsensorTestActivity;
-import com.sprd.validationtools.itemstest.sensor.GyroscopeTestActivity;
-import com.sprd.validationtools.itemstest.sensor.LsensorNoiseTestActivity;
-import com.sprd.validationtools.itemstest.sensor.MSensorCalibrationActivity;
-import com.sprd.validationtools.itemstest.sensor.MagneticTestActivity;
-import com.sprd.validationtools.itemstest.sensor.PressureTestActivity;
-import com.sprd.validationtools.itemstest.sensor.ProxSensorCalibrationActivity;
 import com.sprd.validationtools.itemstest.sensor.PsensorTestActivity;
-import com.sprd.validationtools.itemstest.sptest.ICCardTestActivity;
-import com.sprd.validationtools.itemstest.sptest.MCRTestActivity;
-import com.sprd.validationtools.itemstest.sptest.MyNFCTestActivity;
 import com.sprd.validationtools.itemstest.sptest.POSSensorTestActivity;
-import com.sprd.validationtools.itemstest.sptest.PosIDTestActivity;
-import com.sprd.validationtools.itemstest.sptest.SPVersionTestActivity;
 import com.sprd.validationtools.itemstest.sptest.TimerTestActivity;
-import com.sprd.validationtools.itemstest.sptest.VirtualLedTestActivity;
 import com.sprd.validationtools.itemstest.sysinfo.SystemVersionTest;
-import com.sprd.validationtools.itemstest.telephony.PhoneCallTestActivity;
 import com.sprd.validationtools.itemstest.telephony.SIMCardTestActivity;
-import com.sprd.validationtools.itemstest.tp.MutiTouchTest;
-import com.sprd.validationtools.itemstest.tp.MutiTouchDoubleScreenTest;
 import com.sprd.validationtools.itemstest.tp.ScreenTestActivity;
-import com.sprd.validationtools.itemstest.tp.SingleTouchPointTest;
 import com.sprd.validationtools.itemstest.wholetest.BarcodeTestActivity;
 import com.sprd.validationtools.itemstest.wholetest.BuzzerTestActivity;
 import com.sprd.validationtools.itemstest.wholetest.FlashTestActivity;
@@ -69,7 +35,6 @@ public class AutoTestItemList extends TestItemList {
     private static final String[] FILTER_CLASS_NAMES = {
 
             SystemVersionTest.class.getName(),                                          // AP版本测试
-            SPVersionTestActivity.class.getName(),                                      // SP版本测试
             ScreenColorTest.class.getName(),                                            // LCD测试
             BackLightTest.class.getName(),                                              // 背景光测试
             ScreenTestActivity.class.getName(),                                         // todo:触摸屏
@@ -84,10 +49,6 @@ public class AutoTestItemList extends TestItemList {
             WifiTestActivity.class.getName(),                                           // wifi测试
             BluetoothTestActivity.class.getName(),                                      // 蓝牙测试
             GpsTestActivity.class.getName(),                                            // GPS测试
-            MyNFCTestActivity.class.getName(),                                          // todo:NFC测试   ok
-            ICCardTestActivity.class.getName(),                                         // todo:IC卡测试   ok
-            MCRTestActivity.class.getName(),                                            // todo:磁卡测试    ok
-            VirtualLedTestActivity.class.getName(),                                     // todo:LED灯及蜂鸣器    ok
             BuzzerTestActivity.class.getName(),                                         // 蜂鸣器测试
             PrintTestActivity.class.getName(),                                          // todo:打印机     ok
             CameraTestActivity.class.getName(),                                         // 后相机测试
@@ -95,7 +56,6 @@ public class AutoTestItemList extends TestItemList {
             BarcodeTestActivity.class.getName(),                                        // todo:一维码     ok
             PsensorTestActivity.class.getName(),                                        // 距离和光传感器测试
             TimerTestActivity.class.getName(),                                          // RTC时钟测试
-            PosIDTestActivity.class.getName(),                                          // todo:SP版本测试
             POSSensorTestActivity.class.getName(),                                      // todo:POS Sensor测试
 
 //            BackLightTest.class.getName(), ScreenColorTest.class.getName(),

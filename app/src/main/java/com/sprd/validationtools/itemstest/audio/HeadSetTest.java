@@ -11,8 +11,6 @@ import java.io.IOException;
 import com.simcom.testtools.R;
 import com.sprd.validationtools.BaseActivity;
 
-import android.os.SystemProperties;
-
 import android.app.Activity;
 import android.graphics.Color;
 import android.content.BroadcastReceiver;
@@ -21,6 +19,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemProperties;
 import android.os.Vibrator;
 import android.text.TextUtils;
 import android.util.Log;
@@ -32,7 +31,6 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
-import android.media.AudioSystem;
 
 import com.sprd.validationtools.Const;
 import com.sprd.validationtools.utils.FileUtils;

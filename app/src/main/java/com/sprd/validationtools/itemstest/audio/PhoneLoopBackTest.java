@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import android.media.AudioSystem;
 import android.app.Activity;
 import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioRecord;
+import android.media.AudioSystem;
 import android.media.AudioTrack;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -33,7 +33,7 @@ import com.sprd.validationtools.utils.IATUtils;
 import com.sprd.validationtools.utils.Native;
 import com.sprd.validationtools.utils.ValidationToolsUtils;
 import com.sprd.validationtools.Const;
-import android.os.SystemProperties;
+
 
 public class PhoneLoopBackTest extends BaseActivity {
     private static final String TAG = "PhoneLoopBackTest";

@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.display.DisplayManager;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 
 import com.sprd.validationtools.Const;
 import com.simcom.testtools.R;
+import com.sprd.validationtools.itemstest.lcd.BasePresentation;
 import com.sprd.validationtools.modules.TestItem;
 import com.sprd.validationtools.modules.UnitTestItemList;
 import com.sprd.validationtools.sqlite.EngSqlite;
@@ -100,6 +103,8 @@ public class ListItemTestActivity extends Activity {
         public void onItemClick(AdapterView<?> parent, View view, int position,
                 long id) {
 
+//            if ()
+
             mLastTestItemIndex = position;
             Intent intent = new Intent();
             intent.setClassName(ListItemTestActivity.this,
@@ -109,6 +114,15 @@ public class ListItemTestActivity extends Activity {
 
             intent.putExtra(Const.INTENT_PARA_TEST_INDEX, position);
             startActivityForResult(intent, 0);
+        }
+    }
+
+    private void showSecondByDisplayManager(Context context) {
+        DisplayManager mDisplayManager = (DisplayManager) getSystemService(Context.DISPLAY_SERVICE);
+        Display[] displays = mDisplayManager.getDisplays(DisplayManager.DISPLAY_CATEGORY_PRESENTATION);
+        if (displays != null) {
+            BasePresentation presentation = new BasePresentation(context, displays[displays.length - 1]);
+            presentation.show();
         }
     }
 

@@ -9,8 +9,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
-import android.content.pm.FeatureInfo;
-import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;

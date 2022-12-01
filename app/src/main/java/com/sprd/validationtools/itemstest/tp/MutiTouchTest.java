@@ -24,7 +24,7 @@ import com.sprd.validationtools.BaseActivity;
 import com.simcom.testtools.R;
 import com.sprd.validationtools.utils.ValidationToolsUtils;
 
-public class MutiTouchTest extends BaseActivity{
+public class MutiTouchTest extends BaseActivity {
     private static final String TAG = "MutiTouchTest";
     private MuiltImageView mImgView;
     private TextView mTextView;
@@ -34,9 +34,10 @@ public class MutiTouchTest extends BaseActivity{
     private boolean isShowNavigationBar = false;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isShowNavigationBar = ValidationToolsUtils.hasNavigationBar(this);
+//        isShowNavigationBar = ValidationToolsUtils.hasNavigationBar(this);
+        isShowNavigationBar = true;
         mPassButton.setVisibility(View.GONE);
         mFailButton.setVisibility(View.GONE);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -57,7 +58,7 @@ public class MutiTouchTest extends BaseActivity{
         }
     }
 
-    private View createView(){
+    private View createView() {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
         LinearLayout view = new LinearLayout(this);
@@ -78,9 +79,9 @@ public class MutiTouchTest extends BaseActivity{
         return view;
     }
 
-    private class MainHandler extends Handler{
+    private class MainHandler extends Handler {
         @Override
-        public void handleMessage(Message msg){
+        public void handleMessage(Message msg) {
             if (msg.what == 1) {
                 Toast.makeText(mContext, R.string.text_pass, Toast.LENGTH_SHORT).show();
                 storeRusult(true);
@@ -98,7 +99,7 @@ public class MutiTouchTest extends BaseActivity{
         private int mWidth, mHeight;
         private Paint mPaint = null;
 
-        public MuiltImageView(Context context, int width, int height, Handler handler){
+        public MuiltImageView(Context context, int width, int height, Handler handler) {
             super(context);
             mWidth = width;
             mHeight = height;
@@ -107,7 +108,7 @@ public class MutiTouchTest extends BaseActivity{
             initPaint();
         }
 
-        private void initData(){
+        private void initData() {
             pointf.set(mWidth - RADIUS, RADIUS);
             if (isShowNavigationBar) {
                 points.set(RADIUS, mHeight - RADIUS);
@@ -116,7 +117,7 @@ public class MutiTouchTest extends BaseActivity{
             }
         }
 
-        private void initPaint(){
+        private void initPaint() {
             mPaint = new Paint();
             mPaint.setAntiAlias(true);
             mPaint.setStyle(Paint.Style.FILL);
@@ -124,20 +125,20 @@ public class MutiTouchTest extends BaseActivity{
         }
 
         @Override
-        protected void onDraw(Canvas canvas){
+        protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
             canvas.drawCircle(pointf.x, pointf.y, RADIUS, mPaint);
             canvas.drawCircle(points.x, points.y, RADIUS, mPaint);
         }
 
         @Override
-        public boolean onTouchEvent(MotionEvent event){
-            if (event.getPointerCount() == 2){
+        public boolean onTouchEvent(MotionEvent event) {
+            if (event.getPointerCount() == 2) {
                 pointf.set(event.getX(0), event.getY(0));
                 points.set(event.getX(1), event.getY(1));
                 double distance = Math.sqrt((pointf.x - points.x) * (pointf.x - points.x)
                         + (pointf.y - points.y) * (pointf.y - points.y));
-                if (distance < (double)mWidth / 3 || distance > (double)mWidth / 3 * 2) {
+                if (distance < (double) mWidth / 3 || distance > (double) mWidth / 3 * 2) {
                     mPass = true;
                 }
             }

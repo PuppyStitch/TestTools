@@ -32,7 +32,8 @@ public class Util {
         {4160, 3120},//RES_13M
     };
     public static RES_NAME getSupportResName(Context context){
-        String type = SystemProperties.get(PROP_RES_BOKEH, "RES_5M");
+        String type = "RES_5M";
+//        String type = SystemProperties.get(PROP_RES_BOKEH, "RES_5M");
         Log.d(TAG, "getSupportResName type="+type);
         if(type.equals("RES_0_3M")){
             return RES_NAME.RES_0_3M;

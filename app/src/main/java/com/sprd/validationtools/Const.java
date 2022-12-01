@@ -9,7 +9,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
-import android.hardware.camera2.CaptureRequest.Key;
 import android.hardware.display.DisplayManager;
 import android.location.LocationManager;
 import android.media.AudioManager;
@@ -22,17 +21,11 @@ import android.util.Log;
 import android.view.Display;
 import android.view.ViewConfiguration;
 
-import com.sprd.validationtools.itemstest.*;
 import com.sprd.validationtools.itemstest.ai.AITest;
 import com.sprd.validationtools.itemstest.audio.SmartPATest;
-import com.sprd.validationtools.itemstest.audio.SoundTriggerTestActivity;
 import com.sprd.validationtools.itemstest.camera.CameraTestActivity;
 import com.sprd.validationtools.itemstest.camera.ColorTemperatureTestActivty;
 import com.sprd.validationtools.itemstest.camera.FrontCameraTestActivity;
-import com.sprd.validationtools.itemstest.camera.FrontSecondaryCameraTestActivity;
-import com.sprd.validationtools.itemstest.camera.MacroLensCameraTestActivity;
-import com.sprd.validationtools.itemstest.camera.SecondaryCameraTestActivity;
-import com.sprd.validationtools.itemstest.camera.SpwCameraTestActivity;
 import com.sprd.validationtools.itemstest.camera.TofCalibrationTest;
 //import com.sprd.validationtools.itemstest.fingerprint.FingerprintTestActivity;
 import com.sprd.validationtools.itemstest.fm.FMTest;
@@ -133,7 +126,7 @@ public class Const {
     public static final String CAMERA_CALI_VERI = "persist.vendor.cam.multicam.cali.veri";
 
     public static boolean isSupportCameraCaliVeri(){
-        String calibraionSupport = SystemProperties.get(CAMERA_CALI_VERI,"0");
+        String calibraionSupport = "0";
         Log.d(TAG, "isSupportCameraCaliVeri calibraionSupport="+ calibraionSupport);
         return calibraionSupport.equals("1");
     }
@@ -159,7 +152,7 @@ public class Const {
         } else if (TofCalibrationTest.class.getName().equals(className)) {
             return ValidationToolsUtils.get_camera_sensor_tof_support_flag();
         } else if (AITest.class.getName().equals(className)) {
-            String ipFlag = SystemProperties.get("persist.vendor.npu.version", "0");
+            String ipFlag = "0";
             Log.d(TAG, "ipFlag=:" + ipFlag);
             if (ipFlag.equals("0")) {
                 return false;
@@ -252,56 +245,6 @@ public class Const {
                 return false;
             }
         /*BEGIN BUG555701 zhijie.yang 2016/05/21*/
-        } else if (SecondaryCameraTestActivity.class.getName().equals(className)) {
-            int mNumberOfCameras = Camera.getNumberOfCameras();
-            /* SPRD bug 751615:Add for multi camera */
-            String cam3type = SystemProperties.get("persist.sys.cam3.type",
-                    "unknown");
-            Log.d(TAG, "SecondaryCameraTestActivity 1 mNumberOfCameras="
-                    + mNumberOfCameras + ",cam3type=" + cam3type);
-            if (mNumberOfCameras <= 2) {
-                return false;
-            }
-            boolean calibraionSupportFlag = false;
-            String calibraionSupport = SystemProperties.get("persist.sys.3d.calibraion",
-                    "0");
-            Log.d(TAG, "SecondaryCameraTestActivity calibraionSupport="+ calibraionSupport);
-            if(calibraionSupport != null && calibraionSupport.equals("1")){
-                calibraionSupportFlag = true;
-            }
-            if (mNumberOfCameras >= 3) {
-                if ((cam3type.equals("back_blur") || cam3type
-                        .equals("back_sbs")) || calibraionSupportFlag) {
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-        }
-        else if (FrontSecondaryCameraTestActivity.class.getName().equals(className)) {
-            int mNumberOfCameras = Camera.getNumberOfCameras();
-            /* SPRD bug 751615:Add for multi camera */
-            String cam3type = SystemProperties.get("persist.sys.cam3.type",
-                    "unknown");
-            Log.d(TAG, "FrontSecondaryCameraTestActivity mNumberOfCameras="
-                    + mNumberOfCameras + ",cam3type=" + cam3type);
-            if (mNumberOfCameras <= 2) {
-                return false;
-            }
-            /*SPRD bug 759782 : Change filter*/
-            if (mNumberOfCameras >= 3) {
-                if (cam3type.equals("front_blur")
-                        || cam3type.equals("front_sbs")) {
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-        }
-        else if (SoundTriggerTestActivity.class.getName().equals(className)) {
-            if(!isWhale2Support() || isSharkL2Support()){
-                return false;
-            }
         } else if (NFCTestActivity.class.getName().equals(className)) {
             return isSupportNfc(context);
 //        } else if (FingerprintTestActivity.class.getName().equals(className)) {
@@ -359,28 +302,10 @@ public class Const {
             }
         }
         else if (ColorTemperatureTestActivty.class.getName().equals(className)) {
-            if(isSupportColorTemplture()){
+            if (isSupportColorTemplture()) {
                 return true;
-            }else{
+            } else {
                 return false;
-            }
-        }
-        else if (SpwCameraTestActivity.class.getName().equals(className)) {
-            int mNumberOfCameras = Camera.getNumberOfCameras();
-            Log.d(TAG, "SpwCameraTestActivity mNumberOfCameras="+ mNumberOfCameras);
-            if (mNumberOfCameras <= 3) {
-                return false;
-            }else{
-                return true;
-            }
-        }
-        else if (MacroLensCameraTestActivity.class.getName().equals(className)) {
-            int mNumberOfCameras = Camera.getNumberOfCameras();
-            Log.d(TAG, "MacroLensCameraTestActivity mNumberOfCameras="+ mNumberOfCameras);
-            if (mNumberOfCameras <= 4) {
-                return false;
-            }else{
-                return true;
             }
         }
         else if (FMTest.class.getName().equals(className)) {
@@ -396,12 +321,12 @@ public class Const {
             }
             Log.d(TAG, "MutiTouchDoubleScreenTest = true");
         }
-        else if ( MutiTouchTest.class.getName().equals(className)) {
-            if(displays.length > 1){
-                return false;
-            }
-            Log.d(TAG, "MutiTouchTest = true");
-        }
+//        else if ( MutiTouchTest.class.getName().equals(className)) {
+//            if(displays.length > 1){
+//                return false;
+//            }
+//            Log.d(TAG, "MutiTouchTest = true");
+//        }
         return true;
     }
 

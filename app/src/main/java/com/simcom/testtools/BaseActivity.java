@@ -1,7 +1,6 @@
 package com.simcom.testtools;
 
 import android.app.Activity;
-import android.app.ProcessProtection;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -49,8 +48,6 @@ public class BaseActivity extends Activity implements OnClickListener {
     public static final int MISCDATA_USERSETION_OFFSET_AGING = MISCDATA_USERSETION_OFFSET_BASE + 44;
     public static final int MISCDATA_USERSETION_OFFSET_RING_TUNE = MISCDATA_USERSETION_OFFSET_BASE + 74;
 
-    private ProcessProtection mProcessProtection = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +66,6 @@ public class BaseActivity extends Activity implements OnClickListener {
         if (SUPPORT_WRITE_STATION) {
             mPhaseCheckParse = PhaseCheckParse.getInstance();
         }
-        mProcessProtection = new ProcessProtection();
-        mProcessProtection.setSelfProtectStatus(ProcessProtection.PROCESS_STATUS_PERSISTENT);
     }
 
     public void hideNavigationBar() {
@@ -114,9 +109,6 @@ public class BaseActivity extends Activity implements OnClickListener {
 
     @Override
     protected void onDestroy() {
-        if(mProcessProtection != null){
-            mProcessProtection.setSelfProtectStatus(ProcessProtection.PROCESS_STATUS_IDLE);
-        }
         removeButton();
         if (mTestname != null) {
             Log.d("APK_MMI",

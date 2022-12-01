@@ -1,9 +1,6 @@
 package com.sprd.validationtools;
 
-import android.app.Activity;
-import android.app.ProcessProtection;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Build;
@@ -26,8 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.simcom.testtools.R;
 import com.sprd.validationtools.sqlite.EngSqlite;
-
-import java.lang.ref.WeakReference;
 
 public class BaseActivity extends AppCompatActivity implements OnClickListener {
     private static final String TAG = "BaseActivity";
@@ -52,7 +47,6 @@ public class BaseActivity extends AppCompatActivity implements OnClickListener {
     public static final int MISCDATA_USERSETION_OFFSET_AGING = MISCDATA_USERSETION_OFFSET_BASE + 44;
     public static final int MISCDATA_USERSETION_OFFSET_RING_TUNE = MISCDATA_USERSETION_OFFSET_BASE + 74;
 
-    private ProcessProtection mProcessProtection = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +66,6 @@ public class BaseActivity extends AppCompatActivity implements OnClickListener {
         if (SUPPORT_WRITE_STATION) {
             mPhaseCheckParse = PhaseCheckParse.getInstance();
         }
-        mProcessProtection = new ProcessProtection();
-        mProcessProtection.setSelfProtectStatus(ProcessProtection.PROCESS_STATUS_PERSISTENT);
     }
 
     public void hideNavigationBar() {
@@ -117,9 +109,6 @@ public class BaseActivity extends AppCompatActivity implements OnClickListener {
 
     @Override
     protected void onDestroy() {
-        if(mProcessProtection != null){
-            mProcessProtection.setSelfProtectStatus(ProcessProtection.PROCESS_STATUS_IDLE);
-        }
         removeButton();
         if (mTestname != null) {
             Log.d("APK_MMI",

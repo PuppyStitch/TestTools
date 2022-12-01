@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
-import android.os.SystemProperties;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -47,7 +46,8 @@ public class BackLightTest extends BaseActivity implements OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        isShowNavigationBar = ValidationToolsUtils.hasNavigationBar(this);
+//        isShowNavigationBar = ValidationToolsUtils.hasNavigationBar(this);
+        isShowNavigationBar = true;
         if (isShowNavigationBar) {
             setContentView(R.layout.background_layout);
             mRelativeLayout = (RelativeLayout) findViewById(R.id.background_relativelayout);

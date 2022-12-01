@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.simcom.testtools"
-    android:sharedUserId="android.uid.system"
+
     tools:ignore="CoarseFineLocation">
+
+<!--    android:sharedUserId="android.uid.system"-->
 
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
 
@@ -78,7 +80,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="sprd.permission.PROTECT_PROCESS" />
 
-    <permission android:name="com.android.permission.SAVE_PHASECHECK" />
+<!--    <permission android:name="com.android.permission.SAVE_PHASECHECK" />-->
 
     <application
         android:directBootAware="true"
@@ -181,7 +183,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <!--                 <category android:name="android.intent.category.LAUNCHER" />-->
+                                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
@@ -209,7 +211,7 @@
             android:name="com.sprd.validationtools.itemstest.lcd.ScreenColorTest"
             android:configChanges="keyboardHidden"
             android:label="@string/lcd_test"
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" /> <!-- TP test begin -->
         <activity
             android:name="com.sprd.validationtools.itemstest.tp.SingleTouchPointTest"
@@ -228,7 +230,7 @@
             android:configChanges="keyboardHidden"
             android:label="@string/muti_touchpoint_test"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
             android:name="com.sprd.validationtools.itemstest.tp.MutiTouchDoubleScreenTest"
             android:configChanges="keyboardHidden"
@@ -311,12 +313,6 @@
             android:label="@string/phone_loopback_test"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
-        <activity
-            android:name="com.sprd.validationtools.itemstest.audio.SoundTriggerTestActivity"
-            android:configChanges="keyboardHidden"
-            android:label="@string/soundtrigger_test"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name="com.sprd.validationtools.itemstest.audio.HeadSetTest"
             android:configChanges="keyboardHidden"
@@ -462,35 +458,12 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
-            android:name="com.sprd.validationtools.itemstest.camera.FrontSecondaryCameraTestActivity"
-            android:configChanges="keyboardHidden"
-            android:label="@string/front_secondary_camera_title_text"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-        <activity
-            android:name="com.sprd.validationtools.itemstest.camera.SecondaryCameraTestActivity"
-            android:configChanges="keyboardHidden"
-            android:label="@string/secondary_camera_title_text"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-        <activity
             android:name="com.sprd.validationtools.itemstest.camera.ColorTemperatureTestActivty"
             android:configChanges="keyboardHidden"
             android:label="@string/color_temperature_test"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-        <activity
-            android:name="com.sprd.validationtools.itemstest.camera.SpwCameraTestActivity"
-            android:configChanges="keyboardHidden"
-            android:label="@string/back_third_camera_title_text"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-        <activity
-            android:name="com.sprd.validationtools.itemstest.camera.MacroLensCameraTestActivity"
-            android:configChanges="keyboardHidden"
-            android:label="@string/macrolens_camera_title_text"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" /> <!-- Camera end -->
+        <!-- Camera end -->
         <!-- Nfc begin -->
         <activity
             android:name="com.sprd.validationtools.itemstest.nfc.NFCTestActivity"
@@ -530,24 +503,6 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
-            android:name="com.sprd.validationtools.itemstest.sptest.ICCardTestActivity"
-            android:configChanges="keyboardHidden"
-            android:label="@string/icc_test"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
-        <activity
-            android:name="com.sprd.validationtools.itemstest.sptest.MCRTestActivity"
-            android:configChanges="keyboardHidden"
-            android:label="@string/mcr_test"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
-        <activity
-            android:name="com.sprd.validationtools.itemstest.sptest.MyNFCTestActivity"
-            android:configChanges="keyboardHidden"
-            android:label="@string/my_nfc_test"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
-        <activity
             android:name="com.sprd.validationtools.itemstest.sptest.TimerTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/timer_test"
@@ -557,18 +512,6 @@
             android:name="com.sprd.validationtools.itemstest.wholetest.FlashTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/flash_light_test"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
-        <activity
-            android:name="com.sprd.validationtools.itemstest.sptest.VirtualLedTestActivity"
-            android:configChanges="keyboardHidden"
-            android:label="@string/virtual_led_test"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
-        <activity
-            android:name="com.sprd.validationtools.itemstest.sptest.PosIDTestActivity"
-            android:configChanges="keyboardHidden"
-            android:label="@string/pos_id"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
         <activity
@@ -593,13 +536,6 @@
             android:name="com.sprd.validationtools.itemstest.sptest.POSSensorTestActivity"
             android:configChanges="keyboardHidden"
             android:label="@string/pos_sensor_test"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
-
-        <activity
-            android:name="com.sprd.validationtools.itemstest.sptest.SPVersionTestActivity"
-            android:configChanges="keyboardHidden"
-            android:label="@string/sp_version"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
 

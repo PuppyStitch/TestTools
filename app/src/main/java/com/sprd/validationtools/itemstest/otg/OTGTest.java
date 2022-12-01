@@ -10,7 +10,6 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.hardware.input.InputManager;
 import android.os.Build;
@@ -20,24 +19,20 @@ import android.os.StatFs;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.internal.widget.PointerLocationView;
 import com.sprd.validationtools.Const;
-import com.sprd.validationtools.utils.StorageUtil;
 import com.simcom.testtools.R;
 
-import android.widget.Toast;
 import android.os.Message;
 import android.view.InputDevice;
 
 import androidx.annotation.RequiresApi;
 
 import com.sprd.validationtools.BaseActivity;
+import com.sprd.validationtools.utils.StorageUtil;
 
 public class OTGTest extends BaseActivity {
     private String TAG = "OTGTest";

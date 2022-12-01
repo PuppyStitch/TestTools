@@ -36,10 +36,8 @@ import com.sprd.validationtools.modules.TestItem;
 import com.sprd.validationtools.modules.UnitTestItemList;
 import com.sprd.validationtools.sqlite.EngSqlite;
 import com.sprd.validationtools.utils.BtTestUtil;
-import com.sprd.validationtools.utils.FileUtils;
 import com.sprd.validationtools.utils.ValidationToolsUtils;
 import com.sprd.validationtools.utils.WifiTestUtil;
-import com.sprd.validationtools.utils.ZXingUtils;
 import com.simcom.testtools.R;
 
 public class TestInfoMainActivity extends Activity {
@@ -295,7 +293,8 @@ public class TestInfoMainActivity extends Activity {
                             .getResources()
                             .getDimensionPixelSize(R.dimen.qrcode_bitmap_height);
                     Log.d(TAG, "onCreate width=" + width + ",height=" + height);
-                    Bitmap bm = ZXingUtils.createQRImage(qrtext, width, height);
+//                    Bitmap bm = ZXingUtils.createQRImage(qrtext, width, height);
+                    Bitmap bm = null;
                     return bm;
                 }
 

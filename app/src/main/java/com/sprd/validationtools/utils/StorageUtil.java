@@ -1,19 +1,15 @@
 package com.sprd.validationtools.utils;
 
+import android.content.Context;
+import android.os.Environment;
+import android.util.Log;
+
+import com.sprd.validationtools.nonpublic.EnvironmentExProxy;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import android.content.Context;
-import android.os.Environment;
-//import android.os.EnvironmentEx;
-import android.os.EnvironmentEx;
-import android.os.storage.StorageManager;
-
-import com.sprd.validationtools.nonpublic.EnvironmentExProxy;
-
-import android.util.Log;
 
 public class StorageUtil {
     public static final String TAG = "StorageUtil";
